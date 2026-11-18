@@ -1,0 +1,50 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/historical_character_visual.tscn" id="1_visual"]
+
+[sub_resource type="StandardMaterial3D" id="FloorMaterial"]
+albedo_color = Color(0.38, 0.38, 0.36, 1)
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="Floor"]
+material = SubResource("FloorMaterial")
+size = Vector2(10, 8)
+
+[sub_resource type="Environment" id="PreviewEnvironment"]
+background_mode = 1
+background_color = Color(0.31, 0.34, 0.36, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.87, 0.88, 0.92, 1)
+ambient_light_energy = 0.7
+
+[node name="HistoricalCharacterPreview" type="Node3D"]
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("PreviewEnvironment")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-40, -24, 0)
+light_color = Color(1, 0.91, 0.81, 1)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.018, 0)
+mesh = SubResource("Floor")
+
+[node name="Front" parent="." instance=ExtResource("1_visual")]
+position = Vector3(-1.15, 0, 0)
+rotation_degrees = Vector3(0, 168, 0)
+
+[node name="Profile" parent="." instance=ExtResource("1_visual")]
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="Back" parent="." instance=ExtResource("1_visual")]
+position = Vector3(1.15, 0, 0)
+rotation_degrees = Vector3(0, -12, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 1.48, 5)
+rotation_degrees = Vector3(-6, 0, 0)
+projection = 1
+size = 2.7
+current = true

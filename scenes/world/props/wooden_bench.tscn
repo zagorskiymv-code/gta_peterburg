@@ -1,0 +1,77 @@
+[gd_scene format=3]
+
+[sub_resource type="BoxMesh" id="Box"]
+
+[sub_resource type="StandardMaterial3D" id="Wood"]
+albedo_color = Color(0.34, 0.19, 0.1, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Iron"]
+albedo_color = Color(0.13, 0.16, 0.15, 1)
+roughness = 0.85
+
+[sub_resource type="BoxShape3D" id="BenchCollision"]
+size = Vector3(1.54, 0.83, 0.45)
+
+[node name="WoodenBench" type="Node3D"]
+
+[node name="Seat0" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.45, -0.13)
+scale = Vector3(1.54, 0.065, 0.12)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Seat1" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.45, 0)
+scale = Vector3(1.54, 0.065, 0.12)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Seat2" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.45, 0.13)
+scale = Vector3(1.54, 0.065, 0.12)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Back0" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.65, -0.205)
+scale = Vector3(1.54, 0.105, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Back1" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.79, -0.205)
+scale = Vector3(1.54, 0.105, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Leg0" type="MeshInstance3D" parent="."]
+position = Vector3(-0.59, 0.225, 0)
+scale = Vector3(0.09, 0.45, 0.36)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Leg1" type="MeshInstance3D" parent="."]
+position = Vector3(0.59, 0.225, 0)
+scale = Vector3(0.09, 0.45, 0.36)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Support0" type="MeshInstance3D" parent="."]
+position = Vector3(-0.59, 0.59, -0.2)
+scale = Vector3(0.065, 0.43, 0.065)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Support1" type="MeshInstance3D" parent="."]
+position = Vector3(0.59, 0.59, -0.2)
+scale = Vector3(0.065, 0.43, 0.065)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="BenchBody" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BenchBody"]
+position = Vector3(0, 0.415, -0.015)
+shape = SubResource("BenchCollision")

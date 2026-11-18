@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/citizen_npc.gd" id="1_citizen"]
+[ext_resource type="PackedScene" path="res://scenes/player/historical_character_visual.tscn" id="2_visual"]
+
+[sub_resource type="CapsuleShape3D" id="Capsule"]
+radius = 0.32
+height = 1.75
+
+[node name="CitizenNPC" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
+floor_snap_length = 0.25
+script = ExtResource("1_citizen")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.875, 0)
+shape = SubResource("Capsule")
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_visual")]

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cwigdkus62u2v"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/district/main_street_block.tscn" id="2_block"]
+[ext_resource type="PackedScene" path="res://scenes/world/district/evening_lighting.tscn" id="3_lighting"]
+
+[sub_resource type="BoxShape3D" id="CollisionBox_North"]
+size = Vector3(41, 8, 0.5)
+
+[sub_resource type="BoxShape3D" id="CollisionBox_West"]
+size = Vector3(0.5, 8, 40)
+
+[node name="TestStreet" type="Node3D" unique_id=1960724099]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=854573016]
+transform = Transform3D(0.9456889, -0.18807738, 0.26514027, 0, 0.815633, 0.57856965, -0.325073, -0.5471469, 0.77133507, 11, 24, 32)
+fov = 55.0
+
+[node name="StreetBounds" type="Node3D" parent="." unique_id=1410183615]
+
+[node name="North" type="StaticBody3D" parent="StreetBounds" unique_id=1575589793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.25)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetBounds/North" unique_id=1308908985]
+shape = SubResource("CollisionBox_North")
+
+[node name="South" type="StaticBody3D" parent="StreetBounds" unique_id=1946030925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.25)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetBounds/South" unique_id=1420835964]
+shape = SubResource("CollisionBox_North")
+
+[node name="West" type="StaticBody3D" parent="StreetBounds" unique_id=2053252343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.25, 0, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetBounds/West" unique_id=1223246806]
+shape = SubResource("CollisionBox_West")
+
+[node name="East" type="StaticBody3D" parent="StreetBounds" unique_id=1926885108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.25, 0, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetBounds/East" unique_id=1779097278]
+shape = SubResource("CollisionBox_West")
+
+[node name="Player" parent="." unique_id=1707028492 instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 12)
+
+[node name="MainStreetBlock" parent="." unique_id=498208434 instance=ExtResource("2_block")]
+
+[node name="Lighting" parent="." unique_id=654113825 instance=ExtResource("3_lighting")]

@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_controller"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/historical_character_visual.tscn" id="2_visual"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleCollision"]
+radius = 0.33
+height = 1.75
+
+[sub_resource type="SphereShape3D" id="CameraCollision"]
+radius = 0.25
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_controller")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.875, 0)
+shape = SubResource("CapsuleCollision")
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_visual")]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+position = Vector3(0, 1.4, 0)
+rotation_degrees = Vector3(-17, 0, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+collision_mask = 1
+shape = SubResource("CameraCollision")
+spring_length = 4.5
+margin = 0.08
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+position = Vector3(0, 0, 4.5)
+current = true
+fov = 64.0
+near = 0.08

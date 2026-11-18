@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/palace_square_population.gd" id="1_population"]
+
+[node name="PalaceSquarePopulation" type="Node3D"]
+script = ExtResource("1_population")
+
+[node name="Routes" type="Node3D" parent="."]

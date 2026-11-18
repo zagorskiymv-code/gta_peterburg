@@ -1,0 +1,494 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/player/historical_character_visual.gd" id="1_visual"]
+
+[sub_resource type="StandardMaterial3D" id="Wool"]
+albedo_color = Color(0.102, 0.125, 0.134, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Lapel"]
+albedo_color = Color(0.145, 0.17, 0.175, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Waistcoat"]
+albedo_color = Color(0.28, 0.204, 0.139, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Shirt"]
+albedo_color = Color(0.76, 0.717, 0.594, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Trouser"]
+albedo_color = Color(0.156, 0.153, 0.142, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Leather"]
+albedo_color = Color(0.103, 0.078, 0.062, 1)
+roughness = 0.64
+
+[sub_resource type="StandardMaterial3D" id="HatBand"]
+albedo_color = Color(0.204, 0.165, 0.126, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Skin"]
+albedo_color = Color(0.63, 0.421, 0.304, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Hair"]
+albedo_color = Color(0.23, 0.155, 0.108, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Brass"]
+albedo_color = Color(0.49, 0.352, 0.186, 1)
+roughness = 0.64
+
+[sub_resource type="BoxMesh" id="Box"]
+
+[sub_resource type="SphereMesh" id="Oval"]
+radius = 0.5
+height = 1.0
+radial_segments = 12
+rings = 6
+
+[sub_resource type="CylinderMesh" id="Round"]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 1.0
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Jacket"]
+top_radius = 0.5
+bottom_radius = 0.43
+height = 1.0
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id="Taper"]
+top_radius = 0.5
+bottom_radius = 0.36
+height = 1.0
+radial_segments = 9
+
+[sub_resource type="CylinderMesh" id="CoatSkirt"]
+top_radius = 0.42
+bottom_radius = 0.51
+height = 1.0
+radial_segments = 10
+
+[node name="CharacterVisual" type="Node3D"]
+script = ExtResource("1_visual")
+
+[node name="Body" type="Node3D" parent="."]
+position = Vector3(0, 0.934, 0)
+
+[node name="UpperBody" type="Node3D" parent="Body"]
+
+[node name="CoatShoulders" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.44, 0)
+scale = Vector3(0.423, 0.24, 0.251)
+mesh = SubResource("Oval")
+material_override = SubResource("Wool")
+
+[node name="CoatTorso" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.275, 0.007)
+scale = Vector3(0.423, 0.48, 0.269)
+mesh = SubResource("Jacket")
+material_override = SubResource("Wool")
+
+[node name="CoatHem" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, -0.061, 0.019)
+scale = Vector3(0.421, 0.3, 0.275)
+mesh = SubResource("CoatSkirt")
+material_override = SubResource("Wool")
+
+[node name="Waistcoat" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.275, -0.128)
+scale = Vector3(0.185, 0.34, 0.054)
+mesh = SubResource("Oval")
+material_override = SubResource("Waistcoat")
+
+[node name="ShirtFront" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.428, -0.127)
+scale = Vector3(0.145, 0.162, 0.066)
+mesh = SubResource("Oval")
+material_override = SubResource("Shirt")
+
+[node name="Cravat" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.47, -0.165)
+scale = Vector3(0.064, 0.06, 0.029)
+mesh = SubResource("Oval")
+material_override = SubResource("Hair")
+
+[node name="BackWaistSeam" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.119, 0.131)
+scale = Vector3(0.239, 0.02, 0.024)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="BackVent" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, -0.099, 0.151)
+scale = Vector3(0.011, 0.22, 0.012)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="LeftLapel" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(-0.094, 0.395, -0.153)
+rotation_degrees = Vector3(0, -13, -18)
+scale = Vector3(0.059, 0.229, 0.025)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="LeftCollar" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(-0.074, 0.501, -0.092)
+rotation_degrees = Vector3(8, -23, 16)
+scale = Vector3(0.074, 0.1, 0.053)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="LeftPocketWelt" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(-0.135, 0.055, -0.116)
+rotation_degrees = Vector3(0, -25, -7)
+scale = Vector3(0.078, 0.014, 0.021)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="LeftBackButton" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(-0.066, 0.129, 0.146)
+scale = Vector3(0.014, 0.014, 0.014)
+mesh = SubResource("Oval")
+material_override = SubResource("Brass")
+
+[node name="RightLapel" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0.094, 0.395, -0.153)
+rotation_degrees = Vector3(0, 13, 18)
+scale = Vector3(0.059, 0.229, 0.025)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="RightCollar" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0.074, 0.501, -0.092)
+rotation_degrees = Vector3(8, 23, -16)
+scale = Vector3(0.074, 0.1, 0.053)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="RightPocketWelt" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0.135, 0.055, -0.116)
+rotation_degrees = Vector3(0, 25, 7)
+scale = Vector3(0.078, 0.014, 0.021)
+mesh = SubResource("Box")
+material_override = SubResource("Lapel")
+
+[node name="RightBackButton" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0.066, 0.129, 0.146)
+scale = Vector3(0.014, 0.014, 0.014)
+mesh = SubResource("Oval")
+material_override = SubResource("Brass")
+
+[node name="WaistcoatButton0" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.149, -0.158)
+scale = Vector3(0.015, 0.015, 0.016)
+mesh = SubResource("Oval")
+material_override = SubResource("Brass")
+
+[node name="WaistcoatButton1" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.198, -0.163)
+scale = Vector3(0.015, 0.015, 0.016)
+mesh = SubResource("Oval")
+material_override = SubResource("Brass")
+
+[node name="WaistcoatButton2" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.247, -0.163)
+scale = Vector3(0.015, 0.015, 0.016)
+mesh = SubResource("Oval")
+material_override = SubResource("Brass")
+
+[node name="WaistcoatButton3" type="MeshInstance3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.296, -0.158)
+scale = Vector3(0.015, 0.015, 0.016)
+mesh = SubResource("Oval")
+material_override = SubResource("Brass")
+
+[node name="Head" type="Node3D" parent="Body/UpperBody"]
+position = Vector3(0, 0.527, -0.012)
+
+[node name="Neck" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.041, 0)
+scale = Vector3(0.104, 0.143, 0.101)
+mesh = SubResource("Round")
+material_override = SubResource("Skin")
+
+[node name="ShirtCollar" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.024, 0)
+scale = Vector3(0.116, 0.048, 0.116)
+mesh = SubResource("Round")
+material_override = SubResource("Shirt")
+
+[node name="Skull" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.166, -0.005)
+scale = Vector3(0.168, 0.229, 0.188)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="Jaw" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.122, -0.028)
+scale = Vector3(0.141, 0.126, 0.157)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="Hair" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.206, 0.035)
+scale = Vector3(0.169, 0.139, 0.137)
+mesh = SubResource("Oval")
+material_override = SubResource("Hair")
+
+[node name="Nose" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.158, -0.104)
+scale = Vector3(0.036, 0.052, 0.049)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="Moustache" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.118, -0.112)
+scale = Vector3(0.074, 0.017, 0.016)
+mesh = SubResource("Oval")
+material_override = SubResource("Hair")
+
+[node name="BowlerBrim" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.244, -0.005)
+scale = Vector3(0.248, 0.025, 0.265)
+mesh = SubResource("Round")
+material_override = SubResource("Leather")
+
+[node name="BowlerCrown" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.279, 0.002)
+scale = Vector3(0.194, 0.145, 0.209)
+mesh = SubResource("Oval")
+material_override = SubResource("Leather")
+
+[node name="BowlerBand" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0, 0.253, 0.002)
+scale = Vector3(0.184, 0.027, 0.198)
+mesh = SubResource("Round")
+material_override = SubResource("HatBand")
+
+[node name="LeftEar" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(-0.077, 0.159, 0.004)
+scale = Vector3(0.031, 0.056, 0.03)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="LeftEye" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(-0.041, 0.171, -0.087)
+scale = Vector3(0.019, 0.009, 0.013)
+mesh = SubResource("Oval")
+material_override = SubResource("Hair")
+
+[node name="LeftArmPivot" type="Node3D" parent="Body/UpperBody"]
+position = Vector3(-0.193, 0.434, 0)
+
+[node name="Shoulder" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot"]
+position = Vector3(0, -0.016, 0)
+scale = Vector3(0.141, 0.157, 0.153)
+mesh = SubResource("Oval")
+material_override = SubResource("Wool")
+
+[node name="UpperSleeve" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot"]
+position = Vector3(0, -0.131, 0)
+scale = Vector3(0.145, 0.265, 0.147)
+mesh = SubResource("Taper")
+material_override = SubResource("Wool")
+
+[node name="Elbow" type="Node3D" parent="Body/UpperBody/LeftArmPivot"]
+position = Vector3(0, -0.249, 0)
+
+[node name="ForeSleeve" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot/Elbow"]
+position = Vector3(0, -0.111, 0)
+scale = Vector3(0.119, 0.249, 0.122)
+mesh = SubResource("Taper")
+material_override = SubResource("Wool")
+
+[node name="Cuff" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot/Elbow"]
+position = Vector3(0, -0.221, 0)
+scale = Vector3(0.1, 0.036, 0.104)
+mesh = SubResource("Round")
+material_override = SubResource("Lapel")
+
+[node name="ShirtCuff" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot/Elbow"]
+position = Vector3(0, -0.24, 0)
+scale = Vector3(0.084, 0.019, 0.085)
+mesh = SubResource("Round")
+material_override = SubResource("Shirt")
+
+[node name="Hand" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot/Elbow"]
+position = Vector3(0, -0.282, -0.011)
+scale = Vector3(0.075, 0.096, 0.067)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="Thumb" type="MeshInstance3D" parent="Body/UpperBody/LeftArmPivot/Elbow"]
+position = Vector3(0.031, -0.269, -0.033)
+scale = Vector3(0.027, 0.059, 0.031)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="LeftLegPivot" type="Node3D" parent="Body"]
+position = Vector3(-0.108, 0, 0)
+
+[node name="Thigh" type="MeshInstance3D" parent="Body/LeftLegPivot"]
+position = Vector3(0, -0.182, 0)
+scale = Vector3(0.181, 0.438, 0.175)
+mesh = SubResource("Taper")
+material_override = SubResource("Trouser")
+
+[node name="Knee" type="Node3D" parent="Body/LeftLegPivot"]
+position = Vector3(0, -0.425, 0)
+
+[node name="KneeVolume" type="MeshInstance3D" parent="Body/LeftLegPivot/Knee"]
+position = Vector3(0, 0.01, 0)
+scale = Vector3(0.123, 0.146, 0.134)
+mesh = SubResource("Oval")
+material_override = SubResource("Trouser")
+
+[node name="TrouserLeg" type="MeshInstance3D" parent="Body/LeftLegPivot/Knee"]
+position = Vector3(0, -0.151, 0)
+scale = Vector3(0.141, 0.354, 0.141)
+mesh = SubResource("Taper")
+material_override = SubResource("Trouser")
+
+[node name="BootShaft" type="MeshInstance3D" parent="Body/LeftLegPivot/Knee"]
+position = Vector3(0, -0.322, 0.003)
+scale = Vector3(0.123, 0.251, 0.133)
+mesh = SubResource("Taper")
+material_override = SubResource("Leather")
+
+[node name="Ankle" type="Node3D" parent="Body/LeftLegPivot/Knee"]
+position = Vector3(0, -0.42, 0)
+
+[node name="BootUpper" type="MeshInstance3D" parent="Body/LeftLegPivot/Knee/Ankle"]
+position = Vector3(0, -0.041, -0.044)
+scale = Vector3(0.129, 0.122, 0.257)
+mesh = SubResource("Oval")
+material_override = SubResource("Leather")
+
+[node name="Toe" type="MeshInstance3D" parent="Body/LeftLegPivot/Knee/Ankle"]
+position = Vector3(0, -0.061, -0.124)
+scale = Vector3(0.113, 0.076, 0.12)
+mesh = SubResource("Oval")
+material_override = SubResource("Leather")
+
+[node name="Sole" type="MeshInstance3D" parent="Body/LeftLegPivot/Knee/Ankle"]
+position = Vector3(0, -0.096, -0.056)
+scale = Vector3(0.124, 0.018, 0.227)
+mesh = SubResource("Box")
+material_override = SubResource("Leather")
+
+[node name="RightEar" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0.077, 0.159, 0.004)
+scale = Vector3(0.031, 0.056, 0.03)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="RightEye" type="MeshInstance3D" parent="Body/UpperBody/Head"]
+position = Vector3(0.041, 0.171, -0.087)
+scale = Vector3(0.019, 0.009, 0.013)
+mesh = SubResource("Oval")
+material_override = SubResource("Hair")
+
+[node name="RightArmPivot" type="Node3D" parent="Body/UpperBody"]
+position = Vector3(0.193, 0.434, 0)
+
+[node name="Shoulder" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot"]
+position = Vector3(0, -0.016, 0)
+scale = Vector3(0.141, 0.157, 0.153)
+mesh = SubResource("Oval")
+material_override = SubResource("Wool")
+
+[node name="UpperSleeve" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot"]
+position = Vector3(0, -0.131, 0)
+scale = Vector3(0.145, 0.265, 0.147)
+mesh = SubResource("Taper")
+material_override = SubResource("Wool")
+
+[node name="Elbow" type="Node3D" parent="Body/UpperBody/RightArmPivot"]
+position = Vector3(0, -0.249, 0)
+
+[node name="ForeSleeve" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot/Elbow"]
+position = Vector3(0, -0.111, 0)
+scale = Vector3(0.119, 0.249, 0.122)
+mesh = SubResource("Taper")
+material_override = SubResource("Wool")
+
+[node name="Cuff" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot/Elbow"]
+position = Vector3(0, -0.221, 0)
+scale = Vector3(0.1, 0.036, 0.104)
+mesh = SubResource("Round")
+material_override = SubResource("Lapel")
+
+[node name="ShirtCuff" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot/Elbow"]
+position = Vector3(0, -0.24, 0)
+scale = Vector3(0.084, 0.019, 0.085)
+mesh = SubResource("Round")
+material_override = SubResource("Shirt")
+
+[node name="Hand" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot/Elbow"]
+position = Vector3(0, -0.282, -0.011)
+scale = Vector3(0.075, 0.096, 0.067)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="Thumb" type="MeshInstance3D" parent="Body/UpperBody/RightArmPivot/Elbow"]
+position = Vector3(-0.031, -0.269, -0.033)
+scale = Vector3(0.027, 0.059, 0.031)
+mesh = SubResource("Oval")
+material_override = SubResource("Skin")
+
+[node name="RightLegPivot" type="Node3D" parent="Body"]
+position = Vector3(0.108, 0, 0)
+
+[node name="Thigh" type="MeshInstance3D" parent="Body/RightLegPivot"]
+position = Vector3(0, -0.182, 0)
+scale = Vector3(0.181, 0.438, 0.175)
+mesh = SubResource("Taper")
+material_override = SubResource("Trouser")
+
+[node name="Knee" type="Node3D" parent="Body/RightLegPivot"]
+position = Vector3(0, -0.425, 0)
+
+[node name="KneeVolume" type="MeshInstance3D" parent="Body/RightLegPivot/Knee"]
+position = Vector3(0, 0.01, 0)
+scale = Vector3(0.123, 0.146, 0.134)
+mesh = SubResource("Oval")
+material_override = SubResource("Trouser")
+
+[node name="TrouserLeg" type="MeshInstance3D" parent="Body/RightLegPivot/Knee"]
+position = Vector3(0, -0.151, 0)
+scale = Vector3(0.141, 0.354, 0.141)
+mesh = SubResource("Taper")
+material_override = SubResource("Trouser")
+
+[node name="BootShaft" type="MeshInstance3D" parent="Body/RightLegPivot/Knee"]
+position = Vector3(0, -0.322, 0.003)
+scale = Vector3(0.123, 0.251, 0.133)
+mesh = SubResource("Taper")
+material_override = SubResource("Leather")
+
+[node name="Ankle" type="Node3D" parent="Body/RightLegPivot/Knee"]
+position = Vector3(0, -0.42, 0)
+
+[node name="BootUpper" type="MeshInstance3D" parent="Body/RightLegPivot/Knee/Ankle"]
+position = Vector3(0, -0.041, -0.044)
+scale = Vector3(0.129, 0.122, 0.257)
+mesh = SubResource("Oval")
+material_override = SubResource("Leather")
+
+[node name="Toe" type="MeshInstance3D" parent="Body/RightLegPivot/Knee/Ankle"]
+position = Vector3(0, -0.061, -0.124)
+scale = Vector3(0.113, 0.076, 0.12)
+mesh = SubResource("Oval")
+material_override = SubResource("Leather")
+
+[node name="Sole" type="MeshInstance3D" parent="Body/RightLegPivot/Knee/Ankle"]
+position = Vector3(0, -0.096, -0.056)
+scale = Vector3(0.124, 0.018, 0.227)
+mesh = SubResource("Box")
+material_override = SubResource("Leather")

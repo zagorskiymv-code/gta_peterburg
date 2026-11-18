@@ -1,0 +1,102 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/npc/citizen_npc.tscn" id="1_citizen"]
+[ext_resource type="Script" path="res://scripts/tools/citizen_lineup.gd" id="2_lineup"]
+[ext_resource type="PackedScene" path="res://scenes/world/district/evening_lighting.tscn" id="3_lighting"]
+
+[sub_resource type="PlaneMesh" id="Stage"]
+size = Vector2(44, 42)
+
+[sub_resource type="StandardMaterial3D" id="StageMaterial"]
+albedo_color = Color(0.43, 0.45, 0.46, 1)
+roughness = 0.9
+
+[node name="CitizenLineup" type="Node3D"]
+script = ExtResource("2_lineup")
+
+[node name="Lighting" parent="." instance=ExtResource("3_lighting")]
+
+[node name="PortraitFill" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-31, 164, 0)
+light_color = Color(0.94, 0.91, 0.87, 1)
+light_energy = 0.44
+
+[node name="Stage" type="MeshInstance3D" parent="."]
+mesh = SubResource("Stage")
+material_override = SubResource("StageMaterial")
+
+[node name="Camera" type="Camera3D" parent="."]
+current = true
+fov = 42.0
+
+[node name="Lineup" type="Node3D" parent="."]
+
+[node name="FrockCoat" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(9.2, 0, 0)
+citizen_type = 1
+outfit = 1
+
+[node name="Overcoat" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(7.6, 0, 0)
+citizen_type = 1
+outfit = 2
+
+[node name="LadyInDress" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(6, 0, 0)
+citizen_type = 1
+outfit = 3
+
+[node name="LadyInCape" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(4.4, 0, 0)
+citizen_type = 1
+outfit = 4
+
+[node name="Sentry" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(2.3, 0, 0)
+citizen_type = 2
+outfit = 5
+
+[node name="Patrolman" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(0.7, 0, 0)
+citizen_type = 2
+outfit = 6
+
+[node name="Worker" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(-1.4, 0, 0)
+citizen_type = 0
+outfit = 7
+
+[node name="Merchant" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(-3, 0, 0)
+citizen_type = 0
+outfit = 8
+
+[node name="Clerk" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(-4.6, 0, 0)
+citizen_type = 0
+outfit = 9
+
+[node name="Townswoman" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(-6.2, 0, 0)
+citizen_type = 0
+outfit = 10
+
+[node name="Elder" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(-7.8, 0, 0)
+citizen_type = 0
+outfit = 11
+
+[node name="Vendor" parent="Lineup" instance=ExtResource("1_citizen")]
+position = Vector3(-9.4, 0, 0)
+citizen_type = 0
+outfit = 12
+
+[node name="Instructions" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="Label" parent="Instructions"]
+offset_left = 20.0
+offset_top = 16.0
+theme_override_colors/font_outline_color = Color(0.12, 0.1, 0.09, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "1  Все   ·   2  Дворяне   ·   3  Солдаты   ·   4  Горожане   ·   Пробел  Ходьба   ·   V  Ракурс"

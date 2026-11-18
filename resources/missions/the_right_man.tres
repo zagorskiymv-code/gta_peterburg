@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/mission_definition.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/mission_step.gd" id="2"]
+
+[sub_resource type="Resource" id="MeetBaranov"]
+script = ExtResource("2")
+kind = 2
+objective = "Найдите Савелия Кузьмича Баранова у лавки и поговорите с ним — E"
+target = NodePath("StoryContacts/Baranov")
+radius = 2.2
+contact_name = "Савелий Кузьмич Баранов"
+conversation = PackedStringArray("Работу ищешь, милостивый государь? Есть одно дельце. И платятъ недурно", "А дельце законное?", "Разумеется! Почти")
+
+[resource]
+script = ExtResource("1")
+id = "the_right_man"
+title = "Нужный человек"
+unlocks_chapter = 4
+steps = Array[ExtResource("2")]([SubResource("MeetBaranov")])

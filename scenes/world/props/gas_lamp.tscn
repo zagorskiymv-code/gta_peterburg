@@ -1,0 +1,111 @@
+[gd_scene format=3]
+
+[sub_resource type="BoxMesh" id="Box"]
+
+[sub_resource type="StandardMaterial3D" id="Iron"]
+albedo_color = Color(0.13, 0.16, 0.15, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Amber"]
+albedo_color = Color(0.96, 0.67, 0.29, 1)
+roughness = 0.85
+emission_enabled = true
+emission = Color(0.96, 0.67, 0.29, 1)
+emission_energy_multiplier = 0.35
+
+[sub_resource type="CylinderMesh" id="Post"]
+top_radius = 0.043
+bottom_radius = 0.085
+height = 2.44
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Cap"]
+top_radius = 0.035
+bottom_radius = 0.29
+height = 0.23
+radial_segments = 4
+
+[sub_resource type="CylinderMesh" id="Lantern"]
+top_radius = 0.246
+bottom_radius = 0.164
+height = 0.36
+radial_segments = 4
+
+[sub_resource type="CylinderShape3D" id="PostCollision"]
+radius = 0.13
+height = 2.55
+
+[node name="GasLamp" type="Node3D"]
+
+[node name="Plinth" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.14, 0)
+scale = Vector3(0.29, 0.28, 0.29)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Post" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.35, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("Post")
+material_override = SubResource("Iron")
+
+[node name="LanternSeat" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2.57, 0)
+scale = Vector3(0.28, 0.07, 0.28)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Glazing" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2.78, 0)
+rotation_degrees = Vector3(0, 45, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("Lantern")
+material_override = SubResource("Amber")
+
+[node name="CornerN1N1" type="MeshInstance3D" parent="."]
+position = Vector3(-0.147, 2.78, -0.147)
+rotation_degrees = Vector3(-9, 0, 9)
+scale = Vector3(0.025, 0.38, 0.025)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="CornerN11" type="MeshInstance3D" parent="."]
+position = Vector3(-0.147, 2.78, 0.147)
+rotation_degrees = Vector3(9, 0, 9)
+scale = Vector3(0.025, 0.38, 0.025)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Corner1N1" type="MeshInstance3D" parent="."]
+position = Vector3(0.147, 2.78, -0.147)
+rotation_degrees = Vector3(-9, 0, -9)
+scale = Vector3(0.025, 0.38, 0.025)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Corner11" type="MeshInstance3D" parent="."]
+position = Vector3(0.147, 2.78, 0.147)
+rotation_degrees = Vector3(9, 0, -9)
+scale = Vector3(0.025, 0.38, 0.025)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Hood" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.075, 0)
+rotation_degrees = Vector3(0, 45, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("Cap")
+material_override = SubResource("Iron")
+
+[node name="Finial" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.21, 0)
+scale = Vector3(0.072, 0.09, 0.072)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="PostBody" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PostBody"]
+position = Vector3(0, 1.275, 0)
+shape = SubResource("PostCollision")

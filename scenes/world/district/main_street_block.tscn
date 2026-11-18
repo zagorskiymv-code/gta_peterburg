@@ -1,0 +1,2229 @@
+[gd_scene format=3]
+
+[ext_resource type="Shader" path="res://materials/cobblestone.gdshader" id="2_paving"]
+[ext_resource type="PackedScene" path="res://scenes/world/props/facade_window.tscn" id="3_window"]
+[ext_resource type="PackedScene" path="res://scenes/world/props/gas_lamp.tscn" id="4_lamp"]
+[ext_resource type="PackedScene" path="res://scenes/world/props/wooden_bench.tscn" id="5_bench"]
+
+[sub_resource type="StandardMaterial3D" id="Ground"]
+albedo_color = Color(0.44, 0.44, 0.4, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Stone"]
+albedo_color = Color(0.50, 0.45, 0.40, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Trim"]
+albedo_color = Color(0.77, 0.71, 0.60, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Ochre"]
+albedo_color = Color(0.76, 0.54, 0.28, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Cream"]
+albedo_color = Color(0.76, 0.65, 0.50, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Slate"]
+albedo_color = Color(0.3, 0.34, 0.37, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Iron"]
+albedo_color = Color(0.19, 0.23, 0.22, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Box"]
+
+[sub_resource type="BoxShape3D" id="CollisionBox_GroundCollision"]
+size = Vector3(40, 0.4, 40)
+
+[sub_resource type="BoxShape3D" id="CollisionBox_RoadCollision"]
+size = Vector3(8, 0.06, 40)
+
+[sub_resource type="BoxShape3D" id="Facade_WestNorth"]
+size = Vector3(8, 7.8, 10)
+
+[sub_resource type="BoxShape3D" id="Facade_WestCenter"]
+size = Vector3(8, 6.2, 10)
+
+[sub_resource type="BoxShape3D" id="Facade_WestSouth"]
+size = Vector3(8, 8, 12)
+
+[sub_resource type="BoxShape3D" id="Facade_EastNorth"]
+size = Vector3(8, 7.2, 12)
+
+[sub_resource type="BoxShape3D" id="Facade_EastCenter"]
+size = Vector3(8, 6.6, 12)
+
+[sub_resource type="StandardMaterial3D" id="Sage"]
+albedo_color = Color(0.43, 0.55, 0.37, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Rose"]
+albedo_color = Color(0.65, 0.40, 0.34, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="BlueGrey"]
+albedo_color = Color(0.42, 0.53, 0.57, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="RoofGreen"]
+albedo_color = Color(0.24, 0.35, 0.3, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="RoofRed"]
+albedo_color = Color(0.4, 0.25, 0.22, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Wood"]
+albedo_color = Color(0.31, 0.17, 0.095, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="SignGreen"]
+albedo_color = Color(0.12, 0.23, 0.18, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="SignWine"]
+albedo_color = Color(0.31, 0.12, 0.105, 1)
+roughness = 0.85
+
+[sub_resource type="ShaderMaterial" id="Cobblestone"]
+shader = ExtResource("2_paving")
+
+[sub_resource type="PrismMesh" id="Gable"]
+
+[sub_resource type="PrismMesh" id="LeftRoofSlope"]
+left_to_right = 1.0
+
+[sub_resource type="PrismMesh" id="RightRoofSlope"]
+left_to_right = 0.0
+
+[sub_resource type="CylinderMesh" id="BarrelBelly"]
+top_radius = 0.265
+bottom_radius = 0.32
+height = 0.36
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="BarrelHoop"]
+top_radius = 0.325
+bottom_radius = 0.325
+height = 0.045
+radial_segments = 12
+
+[sub_resource type="BoxShape3D" id="CargoCollision"]
+size = Vector3(0.65, 0.75, 0.65)
+
+[sub_resource type="ConvexPolygonShape3D" id="SidewalkCollision"]
+points = PackedVector3Array(3.90, -0.09, -20, 7, -0.09, -20, 7, 0.121, -20, 4.47, 0.121, -20, 3.90, 0, -20, 3.90, -0.09, 20, 7, -0.09, 20, 7, 0.121, 20, 4.47, 0.121, 20, 3.90, 0, 20)
+
+[sub_resource type="SystemFont" id="SignFont"]
+font_names = PackedStringArray("Georgia", "Times New Roman")
+font_weight = 700
+
+[node name="MainStreetBlock" type="Node3D"]
+
+[node name="Street" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Street"]
+position = Vector3(0, -0.25, 0)
+scale = Vector3(40, 0.4, 40)
+mesh = SubResource("Box")
+material_override = SubResource("Ground")
+
+[node name="Road" type="MeshInstance3D" parent="Street"]
+position = Vector3(0, -0.03, 0)
+scale = Vector3(8, 0.06, 40)
+mesh = SubResource("Box")
+material_override = SubResource("Cobblestone")
+
+[node name="WestSidewalk" type="MeshInstance3D" parent="Street"]
+position = Vector3(-5.5, 0.036, 0)
+scale = Vector3(3, 0.17, 40)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="WestCurb" type="MeshInstance3D" parent="Street"]
+position = Vector3(-4.08, 0.073, 0)
+scale = Vector3(0.16, 0.10, 40)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="EastSidewalk" type="MeshInstance3D" parent="Street"]
+position = Vector3(5.5, 0.036, 0)
+scale = Vector3(3, 0.17, 40)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="EastCurb" type="MeshInstance3D" parent="Street"]
+position = Vector3(4.08, 0.073, 0)
+scale = Vector3(0.16, 0.10, 40)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="WestNorth" type="Node3D" parent="Buildings"]
+position = Vector3(-11, -0.05, -13)
+
+[node name="Facade" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(0, 3.9, 0)
+scale = Vector3(8, 7.8, 10)
+mesh = SubResource("Box")
+material_override = SubResource("Ochre")
+
+[node name="Plinth" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(0, 0.25, 0)
+scale = Vector3(8.08, 0.5, 10.08)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Cornice" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(0, 7.8, 0)
+scale = Vector3(8.36, 0.28, 10.36)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="WestCenter" type="Node3D" parent="Buildings"]
+position = Vector3(-11, -0.05, -2)
+
+[node name="Facade" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(0, 3.1, 0)
+scale = Vector3(8, 6.2, 10)
+mesh = SubResource("Box")
+material_override = SubResource("Sage")
+
+[node name="Plinth" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(0, 0.25, 0)
+scale = Vector3(8.08, 0.5, 10.08)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Cornice" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(0, 6.2, 0)
+scale = Vector3(8.36, 0.28, 10.36)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="WestSouth" type="Node3D" parent="Buildings"]
+position = Vector3(-11, -0.05, 10)
+
+[node name="Facade" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(0, 4, 0)
+scale = Vector3(8, 8, 12)
+mesh = SubResource("Box")
+material_override = SubResource("Cream")
+
+[node name="Plinth" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(0, 0.25, 0)
+scale = Vector3(8.08, 0.5, 12.08)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Cornice" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(0, 8, 0)
+scale = Vector3(8.36, 0.28, 12.36)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="EastNorth" type="Node3D" parent="Buildings"]
+position = Vector3(11, -0.05, -12)
+
+[node name="Facade" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(0, 3.6, 0)
+scale = Vector3(8, 7.2, 12)
+mesh = SubResource("Box")
+material_override = SubResource("Rose")
+
+[node name="Plinth" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(0, 0.25, 0)
+scale = Vector3(8.08, 0.5, 12.08)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Cornice" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(0, 7.2, 0)
+scale = Vector3(8.36, 0.28, 12.36)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="EastCenter" type="Node3D" parent="Buildings"]
+position = Vector3(11, -0.05, 2)
+
+[node name="Facade" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(0, 3.3, 0)
+scale = Vector3(8, 6.6, 12)
+mesh = SubResource("Box")
+material_override = SubResource("BlueGrey")
+
+[node name="Plinth" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(0, 0.25, 0)
+scale = Vector3(8.08, 0.5, 12.08)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Cornice" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(0, 6.6, 0)
+scale = Vector3(8.36, 0.28, 12.36)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Streetlamps" type="Node3D" parent="."]
+
+[node name="GroundCollision" type="StaticBody3D" parent="Street"]
+position = Vector3(0, -0.25, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Street/GroundCollision"]
+shape = SubResource("CollisionBox_GroundCollision")
+
+[node name="RoadCollision" type="StaticBody3D" parent="Street"]
+position = Vector3(0, -0.03, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Street/RoadCollision"]
+shape = SubResource("CollisionBox_RoadCollision")
+
+[node name="FacadeCollision" type="StaticBody3D" parent="Buildings/WestNorth"]
+position = Vector3(0, 3.9, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/WestNorth/FacadeCollision"]
+shape = SubResource("Facade_WestNorth")
+
+[node name="FacadeCollision" type="StaticBody3D" parent="Buildings/WestCenter"]
+position = Vector3(0, 3.1, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/WestCenter/FacadeCollision"]
+shape = SubResource("Facade_WestCenter")
+
+[node name="FacadeCollision" type="StaticBody3D" parent="Buildings/WestSouth"]
+position = Vector3(0, 4, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/WestSouth/FacadeCollision"]
+shape = SubResource("Facade_WestSouth")
+
+[node name="FacadeCollision" type="StaticBody3D" parent="Buildings/EastNorth"]
+position = Vector3(0, 3.6, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/EastNorth/FacadeCollision"]
+shape = SubResource("Facade_EastNorth")
+
+[node name="FacadeCollision" type="StaticBody3D" parent="Buildings/EastCenter"]
+position = Vector3(0, 3.3, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/EastCenter/FacadeCollision"]
+shape = SubResource("Facade_EastCenter")
+
+[node name="EastSidewalkCollision" type="StaticBody3D" parent="Street"]
+rotation_degrees = Vector3(0, 0, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Street/EastSidewalkCollision"]
+shape = SubResource("SidewalkCollision")
+
+[node name="WestSidewalkCollision" type="StaticBody3D" parent="Street"]
+rotation_degrees = Vector3(0, 180, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Street/WestSidewalkCollision"]
+shape = SubResource("SidewalkCollision")
+
+[node name="StreetFront" type="Node3D" parent="Buildings/WestNorth"]
+position = Vector3(4, 0, 0)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="UpperWindow0" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 5.226, 0)
+
+[node name="LowerWindow0" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 1.74, 0)
+
+[node name="AtticWindow0" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 6.84, 0)
+
+[node name="UpperWindow1" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 5.226, 0)
+
+[node name="LowerWindow1" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 1.74, 0)
+
+[node name="AtticWindow1" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 6.84, 0)
+
+[node name="UpperWindow2" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 5.226, 0)
+
+[node name="AtticWindow2" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 6.84, 0)
+
+[node name="UpperWindow3" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 5.226, 0)
+
+[node name="LowerWindow3" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 1.74, 0)
+
+[node name="AtticWindow3" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 6.84, 0)
+
+[node name="UpperWindow4" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 5.226, 0)
+
+[node name="LowerWindow4" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 1.74, 0)
+
+[node name="AtticWindow4" parent="Buildings/WestNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 6.84, 0)
+
+[node name="Pilaster0Shaft" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(-4.73, 3.9, 0.095)
+scale = Vector3(0.3, 7.17, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Base" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(-4.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Capital" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(-4.73, 7.51, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Shaft" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(4.73, 3.9, 0.095)
+scale = Vector3(0.3, 7.17, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Base" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(4.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Capital" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(4.73, 7.51, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="StringCourse" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 3.65, 0.086)
+scale = Vector3(10, 0.17, 0.2)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="CorniceShadow" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 7.56, 0.11)
+scale = Vector3(10.12, 0.11, 0.25)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="PortalStone" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 1.28, 0.045)
+scale = Vector3(1.48, 2.43, 0.14)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 1.24, 0.126)
+scale = Vector3(1.12, 2.22, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorCenter" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 1.26, 0.168)
+scale = Vector3(0.055, 2.17, 0.035)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Transom" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 2.16, 0.173)
+scale = Vector3(0.94, 0.25, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 2.48, 0.15)
+scale = Vector3(1.68, 0.19, 0.34)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Threshold" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 0.18, 0.126)
+scale = Vector3(1.45, 0.14, 0.28)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="DoorPanel0Upper" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(-0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel0Lower" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(-0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Upper" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Lower" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="SignFrame" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 3.05, 0.1)
+scale = Vector3(3.12, 0.49, 0.17)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="SignPanel" type="MeshInstance3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 3.05, 0.195)
+scale = Vector3(2.98, 0.39, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("SignGreen")
+
+[node name="ShopSign" type="Label3D" parent="Buildings/WestNorth/StreetFront"]
+position = Vector3(0, 3.05, 0.224)
+pixel_size = 0.0045
+font_size = 44
+outline_size = 0
+modulate = Color(0.98, 0.83, 0.55, 1)
+font = SubResource("SignFont")
+text = "ХЛѢБЪ И СДОБА"
+
+[node name="GableRoof" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(0, 8.67, 0)
+scale = Vector3(8.28, 1.75, 10.24)
+mesh = SubResource("Gable")
+material_override = SubResource("RoofGreen")
+
+[node name="Chimney0" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(-1, 9.48, -2.8)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap0" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(-1, 10.04, -2.8)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Chimney1" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(-1, 9.48, 2.8)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap1" type="MeshInstance3D" parent="Buildings/WestNorth"]
+position = Vector3(-1, 10.04, 2.8)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="StreetFront" type="Node3D" parent="Buildings/WestCenter"]
+position = Vector3(4, 0, 0)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="UpperWindow0" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 4.154, 0)
+
+[node name="LowerWindow0" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 1.74, 0)
+
+[node name="UpperWindow1" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 4.154, 0)
+
+[node name="LowerWindow1" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 1.74, 0)
+
+[node name="UpperWindow2" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 4.154, 0)
+
+[node name="UpperWindow3" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 4.154, 0)
+
+[node name="LowerWindow3" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 1.74, 0)
+
+[node name="UpperWindow4" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 4.154, 0)
+
+[node name="LowerWindow4" parent="Buildings/WestCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 1.74, 0)
+
+[node name="Pilaster0Shaft" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-4.73, 3.1, 0.095)
+scale = Vector3(0.3, 5.57, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Base" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-4.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Capital" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-4.73, 5.91, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Shaft" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(4.73, 3.1, 0.095)
+scale = Vector3(0.3, 5.57, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Base" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(4.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Capital" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(4.73, 5.91, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="StringCourse" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 3.65, 0.086)
+scale = Vector3(10, 0.17, 0.2)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="CorniceShadow" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 5.96, 0.11)
+scale = Vector3(10.12, 0.11, 0.25)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="PortalStone" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 1.28, 0.045)
+scale = Vector3(1.48, 2.43, 0.14)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 1.24, 0.126)
+scale = Vector3(1.12, 2.22, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorCenter" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 1.26, 0.168)
+scale = Vector3(0.055, 2.17, 0.035)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Transom" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 2.16, 0.173)
+scale = Vector3(0.94, 0.25, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 2.48, 0.15)
+scale = Vector3(1.68, 0.19, 0.34)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Threshold" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 0.18, 0.126)
+scale = Vector3(1.45, 0.14, 0.28)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="DoorPanel0Upper" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel0Lower" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Upper" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Lower" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="BalconySlab" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 3.394, 0.45)
+scale = Vector3(2.42, 0.16, 0.94)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="BalconyFrontRail" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 4.174, 0.88)
+scale = Vector3(2.32, 0.065, 0.065)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster0" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-1.1, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster1" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-0.825, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster2" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-0.55, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster3" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-0.275, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster4" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster5" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0.275, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster6" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0.55, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster7" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(0.825, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster8" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(1.1, 3.824, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Return0" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(-1.1, 4.174, 0.47)
+scale = Vector3(0.06, 0.06, 0.86)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Return1" type="MeshInstance3D" parent="Buildings/WestCenter/StreetFront"]
+position = Vector3(1.1, 4.174, 0.47)
+scale = Vector3(0.06, 0.06, 0.86)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="RoofSlope0" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(-3.07, 6.78, 0)
+scale = Vector3(2.16, 1.2, 10.24)
+mesh = SubResource("LeftRoofSlope")
+material_override = SubResource("Slate")
+
+[node name="RoofSlope1" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(3.07, 6.78, 0)
+scale = Vector3(2.16, 1.2, 10.24)
+mesh = SubResource("RightRoofSlope")
+material_override = SubResource("Slate")
+
+[node name="RoofRidge" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(0, 6.78, 0)
+scale = Vector3(4, 1.2, 10.24)
+mesh = SubResource("Box")
+material_override = SubResource("Slate")
+
+[node name="Chimney0" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(-1, 7.88, -2.8)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap0" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(-1, 8.44, -2.8)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Chimney1" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(-1, 7.88, 2.8)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap1" type="MeshInstance3D" parent="Buildings/WestCenter"]
+position = Vector3(-1, 8.44, 2.8)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="StreetFront" type="Node3D" parent="Buildings/WestSouth"]
+position = Vector3(4, 0, 0)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="UpperWindow0" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 5.36, 0)
+
+[node name="LowerWindow0" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 1.74, 0)
+
+[node name="AtticWindow0" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 7.04, 0)
+
+[node name="UpperWindow1" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 5.36, 0)
+
+[node name="LowerWindow1" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 1.74, 0)
+
+[node name="AtticWindow1" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 7.04, 0)
+
+[node name="UpperWindow2" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 5.36, 0)
+
+[node name="AtticWindow2" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 7.04, 0)
+
+[node name="UpperWindow3" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 5.36, 0)
+
+[node name="LowerWindow3" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 1.74, 0)
+
+[node name="AtticWindow3" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 7.04, 0)
+
+[node name="UpperWindow4" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 5.36, 0)
+
+[node name="LowerWindow4" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 1.74, 0)
+
+[node name="AtticWindow4" parent="Buildings/WestSouth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 7.04, 0)
+
+[node name="Pilaster0Shaft" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(-5.73, 4, 0.095)
+scale = Vector3(0.3, 7.37, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Base" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(-5.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Capital" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(-5.73, 7.71, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Shaft" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(5.73, 4, 0.095)
+scale = Vector3(0.3, 7.37, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Base" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(5.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Capital" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(5.73, 7.71, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="StringCourse" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 3.65, 0.086)
+scale = Vector3(12, 0.17, 0.2)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="CorniceShadow" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 7.76, 0.11)
+scale = Vector3(12.12, 0.11, 0.25)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="PortalStone" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 1.28, 0.045)
+scale = Vector3(1.48, 2.43, 0.14)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 1.24, 0.126)
+scale = Vector3(1.12, 2.22, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorCenter" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 1.26, 0.168)
+scale = Vector3(0.055, 2.17, 0.035)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Transom" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 2.16, 0.173)
+scale = Vector3(0.94, 0.25, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 2.48, 0.15)
+scale = Vector3(1.68, 0.19, 0.34)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Threshold" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 0.18, 0.126)
+scale = Vector3(1.45, 0.14, 0.28)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="DoorPanel0Upper" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(-0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel0Lower" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(-0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Upper" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Lower" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="SignFrame" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 3.05, 0.1)
+scale = Vector3(3.12, 0.49, 0.17)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="SignPanel" type="MeshInstance3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 3.05, 0.195)
+scale = Vector3(2.98, 0.39, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("SignWine")
+
+[node name="ShopSign" type="Label3D" parent="Buildings/WestSouth/StreetFront"]
+position = Vector3(0, 3.05, 0.224)
+pixel_size = 0.0045
+font_size = 44
+outline_size = 0
+modulate = Color(0.98, 0.83, 0.55, 1)
+font = SubResource("SignFont")
+text = "КНИЖНАЯ ЛАВКА"
+
+[node name="CrossGable" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(0, 8.82, 0)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(12.18, 1.65, 8.28)
+mesh = SubResource("Gable")
+material_override = SubResource("RoofRed")
+
+[node name="Chimney0" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(-1, 9.68, -3.36)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap0" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(-1, 10.24, -3.36)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Chimney1" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(-1, 9.68, 3.36)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap1" type="MeshInstance3D" parent="Buildings/WestSouth"]
+position = Vector3(-1, 10.24, 3.36)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="StreetFront" type="Node3D" parent="Buildings/EastNorth"]
+position = Vector3(-4, 0, 0)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="UpperWindow0" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 4.824, 0)
+
+[node name="LowerWindow0" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 1.74, 0)
+
+[node name="UpperWindow1" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 4.824, 0)
+
+[node name="LowerWindow1" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 1.74, 0)
+
+[node name="UpperWindow2" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 4.824, 0)
+
+[node name="UpperWindow3" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 4.824, 0)
+
+[node name="LowerWindow3" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 1.74, 0)
+
+[node name="UpperWindow4" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 4.824, 0)
+
+[node name="LowerWindow4" parent="Buildings/EastNorth/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 1.74, 0)
+
+[node name="Pilaster0Shaft" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-5.73, 3.6, 0.095)
+scale = Vector3(0.3, 6.57, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Base" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-5.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Capital" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-5.73, 6.91, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Shaft" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(5.73, 3.6, 0.095)
+scale = Vector3(0.3, 6.57, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Base" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(5.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Capital" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(5.73, 6.91, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="StringCourse" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 3.65, 0.086)
+scale = Vector3(12, 0.17, 0.2)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="CorniceShadow" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 6.96, 0.11)
+scale = Vector3(12.12, 0.11, 0.25)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="PortalStone" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 1.28, 0.045)
+scale = Vector3(1.48, 2.43, 0.14)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 1.24, 0.126)
+scale = Vector3(1.12, 2.22, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorCenter" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 1.26, 0.168)
+scale = Vector3(0.055, 2.17, 0.035)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Transom" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 2.16, 0.173)
+scale = Vector3(0.94, 0.25, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 2.48, 0.15)
+scale = Vector3(1.68, 0.19, 0.34)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Threshold" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 0.18, 0.126)
+scale = Vector3(1.45, 0.14, 0.28)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="DoorPanel0Upper" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel0Lower" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Upper" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Lower" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="BalconySlab" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 4.064, 0.45)
+scale = Vector3(2.42, 0.16, 0.94)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="BalconyFrontRail" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 4.844, 0.88)
+scale = Vector3(2.32, 0.065, 0.065)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster0" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-1.1, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster1" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-0.825, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster2" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-0.55, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster3" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-0.275, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster4" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster5" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0.275, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster6" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0.55, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster7" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(0.825, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Baluster8" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(1.1, 4.494, 0.88)
+scale = Vector3(0.037, 0.69, 0.038)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Return0" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(-1.1, 4.844, 0.47)
+scale = Vector3(0.06, 0.06, 0.86)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Return1" type="MeshInstance3D" parent="Buildings/EastNorth/StreetFront"]
+position = Vector3(1.1, 4.844, 0.47)
+scale = Vector3(0.06, 0.06, 0.86)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="GableRoof" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(0, 8.07, 0)
+scale = Vector3(8.28, 1.75, 12.24)
+mesh = SubResource("Gable")
+material_override = SubResource("Slate")
+
+[node name="Chimney0" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(-1, 8.88, -3.36)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap0" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(-1, 9.44, -3.36)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Chimney1" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(-1, 8.88, 3.36)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap1" type="MeshInstance3D" parent="Buildings/EastNorth"]
+position = Vector3(-1, 9.44, 3.36)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="StreetFront" type="Node3D" parent="Buildings/EastCenter"]
+position = Vector3(-4, 0, 0)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="UpperWindow0" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 4.422, 0)
+
+[node name="LowerWindow0" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-3.3, 1.74, 0)
+
+[node name="UpperWindow1" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 4.422, 0)
+
+[node name="LowerWindow1" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(-1.65, 1.74, 0)
+
+[node name="UpperWindow2" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(0, 4.422, 0)
+
+[node name="UpperWindow3" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 4.422, 0)
+
+[node name="LowerWindow3" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(1.65, 1.74, 0)
+
+[node name="UpperWindow4" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 4.422, 0)
+
+[node name="LowerWindow4" parent="Buildings/EastCenter/StreetFront" instance=ExtResource("3_window")]
+position = Vector3(3.3, 1.74, 0)
+
+[node name="Pilaster0Shaft" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(-5.73, 3.3, 0.095)
+scale = Vector3(0.3, 5.97, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Base" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(-5.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster0Capital" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(-5.73, 6.31, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Shaft" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(5.73, 3.3, 0.095)
+scale = Vector3(0.3, 5.97, 0.18)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Base" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(5.73, 0.35, 0.095)
+scale = Vector3(0.48, 0.3, 0.24)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Pilaster1Capital" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(5.73, 6.31, 0.095)
+scale = Vector3(0.49, 0.2, 0.26)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="StringCourse" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 3.65, 0.086)
+scale = Vector3(12, 0.17, 0.2)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="CorniceShadow" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 6.36, 0.11)
+scale = Vector3(12.12, 0.11, 0.25)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="PortalStone" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 1.28, 0.045)
+scale = Vector3(1.48, 2.43, 0.14)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="Door" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 1.24, 0.126)
+scale = Vector3(1.12, 2.22, 0.07)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorCenter" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 1.26, 0.168)
+scale = Vector3(0.055, 2.17, 0.035)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="Transom" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 2.16, 0.173)
+scale = Vector3(0.94, 0.25, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("Iron")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 2.48, 0.15)
+scale = Vector3(1.68, 0.19, 0.34)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Threshold" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 0.18, 0.126)
+scale = Vector3(1.45, 0.14, 0.28)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="DoorPanel0Upper" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(-0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel0Lower" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(-0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Upper" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0.29, 1.54, 0.169)
+scale = Vector3(0.38, 0.56, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="DoorPanel1Lower" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0.29, 0.65, 0.169)
+scale = Vector3(0.38, 0.59, 0.045)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="SignFrame" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 3.05, 0.1)
+scale = Vector3(3.12, 0.49, 0.17)
+mesh = SubResource("Box")
+material_override = SubResource("Trim")
+
+[node name="SignPanel" type="MeshInstance3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 3.05, 0.195)
+scale = Vector3(2.98, 0.39, 0.04)
+mesh = SubResource("Box")
+material_override = SubResource("SignGreen")
+
+[node name="ShopSign" type="Label3D" parent="Buildings/EastCenter/StreetFront"]
+position = Vector3(0, 3.05, 0.224)
+pixel_size = 0.0045
+font_size = 44
+outline_size = 0
+modulate = Color(0.98, 0.83, 0.55, 1)
+font = SubResource("SignFont")
+text = "ЧАЙ И КОФЕ"
+
+[node name="RoofSlope0" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(-3.07, 7.18, 0)
+scale = Vector3(2.16, 1.2, 12.24)
+mesh = SubResource("LeftRoofSlope")
+material_override = SubResource("RoofGreen")
+
+[node name="RoofSlope1" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(3.07, 7.18, 0)
+scale = Vector3(2.16, 1.2, 12.24)
+mesh = SubResource("RightRoofSlope")
+material_override = SubResource("RoofGreen")
+
+[node name="RoofRidge" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(0, 7.18, 0)
+scale = Vector3(4, 1.2, 12.24)
+mesh = SubResource("Box")
+material_override = SubResource("RoofGreen")
+
+[node name="Chimney0" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(-1, 8.28, -3.36)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap0" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(-1, 8.84, -3.36)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Chimney1" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(-1, 8.28, 3.36)
+scale = Vector3(0.51, 1.13, 0.56)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="ChimneyCap1" type="MeshInstance3D" parent="Buildings/EastCenter"]
+position = Vector3(-1, 8.84, 3.36)
+scale = Vector3(0.65, 0.13, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("Stone")
+
+[node name="Lamp1" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(-4.75, 0.121, -15)
+
+[node name="Lamp2" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(-4.75, 0.121, -4)
+
+[node name="GasGlow" type="OmniLight3D" parent="Streetlamps/Lamp2"]
+position = Vector3(0, 2.72, 0)
+light_color = Color(1, 0.62, 0.30, 1)
+light_energy = 1.1
+omni_range = 5.2
+
+[node name="Lamp3" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(-4.75, 0.121, 7)
+
+[node name="Lamp4" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(-4.75, 0.121, 16)
+
+[node name="GasGlow" type="OmniLight3D" parent="Streetlamps/Lamp4"]
+position = Vector3(0, 2.72, 0)
+light_color = Color(1, 0.62, 0.30, 1)
+light_energy = 1.1
+omni_range = 5.2
+
+[node name="Lamp5" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(4.75, 0.121, -13)
+
+[node name="Lamp6" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(4.75, 0.121, -2)
+
+[node name="GasGlow" type="OmniLight3D" parent="Streetlamps/Lamp6"]
+position = Vector3(0, 2.72, 0)
+light_color = Color(1, 0.62, 0.30, 1)
+light_energy = 1.1
+omni_range = 5.2
+
+[node name="Lamp7" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(4.75, 0.121, 9)
+
+[node name="GasGlow" type="OmniLight3D" parent="Streetlamps/Lamp7"]
+position = Vector3(0, 2.72, 0)
+light_color = Color(1, 0.62, 0.30, 1)
+light_energy = 1.1
+omni_range = 5.2
+
+[node name="Lamp8" parent="Streetlamps" instance=ExtResource("4_lamp")]
+position = Vector3(4.75, 0.121, 17)
+
+[node name="StreetFurniture" type="Node3D" parent="."]
+
+[node name="Bench1" parent="StreetFurniture" instance=ExtResource("5_bench")]
+position = Vector3(-6.62, 0.121, -9)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="Bench2" parent="StreetFurniture" instance=ExtResource("5_bench")]
+position = Vector3(-6.62, 0.121, 4.4)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="Bench3" parent="StreetFurniture" instance=ExtResource("5_bench")]
+position = Vector3(6.62, 0.121, -6)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="Bench4" parent="StreetFurniture" instance=ExtResource("5_bench")]
+position = Vector3(6.62, 0.121, 5.6)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="Cargo1" type="StaticBody3D" parent="StreetFurniture"]
+position = Vector3(-6.58, 0.121, 12.7)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(0, 0.375, 0)
+shape = SubResource("CargoCollision")
+
+[node name="Crate" type="MeshInstance3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(0, 0.3, 0)
+scale = Vector3(0.61, 0.6, 0.61)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Slat0" type="MeshInstance3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(0, 0.08, 0)
+scale = Vector3(0.65, 0.16, 0.65)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Slat1" type="MeshInstance3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(0, 0.3, 0)
+scale = Vector3(0.65, 0.16, 0.65)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Slat2" type="MeshInstance3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(0, 0.52, 0)
+scale = Vector3(0.65, 0.16, 0.65)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Cleat0" type="MeshInstance3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(-0.255, 0.3, 0)
+scale = Vector3(0.075, 0.6, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="Cleat1" type="MeshInstance3D" parent="StreetFurniture/Cargo1"]
+position = Vector3(0.255, 0.3, 0)
+scale = Vector3(0.075, 0.6, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="Cargo2" type="StaticBody3D" parent="StreetFurniture"]
+position = Vector3(-6.57, 0.121, 13.46)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.375, 0)
+shape = SubResource("CargoCollision")
+
+[node name="LowerStaves" type="MeshInstance3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.18, 0)
+rotation_degrees = Vector3(180, 0, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelBelly")
+material_override = SubResource("Wood")
+
+[node name="UpperStaves" type="MeshInstance3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.54, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelBelly")
+material_override = SubResource("Wood")
+
+[node name="Hoop0" type="MeshInstance3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.14, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop1" type="MeshInstance3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.27, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop2" type="MeshInstance3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.45, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop3" type="MeshInstance3D" parent="StreetFurniture/Cargo2"]
+position = Vector3(0, 0.58, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Cargo3" type="StaticBody3D" parent="StreetFurniture"]
+position = Vector3(6.58, 0.121, 1.8)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(0, 0.375, 0)
+shape = SubResource("CargoCollision")
+
+[node name="Crate" type="MeshInstance3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(0, 0.3, 0)
+scale = Vector3(0.61, 0.6, 0.61)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Slat0" type="MeshInstance3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(0, 0.08, 0)
+scale = Vector3(0.65, 0.16, 0.65)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Slat1" type="MeshInstance3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(0, 0.3, 0)
+scale = Vector3(0.65, 0.16, 0.65)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Slat2" type="MeshInstance3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(0, 0.52, 0)
+scale = Vector3(0.65, 0.16, 0.65)
+mesh = SubResource("Box")
+material_override = SubResource("Wood")
+
+[node name="Cleat0" type="MeshInstance3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(-0.255, 0.3, 0)
+scale = Vector3(0.075, 0.6, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="Cleat1" type="MeshInstance3D" parent="StreetFurniture/Cargo3"]
+position = Vector3(0.255, 0.3, 0)
+scale = Vector3(0.075, 0.6, 0.68)
+mesh = SubResource("Box")
+material_override = SubResource("RoofRed")
+
+[node name="Cargo4" type="StaticBody3D" parent="StreetFurniture"]
+position = Vector3(6.56, 0.121, 2.54)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.375, 0)
+shape = SubResource("CargoCollision")
+
+[node name="LowerStaves" type="MeshInstance3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.18, 0)
+rotation_degrees = Vector3(180, 0, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelBelly")
+material_override = SubResource("Wood")
+
+[node name="UpperStaves" type="MeshInstance3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.54, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelBelly")
+material_override = SubResource("Wood")
+
+[node name="Hoop0" type="MeshInstance3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.14, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop1" type="MeshInstance3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.27, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop2" type="MeshInstance3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.45, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop3" type="MeshInstance3D" parent="StreetFurniture/Cargo4"]
+position = Vector3(0, 0.58, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Cargo5" type="StaticBody3D" parent="StreetFurniture"]
+position = Vector3(6.57, 0.121, -15.3)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.375, 0)
+shape = SubResource("CargoCollision")
+
+[node name="LowerStaves" type="MeshInstance3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.18, 0)
+rotation_degrees = Vector3(180, 0, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelBelly")
+material_override = SubResource("Wood")
+
+[node name="UpperStaves" type="MeshInstance3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.54, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelBelly")
+material_override = SubResource("Wood")
+
+[node name="Hoop0" type="MeshInstance3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.14, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop1" type="MeshInstance3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.27, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop2" type="MeshInstance3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.45, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="Hoop3" type="MeshInstance3D" parent="StreetFurniture/Cargo5"]
+position = Vector3(0, 0.58, 0)
+scale = Vector3(1, 1, 1)
+mesh = SubResource("BarrelHoop")
+material_override = SubResource("Iron")
+
+[node name="RearWindow00" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, -3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow01" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, -1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow02" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, 1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow03" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, 3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow10" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.226, -3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow11" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.226, -1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow12" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.226, 1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow13" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.226, 3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow20" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 6.84, -3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow21" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 6.84, -1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow22" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 6.84, 1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow23" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-4, 6.84, 3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="NorthWindow00" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow01" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow02" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow10" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 5.226, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow11" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 5.226, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow12" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 5.226, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow20" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 6.84, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow21" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 6.84, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow22" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 6.84, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="SouthWindow00" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow01" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow02" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow10" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 5.226, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow11" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 5.226, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow12" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 5.226, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow20" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 6.84, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow21" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 6.84, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow22" parent="Buildings/WestNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 6.84, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="RearWindow00" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, -3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow01" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, -1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow02" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, 1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow03" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, 3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow10" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 4.154, -3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow11" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 4.154, -1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow12" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 4.154, 1.05)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow13" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-4, 4.154, 3.1)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="NorthWindow00" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow01" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow02" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow10" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 4.154, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow11" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 4.154, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow12" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 4.154, -5)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="SouthWindow00" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow01" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow02" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow10" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 4.154, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow11" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 4.154, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow12" parent="Buildings/WestCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 4.154, 5)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="RearWindow00" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, -3.72)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow01" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, -1.26)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow02" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, 1.26)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow03" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 1.74, 3.72)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow10" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.36, -3.72)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow11" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.36, -1.26)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow12" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.36, 1.26)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow13" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 5.36, 3.72)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow20" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 7.04, -3.72)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow21" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 7.04, -1.26)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow22" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 7.04, 1.26)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="RearWindow23" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-4, 7.04, 3.72)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="NorthWindow00" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow01" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow02" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow10" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 5.36, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow11" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(0, 5.36, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow12" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 5.36, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow20" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 7.04, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow21" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(0, 7.04, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow22" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 7.04, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="SouthWindow00" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow01" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow02" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow10" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 5.36, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow11" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(0, 5.36, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow12" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 5.36, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow20" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 7.04, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow21" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(0, 7.04, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow22" parent="Buildings/WestSouth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 7.04, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="RearWindow00" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, -3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow01" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, -1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow02" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, 1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow03" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, 3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow10" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 4.824, -3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow11" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 4.824, -1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow12" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 4.824, 1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow13" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(4, 4.824, 3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="NorthWindow00" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow01" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow02" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow10" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 4.824, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow11" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 4.824, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow12" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 4.824, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="SouthWindow00" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow01" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow02" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow10" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 4.824, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow11" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(0, 4.824, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow12" parent="Buildings/EastNorth" instance=ExtResource("3_window")]
+position = Vector3(2.32, 4.824, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="RearWindow00" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, -3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow01" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, -1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow02" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, 1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow03" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 1.74, 3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow10" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 4.422, -3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow11" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 4.422, -1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow12" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 4.422, 1.26)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="RearWindow13" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(4, 4.422, 3.72)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="NorthWindow00" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow01" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow02" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow10" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 4.422, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow11" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 4.422, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="NorthWindow12" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 4.422, -6)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="SouthWindow00" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow01" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow02" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 1.74, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow10" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(-2.32, 4.422, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow11" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(0, 4.422, 6)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="SouthWindow12" parent="Buildings/EastCenter" instance=ExtResource("3_window")]
+position = Vector3(2.32, 4.422, 6)
+rotation_degrees = Vector3(0, 0, 0)

@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Local editor and macOS files
+/.vscode/
+.DS_Store
+
+# Screenshots are tracked individually
+/petersburg-screenshots.zip

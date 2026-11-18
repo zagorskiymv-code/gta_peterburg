@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/mission_definition.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/mission_step.gd" id="2"]
+
+[sub_resource type="Resource" id="Stable"]
+script = ExtResource("2")
+kind = 2
+objective = "Отнесите записку Баранова конюху у Дворцовой площади — E"
+target = NodePath("HorseDelivery/Stablehand")
+contact_name = "Конюх"
+radius = 2.2
+conversation = PackedStringArray("Записка от Баранова? Конечно, сударь. Гнедой у ворот. Ведите его к покупателю в Новую Голландию.", "Благодарю. Доставлю в целости.")
+
+[sub_resource type="Resource" id="Mount"]
+script = ExtResource("2")
+kind = 1
+objective = "Сядьте верхом на выданного коня — E"
+target = NodePath("HorseDelivery/DeliveryHorse")
+
+[sub_resource type="Resource" id="Deliver"]
+script = ExtResource("2")
+objective = "Доставьте коня покупателю в Новую Голландию"
+target = NodePath("HorseDelivery/Handover")
+radius = 2.75
+required_transport = NodePath("HorseDelivery/DeliveryHorse")
+
+[resource]
+script = ExtResource("1")
+id = "a_horse_not_a_bicycle"
+title = "Конь — не велосипед"
+briefing = "Баранов: «Доставь коня покупателю в Новую Голландию. Вот записка для конюха»."
+steps = Array[ExtResource("2")]([SubResource("Stable"), SubResource("Mount"), SubResource("Deliver")])

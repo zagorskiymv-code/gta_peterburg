@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/mission_definition.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/mission_step.gd" id="2"]
+
+[sub_resource type="Resource" id="FindBicycle"]
+script = ExtResource("2")
+kind = 1
+objective = "Найдите велосипед"
+target = NodePath("DistrictRiding/ParkedBicycles/PennyFarthing14")
+
+[sub_resource type="Resource" id="RideToStreet"]
+script = ExtResource("2")
+objective = "Доберитесь до отмеченного места"
+target = NodePath("MissionPoints/OpeningRideCheckpoint")
+radius = 2.4
+required_transport = NodePath("DistrictRiding/ParkedBicycles/PennyFarthing14")
+
+[resource]
+script = ExtResource("1")
+id = "again_twenty_five"
+title = "Опять двадцать пять"
+reward_rubles = 5
+steps = Array[ExtResource("2")]([SubResource("FindBicycle"), SubResource("RideToStreet")])

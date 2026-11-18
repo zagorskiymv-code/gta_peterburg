@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/vehicles/benz_victoria.gd" id="1_drive"]
+[ext_resource type="Script" path="res://scripts/vehicles/victoria_model.gd" id="2_model"]
+
+[sub_resource type="BoxShape3D" id="CarriageEnvelope"]
+size = Vector3(1.80, 1.60, 3.16)
+
+[node name="BenzVictoria" type="CharacterBody3D"]
+collision_layer = 9
+collision_mask = 15
+floor_snap_length = 0.16
+script = ExtResource("1_drive")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.80, 0.02)
+shape = SubResource("CarriageEnvelope")
+
+[node name="Model" type="Node3D" parent="."]
+script = ExtResource("2_model")

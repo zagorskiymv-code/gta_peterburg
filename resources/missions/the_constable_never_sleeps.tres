@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/mission_definition.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/mission_step.gd" id="2"]
+
+[sub_resource type="Resource" id="Stopped"]
+script = ExtResource("2")
+kind = 2
+objective = "Поговорите с городовым"
+target = NodePath("ConstableChase/Constable")
+contact_name = "Городовой"
+auto_conversation = true
+radius = 7.5
+conversation = PackedStringArray("Позвольте-съ! А чья это лошадь была?", "Не моя, ваше благородие", "Вотъ и разберёмся!")
+
+[sub_resource type="Resource" id="Escape"]
+script = ExtResource("2")
+kind = 4
+objective = "Уйдите от городового и доберитесь до двора Новой Голландии"
+target = NodePath("ConstableChase/HidingCourt")
+radius = 4.5
+
+[resource]
+script = ExtResource("1")
+id = "the_constable_never_sleeps"
+title = "Городовой не дремлет"
+unlocks_story_chapter = 2
+steps = Array[ExtResource("2")]([SubResource("Stopped"), SubResource("Escape")])

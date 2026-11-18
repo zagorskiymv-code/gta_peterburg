@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/death_screen.gd" id="1"]
+
+[node name="DeathScreen" type="CanvasLayer"]
+layer = 30
+script = ExtResource("1")
+visible = false
+
+[node name="Shade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.073, 0.034, 0.052, 0)
+
+[node name="Words" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lines" type="VBoxContainer" parent="Words"]
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Words/Lines"]
+theme_override_colors/font_color = Color(0.96, 0.89, 0.75, 1)
+theme_override_font_sizes/font_size = 65
+text = "УТОНУЛЪ"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Words/Lines"]
+theme_override_colors/font_color = Color(0.89, 0.82, 0.71, 1)
+theme_override_font_sizes/font_size = 21
+text = "В следующий раз научитесь плавать"
+horizontal_alignment = 1

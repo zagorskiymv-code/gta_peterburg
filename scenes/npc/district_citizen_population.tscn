@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/district_citizen_population.gd" id="1_population"]
+
+[node name="DistrictCitizenPopulation" type="Node3D"]
+script = ExtResource("1_population")

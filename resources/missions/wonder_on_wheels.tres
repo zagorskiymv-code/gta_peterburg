@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/mission_definition.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/mission_step.gd" id="2"]
+
+[sub_resource type="Resource" id="FindCar"]
+script = ExtResource("2")
+kind = 1
+objective = "Найдите отмеченный автомобиль и сядьте за управление — E"
+subtitle = "Вотъ это машина! Безъ лошади, а едетъ!"
+target = NodePath("VehicleTrial/BenzVictoria")
+
+[sub_resource type="Resource" id="ParkAndExit"]
+script = ExtResource("2")
+kind = 3
+objective = "Доедьте до мастерской возле Невского проспекта"
+target = NodePath("MissionPoints/NevskyWorkshopParking")
+radius = 3.3
+required_transport = NodePath("VehicleTrial/BenzVictoria")
+
+[resource]
+script = ExtResource("1")
+id = "wonder_on_wheels"
+title = "Чудо на колёсах"
+reward_rubles = 10
+steps = Array[ExtResource("2")]([SubResource("FindCar"), SubResource("ParkAndExit")])

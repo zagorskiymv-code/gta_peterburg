@@ -1,0 +1,149 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/petersburg_district.gd" id="1_district"]
+[ext_resource type="PackedScene" path="res://scenes/world/district/main_street_block.tscn" id="2_street"]
+[ext_resource type="PackedScene" path="res://scenes/world/district/evening_lighting.tscn" id="3_lighting"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4_player"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/singer_house.tscn" id="5_singer"]
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/cruiser_aurora.tscn" id="6_aurora"]
+
+[ext_resource type="Script" path="res://scripts/ui/district_respawn.gd" id="7_respawn"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/scarlet_sails_ship.tscn" id="8_scarlet"]
+
+[node name="PetersburgDistrict" type="Node3D"]
+script = ExtResource("1_district")
+
+[node name="Streets" type="Node3D" parent="."]
+
+[node name="MainStreetBlock" parent="Streets" instance=ExtResource("2_street")]
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="Landmarks" type="Node3D" parent="."]
+
+[node name="SingerHouse" parent="Landmarks" instance=ExtResource("5_singer")]
+position = Vector3(18.75, -0.05, -94)
+
+[node name="CruiserAurora" parent="Landmarks" instance=ExtResource("6_aurora")]
+position = Vector3(-148, -2.48, -158)
+rotation_degrees = Vector3(0, -30, 0)
+
+[node name="ScarletSailsShip" parent="Landmarks" instance=ExtResource("8_scarlet")]
+position = Vector3(-146, -2.55, -285)
+rotation_degrees = Vector3(0, 60, 0)
+
+[node name="Infill" type="Node3D" parent="."]
+
+[node name="Canal" type="Node3D" parent="."]
+
+[node name="Square" type="Node3D" parent="."]
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Lighting" parent="." instance=ExtResource("3_lighting")]
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+position = Vector3(0, 0.02, 12)
+
+[node name="Player" parent="PlayerSpawn" groups=["district_explorer"] instance=ExtResource("4_player")]
+
+[node name="Diagnostics" type="CanvasLayer" parent="."]
+
+[node name="Fps" type="Label" parent="Diagnostics"]
+visible = false
+offset_left = 18.0
+offset_top = 14.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.12, 0.1, 0.08, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "FPS"
+
+[node name="ReviewViews" type="Node3D" parent="."]
+
+[node name="MainStreet" type="Marker3D" parent="ReviewViews"]
+position = Vector3(1, 3.2, 16)
+rotation_degrees = Vector3(-4, 0, 0)
+
+[node name="IsaacSquare" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-45, 4.7, -77)
+rotation_degrees = Vector3(19, 4, 0)
+
+[node name="Quay" type="Marker3D" parent="ReviewViews"]
+position = Vector3(44, 4.5, -44)
+rotation_degrees = Vector3(-8, -150, 0)
+
+[node name="Crossroads" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-9, 4, -29.5)
+rotation_degrees = Vector3(-7, -100, 0)
+
+[node name="Garden" type="Marker3D" parent="ReviewViews"]
+position = Vector3(23, 3.3, -37)
+rotation_degrees = Vector3(-4, 0, 0)
+
+[node name="NevskyProspekt" type="Node3D" parent="."]
+
+[node name="NevskyIsaac" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-3, 4, -128)
+rotation_degrees = Vector3(15, 78, 0)
+
+[node name="NevskyStreetLevel" type="Marker3D" parent="ReviewViews"]
+position = Vector3(5, 2, -59)
+rotation_degrees = Vector3(1, 1, 0)
+
+[node name="PalaceTurn" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-12, 6.6, -174)
+rotation_degrees = Vector3(-6, 53, 0)
+
+[node name="NevaBridgeApproach" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-85, 4.7, -213)
+rotation_degrees = Vector3(-4, 70, 0)
+
+[node name="NevaBridgeBoundary" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-142, 4.5, -234)
+rotation_degrees = Vector3(-4, 70, 0)
+
+[node name="PalaceBridgeSide" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-97, 4.5, -191)
+rotation_degrees = Vector3(-4.328, 47.726, 0)
+
+[node name="AuroraFromQuay" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-88, 4, -159)
+rotation_degrees = Vector3(-0.955, 90.955, 0)
+
+[node name="SingerFromNevsky" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-6, 3.6, -83)
+rotation_degrees = Vector3(19.857, -64.537, 0)
+
+[node name="IsaacBypassWest" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-84.5, 3.4, -152)
+rotation_degrees = Vector3(8.572, -145.008, 0)
+
+[node name="IsaacColonnade" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-60.2, 26, -136)
+rotation_degrees = Vector3(-17.403, 71.733, 0)
+
+[node name="DistrictRespawn" type="Node" parent="."]
+script = ExtResource("7_respawn")
+
+[node name="OpenPalaceBridge" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-125, 8, -203)
+rotation_degrees = Vector3(-1.319, 38.454, 0)
+
+[node name="GeneralStaffArch" type="Marker3D" parent="ReviewViews"]
+position = Vector3(24, 3.0, -235)
+rotation_degrees = Vector3(5.458, 180.000, 0)
+
+[node name="SingerStreetElevation" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-10.5, 3.5, -80)
+rotation_degrees = Vector3(23.063, -60.751, 0)
+
+[node name="ScarletSails" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-121, 4.7, -241)
+rotation_degrees = Vector3(1.245, 29.604, 0)
+
+[node name="ColonnadeWaterView" type="Marker3D" parent="ReviewViews"]
+position = Vector3(-59, 25.8, -141)
+rotation_degrees = Vector3(-10.417, 44.284, 0)

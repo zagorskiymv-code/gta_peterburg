@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/mission_definition.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/systems/mission_step.gd" id="2"]
+
+[sub_resource type="Resource" id="Reach"]
+script = ExtResource("2")
+objective = "Дойдите до жёлтого маркера на главной улице"
+target = NodePath("MissionPoints/StreetCheckpoint")
+radius = 2.0
+on_foot_only = true
+
+[resource]
+script = ExtResource("1")
+id = "walk_test"
+title = "Пробная прогулка"
+steps = Array[ExtResource("2")]([SubResource("Reach")])
