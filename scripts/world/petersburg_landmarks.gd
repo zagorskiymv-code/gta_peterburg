@@ -28,7 +28,7 @@ func build(parent: Node3D, paving: Material, flagstone: Material, ground: Materi
 	var cathedral := CATHEDRAL.instantiate() as Node3D
 	cathedral.position = Vector3(-49, 0, -136)
 	parent.add_child(cathedral)
-	_tile(parent, "IsaacStoneParvis", Vector2(-49.5, -136), Vector2(79, 71), flagstone, 0.018)
+	_tile(parent, "IsaacStoneParvis", Vector2(-49.5, -136), Vector2(79, 73), flagstone, 0.018)
 	_tile(parent, "IsaacNorthWalk", Vector2(-49, -174.5), Vector2(15, 7), flagstone, 0.017)
 	_tile(parent, "AdmiraltyForecourt", Vector2(-49, -184.5), Vector2(25, 13), flagstone, 0.017)
 	for x in [-59.0, -39.0]:

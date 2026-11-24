@@ -1,7 +1,7 @@
 @tool
 extends MeshInstance3D
 
-const EAVE := Vector2(21.64, 19.14)
+const EAVE := Vector2(21.64, 24.69)
 const EAVE_HEIGHT := 20.57
 const STONE_TOE_RADIUS := 13.23
 const STONE_TOE_HEIGHT := 22.0
