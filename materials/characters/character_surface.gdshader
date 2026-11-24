@@ -29,7 +29,7 @@ void fragment() {
 	float rough = base_roughness;
 	if (finish == 0) {
 		float yarn = sin((p.y + (p.x + p.z) * 0.72) * 752.0) * grain_visible;
-		albedo *= 1.0 + grain * 0.060 + yarn * 0.014;
+		albedo *= 1.0 + grain * 0.035 + yarn * 0.009;
 		rough += grain * 0.10;
 	} else if (finish == 1) {
 		float front = smoothstep(0.1, 0.85, -object_normal.z);
@@ -38,7 +38,7 @@ void fragment() {
 		float forehead = smoothstep(0.17, 0.24, p.y) * front;
 		vec2 nose_delta = vec2(p.x * 55.0, (p.y - 0.155) * 39.0);
 		float nose = exp(-dot(nose_delta, nose_delta)) * front;
-		albedo *= 1.0 + grain * 0.025 + forehead * 0.063;
+		albedo *= 1.0 + grain * 0.014 + forehead * 0.063;
 		albedo += vec3(0.065, -0.007, -0.008) * (cheek + 0.48 * nose);
 		rough += cheek * 0.08 - nose * 0.10 - forehead * 0.043;
 	} else if (finish == 2) {
