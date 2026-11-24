@@ -1,0 +1,853 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/column.tscn" id="column"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(6, 0.44, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+resource_name = "trim"
+albedo_color = Color(0.70196, 0.67843, 0.63137, 1)
+roughness = 0.85
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(5.65, 1.19, 5.65)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+resource_name = "base"
+albedo_color = Color(0.54118, 0.52549, 0.4902, 1)
+roughness = 0.88
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5"]
+size = Vector3(5.71, 0.52, 5.71)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+resource_name = "stone"
+albedo_color = Color(0.6549, 0.63922, 0.60392, 1)
+roughness = 0.88
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_7"]
+size = Vector3(6.08, 0.18, 6.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8"]
+size = Vector3(5.89, 0.28, 5.89)
+
+[sub_resource type="BoxMesh" id="BoxMesh_9"]
+size = Vector3(6.02, 0.57, 6.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_10"]
+size = Vector3(6.23, 0.25, 6.23)
+
+[sub_resource type="BoxMesh" id="BoxMesh_11"]
+size = Vector3(1.48, 5.3, 1.48)
+
+[sub_resource type="BoxMesh" id="BoxMesh_12"]
+size = Vector3(0.4, 0.42, 1.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_13"]
+size = Vector3(0.42, 3.76, 1.13)
+
+[sub_resource type="PrismMesh" id="PrismMesh_14"]
+size = Vector3(5.86, 1.47, 1.03)
+
+[sub_resource type="BoxMesh" id="BoxMesh_15"]
+size = Vector3(6.1, 0.18, 0.51)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16"]
+size = Vector3(3.50808, 0.18, 0.91)
+
+[sub_resource type="BoxMesh" id="BoxMesh_17"]
+size = Vector3(3.50808, 0.13, 1.61)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18"]
+resource_name = "copper"
+albedo_color = Color(0.30588, 0.40784, 0.33333, 1)
+roughness = 0.76
+metallic = 0.21
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_19"]
+top_radius = 1.94
+bottom_radius = 4.24
+height = 1.44
+radial_segments = 4
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_20"]
+top_radius = 1.44
+bottom_radius = 1.61
+height = 0.33
+radial_segments = 8
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_21"]
+top_radius = 1.28
+bottom_radius = 1.42
+height = 0.31
+radial_segments = 8
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_22"]
+top_radius = 1.25
+bottom_radius = 1.29
+height = 0.15
+radial_segments = 24
+rings = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_23"]
+radius = 1.19
+height = 1.42
+radial_segments = 64
+rings = 24
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24"]
+resource_name = "gold"
+albedo_color = Color(0.8, 0.60784, 0.25098, 1)
+roughness = 0.49
+metallic = 0.53
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_25"]
+top_radius = 0.162
+bottom_radius = 0.162
+height = 0.14
+radial_segments = 12
+rings = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_26"]
+size = Vector3(0.0972, 1.08, 0.0972)
+
+[sub_resource type="BoxMesh" id="BoxMesh_27"]
+size = Vector3(0.6912, 0.0972, 0.0972)
+
+[sub_resource type="BoxMesh" id="BoxMesh_28"]
+size = Vector3(0.47, 0.34, 4.72)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_29"]
+resource_name = "shadowtrim"
+albedo_color = Color(0.44314, 0.41961, 0.38431, 1)
+roughness = 0.82
+metallic = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_30"]
+top_radius = 0.28
+bottom_radius = 0.28
+height = 0.66
+radial_segments = 32
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_31"]
+top_radius = 0.32
+bottom_radius = 0.62
+height = 0.49
+radial_segments = 32
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32"]
+resource_name = "bronze"
+albedo_color = Color(0.15294, 0.24314, 0.21961, 1)
+roughness = 0.63
+metallic = 0.39
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_33"]
+top_radius = 0.62
+bottom_radius = 0.79
+height = 0.58
+radial_segments = 32
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_34"]
+top_radius = 0.79
+bottom_radius = 1.13
+height = 0.28
+radial_segments = 32
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_35"]
+top_radius = 1.13
+bottom_radius = 1.16
+height = 0.14
+radial_segments = 32
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36"]
+resource_name = "relief"
+albedo_color = Color(0.27843, 0.38039, 0.32941, 1)
+roughness = 0.56
+metallic = 0.34
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_37"]
+top_radius = 0.12
+bottom_radius = 0.19
+height = 0.36
+radial_segments = 32
+rings = 0
+
+[node name="Belfry" type="Node3D"]
+
+[node name="Foot" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.22, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Pedestal" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.02, 0)
+mesh = SubResource("BoxMesh_3")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="PedestalPanel" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.11, 0)
+mesh = SubResource("BoxMesh_5")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="PlinthCap" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.63, 0)
+mesh = SubResource("BoxMesh_7")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Sill" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.76, 0)
+mesh = SubResource("BoxMesh_8")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Entablature" type="MeshInstance3D" parent="."]
+position = Vector3(0, 7.42, 0)
+mesh = SubResource("BoxMesh_9")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Cornice" type="MeshInstance3D" parent="."]
+position = Vector3(0, 7.8, 0)
+mesh = SubResource("BoxMesh_10")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Pier0" type="MeshInstance3D" parent="."]
+position = Vector3(-2.12, 4.52, -2.12)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="EngagedColumn0_0" parent="." instance=ExtResource("column")]
+position = Vector3(-3.03, 1.9, -2.12)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="EngagedColumn0_1" parent="." instance=ExtResource("column")]
+position = Vector3(-2.12, 1.9, -3.03)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="Pier1" type="MeshInstance3D" parent="."]
+position = Vector3(-2.12, 4.52, 2.12)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="EngagedColumn1_0" parent="." instance=ExtResource("column")]
+position = Vector3(-3.03, 1.9, 2.12)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="EngagedColumn1_1" parent="." instance=ExtResource("column")]
+position = Vector3(-2.12, 1.9, 3.03)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="Pier2" type="MeshInstance3D" parent="."]
+position = Vector3(2.12, 4.52, -2.12)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="EngagedColumn2_0" parent="." instance=ExtResource("column")]
+position = Vector3(3.03, 1.9, -2.12)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="EngagedColumn2_1" parent="." instance=ExtResource("column")]
+position = Vector3(2.12, 1.9, -3.03)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="Pier3" type="MeshInstance3D" parent="."]
+position = Vector3(2.12, 4.52, 2.12)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="EngagedColumn3_0" parent="." instance=ExtResource("column")]
+position = Vector3(3.03, 1.9, 2.12)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="EngagedColumn3_1" parent="." instance=ExtResource("column")]
+position = Vector3(2.12, 1.9, 3.03)
+scale = Vector3(0.52, 0.49, 0.52)
+
+[node name="Arch0" type="Node3D" parent="."]
+rotation = Vector3(0, 0, 0)
+
+[node name="Voussoir0" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 0.12083)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir1" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 0.36249)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir2" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 0.60415)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir3" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 0.84581)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir4" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 1.08747)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir5" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.32914)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir6" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-0, 7.01, 2.66)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir7" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.81246)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir8" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 2.05412)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir9" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 2.29578)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir10" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 2.53744)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir11" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 2.7791)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir12" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 3.02076)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Jamb0" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Jamb1" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Pediment" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(0, 8.64, 2.63)
+mesh = SubResource("PrismMesh_14")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="PedimentSill" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(0, 7.98, 3.01)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftPedimentCornice" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftCopperGable" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(-1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="RightPedimentCornice" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="RightCopperGable" type="MeshInstance3D" parent="Arch0"]
+position = Vector3(1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="Arch1" type="Node3D" parent="."]
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="Voussoir0" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 0.12083)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir1" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 0.36249)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir2" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 0.60415)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir3" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 0.84581)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir4" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 1.08747)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir5" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.32914)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir6" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-0, 7.01, 2.66)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir7" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.81246)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir8" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 2.05412)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir9" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 2.29578)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir10" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 2.53744)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir11" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 2.7791)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir12" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 3.02076)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Jamb0" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Jamb1" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Pediment" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(0, 8.64, 2.63)
+mesh = SubResource("PrismMesh_14")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="PedimentSill" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(0, 7.98, 3.01)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftPedimentCornice" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftCopperGable" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(-1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="RightPedimentCornice" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="RightCopperGable" type="MeshInstance3D" parent="Arch1"]
+position = Vector3(1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="Arch2" type="Node3D" parent="."]
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Voussoir0" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 0.12083)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir1" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 0.36249)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir2" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 0.60415)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir3" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 0.84581)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir4" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 1.08747)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir5" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.32914)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir6" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-0, 7.01, 2.66)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir7" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.81246)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir8" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 2.05412)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir9" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 2.29578)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir10" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 2.53744)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir11" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 2.7791)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir12" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 3.02076)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Jamb0" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Jamb1" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Pediment" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(0, 8.64, 2.63)
+mesh = SubResource("PrismMesh_14")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="PedimentSill" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(0, 7.98, 3.01)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftPedimentCornice" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftCopperGable" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(-1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="RightPedimentCornice" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="RightCopperGable" type="MeshInstance3D" parent="Arch2"]
+position = Vector3(1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="Arch3" type="Node3D" parent="."]
+rotation = Vector3(0, 4.71239, 0)
+
+[node name="Voussoir0" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 0.12083)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir1" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 0.36249)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir2" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 0.60415)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir3" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 0.84581)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir4" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 1.08747)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir5" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.32914)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir6" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-0, 7.01, 2.66)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir7" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-0.32547, 6.97048, 2.66)
+rotation = Vector3(0, 0, 1.81246)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir8" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-0.63202, 6.85422, 2.66)
+rotation = Vector3(0, 0, 2.05412)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir9" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-0.90185, 6.66797, 2.66)
+rotation = Vector3(0, 0, 2.29578)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir10" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-1.11926, 6.42257, 2.66)
+rotation = Vector3(0, 0, 2.53744)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir11" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-1.27162, 6.13226, 2.66)
+rotation = Vector3(0, 0, 2.7791)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Voussoir12" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-1.35008, 5.81393, 2.66)
+rotation = Vector3(0, 0, 3.02076)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Jamb0" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Jamb1" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(1.37, 3.77, 2.66)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Pediment" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(0, 8.64, 2.63)
+mesh = SubResource("PrismMesh_14")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="PedimentSill" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(0, 7.98, 3.01)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftPedimentCornice" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LeftCopperGable" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(-1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, 0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="RightPedimentCornice" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(1.465, 8.67, 2.82)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="RightCopperGable" type="MeshInstance3D" parent="Arch3"]
+position = Vector3(1.465, 8.8, 2.55)
+rotation = Vector3(0, 0, -0.46501)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="CopperShoulder" type="MeshInstance3D" parent="."]
+position = Vector3(0, 8.64, 0)
+rotation = Vector3(0, 0.7854, 0)
+mesh = SubResource("CylinderMesh_19")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="CupolaPedestal" type="MeshInstance3D" parent="."]
+position = Vector3(0, 9.47, 0)
+rotation = Vector3(0, 0.3927, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="CupolaCove" type="MeshInstance3D" parent="."]
+position = Vector3(0, 9.71, 0)
+rotation = Vector3(0, 0.3927, 0)
+mesh = SubResource("CylinderMesh_21")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="CupolaCrown" type="MeshInstance3D" parent="."]
+position = Vector3(0, 9.88, 0)
+mesh = SubResource("CylinderMesh_22")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Cupola" type="MeshInstance3D" parent="."]
+position = Vector3(0, 9.94, 0)
+mesh = SubResource("SphereMesh_23")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="CrossFinial" type="MeshInstance3D" parent="."]
+position = Vector3(0, 11.27, 0)
+mesh = SubResource("CylinderMesh_25")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="CrossStem" type="MeshInstance3D" parent="."]
+position = Vector3(0, 11.88, 0)
+mesh = SubResource("BoxMesh_26")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="CrossArms" type="MeshInstance3D" parent="."]
+position = Vector3(0, 12.0528, 0)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="BellBeam" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 5.85, 0)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_29")
+
+[node name="Yoke" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 5.44, 0.22)
+mesh = SubResource("CylinderMesh_30")
+material_override = SubResource("StandardMaterial3D_29")
+
+[node name="Crown" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 5.01, 0.22)
+mesh = SubResource("CylinderMesh_31")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Waist" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 4.48, 0.22)
+mesh = SubResource("CylinderMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="SoundBow" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 4.06, 0.22)
+mesh = SubResource("CylinderMesh_34")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Lip" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 3.88, 0.22)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_36")
+
+[node name="Clapper" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 3.68, 0.22)
+mesh = SubResource("CylinderMesh_37")
+material_override = SubResource("StandardMaterial3D_29")

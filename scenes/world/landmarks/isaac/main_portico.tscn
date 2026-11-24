@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/portico.tscn" id="portico"]
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/column.tscn" id="column"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(30.4, 0.19, 0.78)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5"]
+size = Vector3(30.28, 0.38, 0.78)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6"]
+size = Vector3(30.16, 0.57, 0.78)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7"]
+size = Vector3(30.04, 0.76, 0.78)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8"]
+points = PackedVector3Array(-15.19, 0, 9.215, -15.19, 0, 6.49, -15.19, 0.77, 6.49, 15.19, 0, 9.215, 15.19, 0, 6.49, 15.19, 0.77, 6.49)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_9"]
+points = PackedVector3Array(0.76, -5.22, 0, 0.65818, -5.22, 0.38, 0.38, -5.22, 0.65818, 0, -5.22, 0.76, -0.38, -5.22, 0.65818, -0.65818, -5.22, 0.38, -0.76, -5.22, 0, -0.65818, -5.22, -0.38, -0.38, -5.22, -0.65818, -0, -5.22, -0.76, 0.38, -5.22, -0.65818, 0.65818, -5.22, -0.38, 0.76, 5.22, 0, 0.65818, 5.22, 0.38, 0.38, 5.22, 0.65818, 0, 5.22, 0.76, -0.38, 5.22, 0.65818, -0.65818, 5.22, 0.38, -0.76, 5.22, 0, -0.65818, 5.22, -0.38, -0.38, 5.22, -0.65818, -0, 5.22, -0.76, 0.38, 5.22, -0.65818, 0.65818, 5.22, -0.38)
+
+[node name="MainPortico" instance=ExtResource("portico")]
+
+[node name="Tread0" parent="." index="2"]
+position = Vector3(0, 0.095, 8.825)
+mesh = SubResource("BoxMesh_4")
+
+[node name="Tread1" parent="." index="3"]
+position = Vector3(0, 0.19, 8.115)
+mesh = SubResource("BoxMesh_5")
+
+[node name="Tread2" parent="." index="4"]
+position = Vector3(0, 0.285, 7.405)
+mesh = SubResource("BoxMesh_6")
+
+[node name="Tread3" parent="." index="5"]
+position = Vector3(0, 0.38, 6.695)
+mesh = SubResource("BoxMesh_7")
+
+[node name="Shape" parent="StairRamp" index="0"]
+shape = SubResource("ConvexPolygonShape3D_8")
+
+[node name="RearColumn2" parent="." instance=ExtResource("column")]
+position = Vector3(-9.9, 0.76, 2.27)
+
+[node name="RearShape2" type="CollisionShape3D" parent="ColumnCollisions"]
+position = Vector3(-9.9, 5.98, 2.27)
+shape = SubResource("ConvexPolygonShape3D_9")
+
+[node name="RearColumn3" parent="." instance=ExtResource("column")]
+position = Vector3(-5.94, 0.76, 2.27)
+
+[node name="RearShape3" type="CollisionShape3D" parent="ColumnCollisions"]
+position = Vector3(-5.94, 5.98, 2.27)
+shape = SubResource("ConvexPolygonShape3D_9")
+
+[node name="RearColumn4" parent="." instance=ExtResource("column")]
+position = Vector3(5.94, 0.76, 2.27)
+
+[node name="RearShape4" type="CollisionShape3D" parent="ColumnCollisions"]
+position = Vector3(5.94, 5.98, 2.27)
+shape = SubResource("ConvexPolygonShape3D_9")
+
+[node name="RearColumn5" parent="." instance=ExtResource("column")]
+position = Vector3(9.9, 0.76, 2.27)
+
+[node name="RearShape5" type="CollisionShape3D" parent="ColumnCollisions"]
+position = Vector3(9.9, 5.98, 2.27)
+shape = SubResource("ConvexPolygonShape3D_9")

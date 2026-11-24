@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[node name="IsaacComparisonCameras" type="Node3D"]
+
+[node name="Street" type="Camera3D" parent="."]
+transform = Transform3D(0.7875863, 0.1085113, 0.606575, 0, 0.9843729, -0.1760963, -0.6162044, 0.138691, 0.7752786, 64, 1.72, 83)
+fov = 33.8
+far = 1400.0
+
+[node name="Aerial" type="Camera3D" parent="."]
+transform = Transform3D(0.3341643, -0.5591152, 0.7587651, 0, 0.8050431, 0.5932163, -0.9425148, -0.1982317, 0.2690167, 110, 106, 40)
+fov = 29.1
+far = 1400.0

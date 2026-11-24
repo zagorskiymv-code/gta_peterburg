@@ -4,13 +4,12 @@ extends Node3D
 const G = preload("res://scripts/world/district_geometry.gd")
 const FLOOR_HEIGHT := 24.06
 const INNER_RADIUS := 9.85
-const OUTER_RADIUS := 12.55
+const OUTER_RADIUS := 11.57
 const SECTIONS := 64
 const ENTRY_RADIUS := 1.75
 
-var stone := G.solid_material(Color("#aaa395"))
-var iron := G.solid_material(Color("#4f5349"))
-var wood := G.solid_material(Color("#594236"))
+var stone := G.solid_material(Color("#827f74"))
+var iron := G.solid_material(Color("#272d2c"))
 var ground_stop: Marker3D
 var upper_stop: Marker3D
 var player: CharacterBody3D
@@ -90,14 +89,10 @@ func _transfer(marker: Marker3D) -> void:
 
 
 func _build_lookout() -> void:
-	ground_stop = _marker("LowerDoor", Vector3(16.7, 0.06, 23.8))
-	upper_stop = _marker("UpperDoor", Vector3(0, FLOOR_HEIGHT + 0.08, 11.17))
-	# Two recognizable service doorways bracket the implied access stairs.
-	var portal := G.group(self, "SouthColonnadeEntrance", Vector3(16.7, 0.05, 22.2))
-	G.box(portal, "DoorStonework", Vector3.UP * 1.39, Vector3(1.88, 2.71, 0.83), stone, true)
-	G.box(portal, "OakDoor", Vector3(0, 1.09, 0.43), Vector3(1.11, 2.17, 0.08), wood)
-	G.box(portal, "DoorCornice", Vector3(0, 2.76, 0.12), Vector3(2.1, 0.21, 1.1), stone)
-	_sign(portal, "КОЛОННАДА", Vector3(0, 2.40, 0.49))
+	ground_stop = _marker("LowerDoor", Vector3(17.5, 0.06, 26.10))
+	upper_stop = _marker("UpperDoor", Vector3(0, FLOOR_HEIGHT + 0.08, 10.68))
+	# The doorway itself is part of the south masonry and exposes only a shallow niche.
+	_sign(self, "КОЛОННАДА", Vector3(17.5, 2.84, 24.65))
 	_sign(self, "СПУСКЪ  ↓", Vector3(0, FLOOR_HEIGHT + 1.0, 9.79))
 	var floor_mesh := _surface()
 	var guards := _surface()
@@ -120,10 +115,10 @@ func _build_lookout() -> void:
 			_quad(masonry_mesh, from, from - Vector3.UP * 0.35, to - Vector3.UP * 0.35, to)
 			var tangent := to - from
 			var beam := Basis.looking_at(tangent, Vector3.UP)
-			for y in [0.09, 0.74, 1.38]:
-				spindles.append(Transform3D(beam.scaled_local(Vector3(0.085, 0.085, tangent.length() + 0.02)),
+			for y in [0.12, 1.38]:
+				spindles.append(Transform3D(beam.scaled_local(Vector3(0.038, 0.045, tangent.length() + 0.02)),
 						(from + to) * 0.5 + Vector3.UP * y))
-			spindles.append(G.box_transform(from + Vector3.UP * 0.69, Vector3(0.065, 1.38, 0.065)))
+			spindles.append(G.box_transform(from + Vector3.UP * 0.69, Vector3(0.039, 1.38, 0.039)))
 	_finish("ColonnadeFloor", floor_mesh, stone, true)
 	_finish("ColonnadeStoneEdge", masonry_mesh, stone, false)
 	_finish("ColonnadeGuards", guards, null, true)
