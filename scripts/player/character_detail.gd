@@ -29,6 +29,8 @@ static func apply(visual: Node3D) -> void:
 					tint = Color("#424a50")
 				"Waistcoat":
 					tint = Color("#664d36")
+				"Shirt":
+					finish = Materials.Finish.COTTON
 				"Skin":
 					tint = player_skin
 					finish = Materials.Finish.SKIN
@@ -58,7 +60,7 @@ static func apply(visual: Node3D) -> void:
 		Vector4(.47, .17, .18, .026), Vector4(.50, .012, .012, .028)])
 	head.get_node("BowlerCrown").position.y = .298
 	head.get_node("BowlerBrim").scale.y = .014
-	head.get_node("BowlerBand").scale.y = .022
+	head.get_node("BowlerBand").scale = Vector3(.199, .022, .213)
 
 	var knot: MeshInstance3D = upper.get_node("Cravat")
 	knot.mesh = _cached_batch("tied cravat", [

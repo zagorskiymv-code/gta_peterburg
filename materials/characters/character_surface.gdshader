@@ -1,7 +1,7 @@
 shader_type spatial;
 
 uniform vec4 tint : source_color = vec4(1.0);
-uniform int finish = 0; // wool, skin, hair, leather
+uniform int finish = 0; // wool, skin, hair, leather, metal (external), cotton
 uniform float base_roughness : hint_range(0.0, 1.0) = 0.9;
 uniform float base_specular : hint_range(0.0, 1.0) = 0.18;
 
@@ -45,6 +45,9 @@ void fragment() {
 		float strand = sin((p.x * 0.9 + p.y * 0.21 - p.z * 0.6) * 455.0) * grain_visible;
 		albedo *= 1.0 + strand * 0.08 + grain * 0.065;
 		rough += strand * 0.035;
+	} else if (finish == 5) {
+		albedo *= 1.0 + grain * 0.035;
+		rough += grain * 0.045;
 	} else {
 		albedo *= 1.0 + grain * 0.105;
 		rough += grain * 0.11;

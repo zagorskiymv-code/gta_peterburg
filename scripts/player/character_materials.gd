@@ -1,10 +1,10 @@
 extends RefCounted
 
-enum Finish { WOOL, SKIN, HAIR, LEATHER, METAL }
+enum Finish { WOOL, SKIN, HAIR, LEATHER, METAL, COTTON }
 
 const SURFACE := preload("res://materials/characters/character_surface.gdshader")
-const ROUGHNESS := [0.88, 0.72, 0.76, 0.52]
-const SPECULAR := [0.14, 0.24, 0.17, 0.32]
+const ROUGHNESS := [0.88, 0.72, 0.76, 0.52, 0.36, 0.94]
+const SPECULAR := [0.14, 0.24, 0.17, 0.32, 0.52, 0.12]
 
 static var _materials: Dictionary = {}
 
