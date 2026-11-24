@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/column.tscn" id="column"]
 
+[ext_resource type="Script" path="res://scenes/world/landmarks/isaac/sculpture.gd" id="sculpture"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(29.8, 0.76, 6.5)
 
@@ -37,7 +39,7 @@ size = Vector3(29.5, 0.46, 6.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11"]
 resource_name = "trim"
-albedo_color = Color(0.80784, 0.75686, 0.66667, 1)
+albedo_color = Color(0.77255, 0.70588, 0.59608, 1)
 roughness = 0.81
 metallic = 0
 
@@ -58,9 +60,9 @@ size = Vector3(29.9, 3.96, 6.76)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16"]
 resource_name = "bronze"
-albedo_color = Color(0.25098, 0.35294, 0.31373, 1)
-roughness = 0.53
-metallic = 0.33
+albedo_color = Color(0.15294, 0.24314, 0.21961, 1)
+roughness = 0.63
+metallic = 0.39
 
 [sub_resource type="BoxMesh" id="BoxMesh_17"]
 size = Vector3(15.97249, 0.35, 7.15)
@@ -70,9 +72,9 @@ size = Vector3(15.97249, 0.2, 7.15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_19"]
 resource_name = "copper"
-albedo_color = Color(0.34118, 0.51765, 0.46667, 1)
-roughness = 0.63
-metallic = 0.28
+albedo_color = Color(0.33725, 0.44706, 0.37647, 1)
+roughness = 0.73
+metallic = 0.21
 
 [sub_resource type="BoxMesh" id="BoxMesh_20"]
 size = Vector3(0.36, 0.16, 7.18)
@@ -82,76 +84,18 @@ size = Vector3(15.54, 0.08, 0.062)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22"]
 resource_name = "seam"
-albedo_color = Color(0.24314, 0.38431, 0.34902, 1)
-roughness = 0.66
+albedo_color = Color(0.20784, 0.30588, 0.26275, 1)
+roughness = 0.71
 metallic = 0.24
 
 [sub_resource type="BoxMesh" id="BoxMesh_23"]
 size = Vector3(0.25, 0.17, 0.25)
 
-[sub_resource type="SphereMesh" id="SphereMesh_24"]
-radius = 0.19
-height = 0.38
-radial_segments = 12
-rings = 6
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24"]
 resource_name = "relief"
-albedo_color = Color(0.34902, 0.44314, 0.4, 1)
-roughness = 0.59
-metallic = 0.27
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_26"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 0.88938
-radial_segments = 10
-rings = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_27"]
-size = Vector3(0.72, 0.16, 0.23)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_28"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 1.12365
-radial_segments = 10
-rings = 0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_29"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 1.35792
-radial_segments = 10
-rings = 0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_30"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 1.59219
-radial_segments = 10
-rings = 0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_31"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 1.82646
-radial_segments = 10
-rings = 0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_32"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 2.06073
-radial_segments = 10
-rings = 0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_33"]
-top_radius = 0.24
-bottom_radius = 0.32
-height = 2.295
-radial_segments = 10
-rings = 0
+albedo_color = Color(0.27843, 0.38039, 0.32941, 1)
+roughness = 0.56
+metallic = 0.34
 
 [node name="Portico" type="Node3D"]
 
@@ -684,221 +628,8 @@ position = Vector3(14.52, 12.19, 6.68)
 mesh = SubResource("BoxMesh_23")
 material_override = SubResource("StandardMaterial3D_11")
 
-[node name="ReliefHead0" type="MeshInstance3D" parent="."]
-position = Vector3(-11.4, 13.5682, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe0" type="MeshInstance3D" parent="."]
-position = Vector3(-11.4, 13.04445, 6.71)
-mesh = SubResource("CylinderMesh_26")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm0" type="MeshInstance3D" parent="."]
-position = Vector3(-11.25, 13.22221, 6.82)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead1" type="MeshInstance3D" parent="."]
-position = Vector3(-9.5, 13.8285, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe1" type="MeshInstance3D" parent="."]
-position = Vector3(-9.5, 13.1668, 6.71)
-rotation = Vector3(0, 0, 0.20195)
-mesh = SubResource("CylinderMesh_28")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm1" type="MeshInstance3D" parent="."]
-position = Vector3(-9.35, 13.39401, 6.82)
-rotation = Vector3(0, 0, 0.54696)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead2" type="MeshInstance3D" parent="."]
-position = Vector3(-7.6, 14.0888, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe2" type="MeshInstance3D" parent="."]
-position = Vector3(-7.6, 13.28914, 6.71)
-rotation = Vector3(0, 0, 0.21823)
-mesh = SubResource("CylinderMesh_29")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm2" type="MeshInstance3D" parent="."]
-position = Vector3(-7.45, 13.56581, 6.82)
-rotation = Vector3(0, 0, 0.59104)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead3" type="MeshInstance3D" parent="."]
-position = Vector3(-5.7, 14.3491, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe3" type="MeshInstance3D" parent="."]
-position = Vector3(-5.7, 13.41148, 6.71)
-rotation = Vector3(0, 0, 0.03387)
-mesh = SubResource("CylinderMesh_30")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm3" type="MeshInstance3D" parent="."]
-position = Vector3(-5.55, 13.73761, 6.82)
-rotation = Vector3(0, 0, 0.09173)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead4" type="MeshInstance3D" parent="."]
-position = Vector3(-3.8, 14.6094, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe4" type="MeshInstance3D" parent="."]
-position = Vector3(-3.8, 13.53382, 6.71)
-rotation = Vector3(0, 0, -0.18163)
-mesh = SubResource("CylinderMesh_31")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm4" type="MeshInstance3D" parent="."]
-position = Vector3(-3.65, 13.9094, 6.82)
-rotation = Vector3(0, 0, -0.49192)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead5" type="MeshInstance3D" parent="."]
-position = Vector3(-1.9, 14.8697, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe5" type="MeshInstance3D" parent="."]
-position = Vector3(-1.9, 13.65616, 6.71)
-rotation = Vector3(0, 0, -0.23014)
-mesh = SubResource("CylinderMesh_32")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm5" type="MeshInstance3D" parent="."]
-position = Vector3(-1.75, 14.0812, 6.82)
-rotation = Vector3(0, 0, -0.6233)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead6" type="MeshInstance3D" parent="."]
-position = Vector3(0, 15.13, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe6" type="MeshInstance3D" parent="."]
-position = Vector3(0, 13.7785, 6.71)
-rotation = Vector3(0, 0, -0.06706)
-mesh = SubResource("CylinderMesh_33")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm6" type="MeshInstance3D" parent="."]
-position = Vector3(0.15, 14.253, 6.82)
-rotation = Vector3(0, 0, -0.18162)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead7" type="MeshInstance3D" parent="."]
-position = Vector3(1.9, 14.8697, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe7" type="MeshInstance3D" parent="."]
-position = Vector3(1.9, 13.65616, 6.71)
-rotation = Vector3(0, 0, 0.15768)
-mesh = SubResource("CylinderMesh_32")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm7" type="MeshInstance3D" parent="."]
-position = Vector3(2.05, 14.0812, 6.82)
-rotation = Vector3(0, 0, 0.42704)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead8" type="MeshInstance3D" parent="."]
-position = Vector3(3.8, 14.6094, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe8" type="MeshInstance3D" parent="."]
-position = Vector3(3.8, 13.53382, 6.71)
-rotation = Vector3(0, 0, 0.23745)
-mesh = SubResource("CylinderMesh_31")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm8" type="MeshInstance3D" parent="."]
-position = Vector3(3.95, 13.9094, 6.82)
-rotation = Vector3(0, 0, 0.64308)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead9" type="MeshInstance3D" parent="."]
-position = Vector3(5.7, 14.3491, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe9" type="MeshInstance3D" parent="."]
-position = Vector3(5.7, 13.41148, 6.71)
-rotation = Vector3(0, 0, 0.09891)
-mesh = SubResource("CylinderMesh_30")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm9" type="MeshInstance3D" parent="."]
-position = Vector3(5.85, 13.73761, 6.82)
-rotation = Vector3(0, 0, 0.26788)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead10" type="MeshInstance3D" parent="."]
-position = Vector3(7.6, 14.0888, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe10" type="MeshInstance3D" parent="."]
-position = Vector3(7.6, 13.28914, 6.71)
-rotation = Vector3(0, 0, -0.13057)
-mesh = SubResource("CylinderMesh_29")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm10" type="MeshInstance3D" parent="."]
-position = Vector3(7.75, 13.56581, 6.82)
-rotation = Vector3(0, 0, -0.35361)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead11" type="MeshInstance3D" parent="."]
-position = Vector3(9.5, 13.8285, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe11" type="MeshInstance3D" parent="."]
-position = Vector3(9.5, 13.1668, 6.71)
-rotation = Vector3(0, 0, -0.24)
-mesh = SubResource("CylinderMesh_28")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm11" type="MeshInstance3D" parent="."]
-position = Vector3(9.65, 13.39401, 6.82)
-rotation = Vector3(0, 0, -0.64999)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefHead12" type="MeshInstance3D" parent="."]
-position = Vector3(11.4, 13.5682, 6.69)
-mesh = SubResource("SphereMesh_24")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefRobe12" type="MeshInstance3D" parent="."]
-position = Vector3(11.4, 13.04445, 6.71)
-rotation = Vector3(0, 0, -0.12878)
-mesh = SubResource("CylinderMesh_26")
-material_override = SubResource("StandardMaterial3D_25")
-
-[node name="ReliefArm12" type="MeshInstance3D" parent="."]
-position = Vector3(11.55, 13.22221, 6.82)
-rotation = Vector3(0, 0, -0.34877)
-mesh = SubResource("BoxMesh_27")
-material_override = SubResource("StandardMaterial3D_25")
+[node name="BronzeRelief" type="MeshInstance3D" parent="."]
+position = Vector3(0, 12.6, 6.62)
+script = ExtResource("sculpture")
+patina = SubResource("StandardMaterial3D_16")
+highlight = SubResource("StandardMaterial3D_24")

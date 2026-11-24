@@ -4,7 +4,7 @@ extends Node3D
 const G = preload("res://scripts/world/district_geometry.gd")
 const FLOOR_HEIGHT := 24.06
 const INNER_RADIUS := 9.85
-const OUTER_RADIUS := 12.55
+const OUTER_RADIUS := 11.57
 const SECTIONS := 64
 const ENTRY_RADIUS := 1.75
 
@@ -91,7 +91,7 @@ func _transfer(marker: Marker3D) -> void:
 
 func _build_lookout() -> void:
 	ground_stop = _marker("LowerDoor", Vector3(16.7, 0.06, 23.8))
-	upper_stop = _marker("UpperDoor", Vector3(0, FLOOR_HEIGHT + 0.08, 11.17))
+	upper_stop = _marker("UpperDoor", Vector3(0, FLOOR_HEIGHT + 0.08, 10.68))
 	# Two recognizable service doorways bracket the implied access stairs.
 	var portal := G.group(self, "SouthColonnadeEntrance", Vector3(16.7, 0.05, 22.2))
 	G.box(portal, "DoorStonework", Vector3.UP * 1.39, Vector3(1.88, 2.71, 0.83), stone, true)

@@ -5,7 +5,7 @@ const RADIUS := 8.58
 const RISE := 7.15
 const RINGS := 24
 const RIBS := 24
-const SIDES_PER_RIB := 6
+const SIDES_PER_RIB := 16
 
 @export var shell_material: Material
 @export var rib_material: Material
@@ -41,6 +41,6 @@ func _ready() -> void:
 func _point(ring: int, side: int, sides: int) -> Vector3:
 	var pitch := PI * 0.5 * ring / RINGS
 	var yaw := TAU * (side % sides) / sides
-	var raised := 0.10 if side % SIDES_PER_RIB == 0 else 0.0
+	var raised := 0.075 if side % SIDES_PER_RIB == 0 else 0.0
 	var radius := (RADIUS + raised) * cos(pitch)
 	return Vector3(radius * cos(yaw), RISE * sin(pitch), radius * sin(yaw))
