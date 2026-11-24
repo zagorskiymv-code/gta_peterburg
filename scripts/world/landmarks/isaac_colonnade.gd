@@ -89,10 +89,10 @@ func _transfer(marker: Marker3D) -> void:
 
 
 func _build_lookout() -> void:
-	ground_stop = _marker("LowerDoor", Vector3(17.335, 0.06, 20.55))
+	ground_stop = _marker("LowerDoor", Vector3(20.5, 0.06, 24.275))
 	upper_stop = _marker("UpperDoor", Vector3(0, FLOOR_HEIGHT + 0.08, 10.68))
 	# The doorway itself is part of the south masonry and exposes only a shallow niche.
-	_sign(self, "КОЛОННАДА", Vector3(17.335, 2.84, 19.10))
+	_sign(self, "КОЛОННАДА", Vector3(20.5, 2.84, 22.825))
 	_sign(self, "СПУСКЪ  ↓", Vector3(0, FLOOR_HEIGHT + 1.0, 9.79))
 	var floor_mesh := _surface()
 	var guards := _surface()
