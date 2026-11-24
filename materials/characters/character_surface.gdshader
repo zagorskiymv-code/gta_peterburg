@@ -1,59 +1,71 @@
 shader_type spatial;
 
 uniform vec4 tint : source_color = vec4(1.0);
-uniform int finish = 0; // wool, skin, hair, leather, metal (external), cotton
+uniform vec4 sclera : source_color = vec4(0.847, 0.827, 0.788, 1.0);
+uniform int finish = 0;
 uniform float base_roughness : hint_range(0.0, 1.0) = 0.9;
 uniform float base_specular : hint_range(0.0, 1.0) = 0.18;
 
 varying vec3 object_metres;
 varying vec3 object_normal;
+varying vec3 anatomy;
 
-float grain_hash(vec3 p) {
-	p = fract(p * vec3(0.1031, 0.11369, 0.13787));
-	p += dot(p, p.yxz + 19.19);
-	return fract((p.x + p.y) * p.z);
+float grain_hash(vec2 p) {
+	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+float cloth_grain(vec2 p) {
+	vec2 cell = floor(p);
+	vec2 weight = smoothstep(vec2(0.0), vec2(1.0), fract(p));
+	float lower = mix(grain_hash(cell), grain_hash(cell + vec2(1, 0)), weight.x);
+	float upper = mix(grain_hash(cell + vec2(0, 1)), grain_hash(cell + vec2(1, 1)), weight.x);
+	return (mix(lower, upper, weight.y) - 0.5)
+		* (1.0 - smoothstep(0.45, 1.35, length(fwidth(p))));
+}
+
+float spot(vec2 point, vec2 center, vec2 radius) {
+	vec2 delta = (point - center) / radius;
+	return exp(-dot(delta, delta));
 }
 
 void vertex() {
-	vec3 scale_metres = vec3(length(MODEL_MATRIX[0].xyz), length(MODEL_MATRIX[1].xyz), length(MODEL_MATRIX[2].xyz));
-	object_metres = VERTEX * scale_metres;
+	vec3 dimensions = vec3(length(MODEL_MATRIX[0].xyz), length(MODEL_MATRIX[1].xyz), length(MODEL_MATRIX[2].xyz));
+	object_metres = VERTEX * dimensions;
+	anatomy = VERTEX;
 	object_normal = NORMAL;
 }
 
 void fragment() {
-	vec3 p = object_metres;
-	vec3 microcell = p * (finish == 0 ? 410.0 : 570.0);
-	float grain_visible = 1.0 - smoothstep(0.48, 1.5, length(fwidth(microcell)));
-	float grain = (grain_hash(floor(microcell)) - 0.5) * grain_visible;
 	vec3 albedo = tint.rgb;
 	float rough = base_roughness;
-	if (finish == 0) {
-		float yarn = sin((p.y + (p.x + p.z) * 0.72) * 752.0) * grain_visible;
-		albedo *= 1.0 + grain * 0.035 + yarn * 0.009;
-		rough += grain * 0.10;
-	} else if (finish == 1) {
-		float front = smoothstep(0.1, 0.85, -object_normal.z);
-		vec2 cheek_delta = vec2((abs(p.x) - 0.056) * 32.0, (p.y - 0.145) * 36.0);
-		float cheek = exp(-dot(cheek_delta, cheek_delta)) * front;
-		float forehead = smoothstep(0.17, 0.24, p.y) * front;
-		vec2 nose_delta = vec2(p.x * 55.0, (p.y - 0.155) * 39.0);
-		float nose = exp(-dot(nose_delta, nose_delta)) * front;
-		albedo *= 1.0 + grain * 0.014 + forehead * 0.063;
-		albedo += vec3(0.065, -0.007, -0.008) * (cheek + 0.48 * nose);
-		rough += cheek * 0.08 - nose * 0.10 - forehead * 0.043;
-	} else if (finish == 2) {
-		float strand = sin((p.x * 0.9 + p.y * 0.21 - p.z * 0.6) * 455.0) * grain_visible;
-		albedo *= 1.0 + strand * 0.08 + grain * 0.065;
-		rough += strand * 0.035;
-	} else if (finish == 5) {
-		albedo *= 1.0 + grain * 0.035;
-		rough += grain * 0.045;
-	} else {
-		albedo *= 1.0 + grain * 0.105;
-		rough += grain * 0.11;
+	if (finish == 6) {
+		float radius = length((UV - 0.5) * 0.024);
+		float width = max(fwidth(radius), 0.00015);
+		vec3 iris = mix(tint.rgb, tint.rgb * 0.50, smoothstep(0.0036, 0.00575, radius));
+		iris = mix(vec3(0.018), iris, smoothstep(0.002 - width, 0.002 + width, radius));
+		albedo = mix(iris, sclera.rgb, smoothstep(0.00575 - width, 0.00575 + width, radius));
+	} else if (finish == 7) {
+		vec2 face = vec2(abs(anatomy.x), anatomy.y);
+		float front = smoothstep(0.15, 0.75, -object_normal.z);
+		float cheek = spot(face, vec2(.054, .151), vec2(.020, .024)) * front;
+		float nose = spot(face, vec2(.011, .143), vec2(.018, .016)) * front;
+		albedo += vec3(.034, -.006, -.008) * (cheek + nose * .62);
+		rough += cheek * .03 - nose * .035;
+		float lip = spot(face, vec2(.0, .110), vec2(.023, .007)) * front;
+		float mouth = spot(face, vec2(.0, .111), vec2(.021, .0012)) * front;
+		float nostril = spot(face, vec2(.011, .139), vec2(.0043, .0027)) * front;
+		float brow = spot(face, vec2(.038, .188), vec2(.014, .0027)) * front;
+		float orbit = spot(face, vec2(.037, .176), vec2(.011, .0025)) * front;
+		albedo *= 1.0 - mouth * .27 - nostril * .46 - brow * .40 - orbit * .23;
+		albedo = mix(albedo, albedo * vec3(1.04, .84, .86), lip * .78);
+	} else if (finish != 1 && finish != 2) {
+		vec3 p = object_metres;
+		float grain = cloth_grain(vec2(p.x + p.z * .71, p.y + p.z * .55) * 260.0);
+		albedo *= 1.0 + grain * .025;
+		rough += grain * .045;
 	}
 	ALBEDO = albedo;
-	ROUGHNESS = clamp(rough, 0.32, 1.0);
+	ROUGHNESS = clamp(rough, 0.15, 1.0);
 	METALLIC = 0.0;
 	SPECULAR = base_specular;
 }

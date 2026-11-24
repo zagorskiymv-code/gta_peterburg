@@ -39,11 +39,14 @@ var _idle_time := 0.0
 var _blink_time := 0.0
 var _blink_period := 3.6
 var _portrait: MeshInstance3D
-var _eyes_closed := false
+var _blink_frame := 0
+var _sleeve_rigs: Array[Skeleton3D] = []
 
 
 func _ready() -> void:
 	Detail.apply(self)
+	for arm in arms:
+		_sleeve_rigs.append(arm.get_node("SleeveRig"))
 	_portrait = head.get_node("PortraitDetails")
 	_blink_period = 3.15 + float(abs(hash(str(get_path()))) % 125) * 0.01
 	_blink_time = fposmod(float(get_instance_id()) * .113, _blink_period)
@@ -51,7 +54,7 @@ func _ready() -> void:
 
 func configure_portrait(profile: int, skin: Color, hair: Color) -> void:
 	Detail.configure_face(head, profile, skin, hair)
-	_eyes_closed = false
+	_blink_frame = 0
 
 
 func animate(delta: float, displacement: Vector3, direction: Vector3, grounded: bool,
@@ -124,7 +127,7 @@ func _apply_pose(delta: float, stride: float, normal: Vector3, landing: float, b
 		arm_angle = lerpf(arm_angle, lerpf(0.36, 0.65, falling_blend) * (1 if index == 0 else 0.83), airborne_blend)
 		arms[index].rotation.x = lerpf(arms[index].rotation.x, arm_angle + landing * 0.20 + side * shift * .028, blend)
 		arms[index].rotation.z = side * (0.065 + .017 * idle + airborne_blend * (0.18 + falling_blend * 0.26))
-		elbows[index].rotation.x = lerpf(elbows[index].rotation.x, 0.12 + run_blend * 0.76 + airborne_blend * 0.22, blend)
+		_bend_elbow(index, lerpf(elbows[index].rotation.x, 0.12 + run_blend * 0.76 + airborne_blend * 0.22, blend))
 
 	var wave := sin(phase * TAU)
 	var hip := HIP_HEIGHT + sin(breath) * 0.003 - movement_blend * (0.020 + absf(wave) * 0.012)
@@ -143,7 +146,6 @@ func _apply_pose(delta: float, stride: float, normal: Vector3, landing: float, b
 	upper_body.rotation.x = -deg_to_rad(run_lean_degrees) * lean + 0.08 * falling_blend - 0.10 * landing
 	upper_body.rotation.y = wave * movement_blend * lerpf(0.034, 0.075, run_blend)
 	upper_body.rotation.z = wave * movement_blend * 0.027 + sin(breath) * 0.009 - shift * .026
-	upper_body.scale = Vector3(1.0, 1.0 + sin(breath) * .006 * idle, 1.0 + sin(breath) * .018 * idle)
 	head.rotation.x = lerpf(head.rotation.x, idle * (sin(_idle_time * .81) * .037 - .012), blend)
 	head.rotation.y = (sin(breath) * .016 + sin(_idle_time * .58) * .065) * idle
 	var pitch := atan2(normal.z, maxf(normal.y, 0.55))
@@ -154,16 +156,25 @@ func _apply_pose(delta: float, stride: float, normal: Vector3, landing: float, b
 		_pose_leg(index, feet[index], pitch + ankle_motion)
 
 
+func _bend_elbow(index: int, angle: float) -> void:
+	elbows[index].rotation.x = angle
+	_sleeve_rigs[index].set_bone_pose_rotation(1, Quaternion(Vector3.RIGHT, angle))
+
+
 func _advance_blink(delta: float) -> void:
 	_blink_time = fposmod(_blink_time + delta, _blink_period)
-	_set_blink(_blink_time > _blink_period - .105)
+	_set_blink(_blink_time)
 
 
-func _set_blink(closed: bool) -> void:
-	if _eyes_closed == closed:
+func _set_blink(time: float) -> void:
+	var elapsed := time - (_blink_period - .17)
+	var closure := smoothstep(0.0, .065, elapsed) * (1.0 - smoothstep(.075, .17, elapsed))
+	var frame := roundi(closure * 4.0)
+	if _blink_frame == frame:
 		return
-	_eyes_closed = closed
-	_portrait.mesh = _portrait.get_meta(&"closed_eyes" if closed else &"open_eyes") as Mesh
+	_blink_frame = frame
+	var frames: Array = _portrait.get_meta(&"eye_frames")
+	_portrait.mesh = frames[frame]
 
 
 func _step(cycle: float, stance: float, stride: float, stride_scale: float) -> Vector2:
@@ -190,7 +201,7 @@ func _reset_idle_offsets() -> void:
 	upper_body.scale = Vector3.ONE
 	legs[0].position.x = -.108
 	legs[1].position.x = .108
-	_set_blink(false)
+	_set_blink(0.0)
 
 
 func pose_seated(steering: float = 0.0) -> void:
@@ -205,7 +216,7 @@ func pose_seated(steering: float = 0.0) -> void:
 		ankles[index].rotation.x = -0.94
 		arms[index].rotation.x = 0.91 if index == 0 else 0.66
 		arms[index].rotation.z = 0.05 + steering * 0.68 if index == 0 else -0.12
-		elbows[index].rotation.x = 0.53 if index == 0 else 0.70
+		_bend_elbow(index, 0.53 if index == 0 else 0.70)
 
 
 func leave_seat() -> void:
@@ -218,7 +229,7 @@ func leave_seat() -> void:
 		knees[index].rotation = Vector3.ZERO
 		ankles[index].rotation = Vector3.ZERO
 		arms[index].rotation = Vector3.ZERO
-		elbows[index].rotation = Vector3.ZERO
+		_bend_elbow(index, 0.0)
 
 
 func pose_mounted() -> void:
@@ -230,7 +241,7 @@ func pose_mounted() -> void:
 		knees[index].rotation.x = -1.10
 		ankles[index].rotation.x = 0.24
 		arms[index].rotation.x = 0.68
-		elbows[index].rotation.x = 0.60
+		_bend_elbow(index, 0.60)
 
 
 
@@ -243,7 +254,7 @@ func pose_cycling(angle: float) -> void:
 		knees[index].rotation.x = -0.58 + sin(phase_angle) * 0.41
 		ankles[index].rotation.x = -legs[index].rotation.x - knees[index].rotation.x
 		arms[index].rotation.x = 0.72
-		elbows[index].rotation.x = 0.27
+		_bend_elbow(index, 0.27)
 
 
 func pose_opening(rise: float, look: float) -> void:
@@ -254,19 +265,19 @@ func pose_opening(rise: float, look: float) -> void:
 	for index in 2:
 		var side := -1.0 if index == 0 else 1.0
 		arms[index].rotation = Vector3(0.64 * (1.0 - rise), 0.0, side * 0.10)
-		elbows[index].rotation.x = 0.63 * (1.0 - rise)
+		_bend_elbow(index, 0.63 * (1.0 - rise))
 		_pose_leg(index, Vector2((-0.63 + index * 0.13) * (1.0 - rise), ANKLE_HEIGHT), 0.0)
 
 
 func pose_conversation(time: float, duration: float, speaking: bool) -> void:
-	_set_blink(fposmod(time + _blink_time, _blink_period) > _blink_period - .105)
+	_set_blink(fposmod(time + _blink_time, _blink_period))
 	var blend := smoothstep(0.0, 0.36, minf(time, duration - time))
 	var gesture := (0.55 + 0.22 * sin(time * 5.0)) * blend if speaking else 0.0
 	head.rotation.x = sin(time * (4.2 if speaking else 2.2)) * blend * 0.085
 	upper_body.rotation.y = sin(time * 2.7) * gesture * 0.12
 	arms[1].rotation.x = -gesture * 0.58
 	arms[1].rotation.z = -gesture * 0.31
-	elbows[1].rotation.x = gesture * 0.86
+	_bend_elbow(1, gesture * 0.86)
 
 
 func pose_inspect(time: float, duration: float) -> void:
@@ -274,4 +285,4 @@ func pose_inspect(time: float, duration: float) -> void:
 	upper_body.rotation.x = -0.19 * lean_in
 	head.rotation.x = (0.12 + sin(time * 5.0) * 0.12) * lean_in
 	arms[1].rotation.x = -0.56 * lean_in
-	elbows[1].rotation.x = 0.31 * lean_in
+	_bend_elbow(1, 0.31 * lean_in)

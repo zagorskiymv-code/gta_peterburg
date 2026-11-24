@@ -1,10 +1,10 @@
 extends RefCounted
 
-enum Finish { WOOL, SKIN, HAIR, LEATHER, METAL, COTTON }
+enum Finish { WOOL, SKIN, HAIR, LEATHER, METAL, COTTON, EYE, FACE, FELT }
 
 const SURFACE := preload("res://materials/characters/character_surface.gdshader")
-const ROUGHNESS := [0.88, 0.72, 0.76, 0.52, 0.36, 0.94]
-const SPECULAR := [0.14, 0.24, 0.17, 0.32, 0.52, 0.12]
+const ROUGHNESS := [0.90, 0.78, 0.82, 0.58, 0.42, 0.94, 0.22, 0.78, 0.94]
+const SPECULAR := [0.12, 0.20, 0.16, 0.28, 0.52, 0.10, 0.34, 0.20, 0.12]
 
 static var _materials: Dictionary = {}
 
@@ -18,7 +18,7 @@ static func get_material(color: Color, finish: Finish = Finish.WOOL) -> Material
 		var metal := StandardMaterial3D.new()
 		metal.albedo_color = color
 		metal.metallic = 0.76
-		metal.roughness = 0.36
+		metal.roughness = ROUGHNESS[finish]
 		metal.metallic_specular = 0.52
 		material = metal
 	else:
