@@ -6,6 +6,7 @@ enum Outfit { DEFAULT, FROCK_COAT, OVERCOAT, LADY_IN_DRESS, LADY_IN_CAPE, SENTRY
 enum Hat { BOWLER, CAP, BARE, TOP_HAT, LADIES_HAT, BONNET, FORAGE_CAP }
 
 const G = preload("res://scripts/world/district_geometry.gd")
+const Materials = preload("res://scripts/player/character_materials.gd")
 const Visual = preload("res://scripts/player/historical_character_visual.gd")
 const PRESETS := {
 	Outfit.FROCK_COAT: [0.68, 1.04, Hat.TOP_HAT, "#252b35", "#d0c2ab", "#32343c"],
@@ -22,11 +23,11 @@ const PRESETS := {
 	Outfit.VENDOR: [1.0, 0.98, Hat.CAP, "#735246", "#bbab8c", "#50423a"],
 }
 
-var _cloth: StandardMaterial3D
-var _accent: StandardMaterial3D
-var _leather := G.solid_material(Color("#272320"))
-var _brass := G.solid_material(Color("#af8750"))
-var _linen := G.solid_material(Color("#c7bda5"))
+var _cloth: Material
+var _accent: Material
+var _leather := Materials.get_material(Color("#322821"), Materials.Finish.LEATHER)
+var _brass := Materials.get_material(Color("#af8750"), Materials.Finish.METAL)
+var _linen := Materials.get_material(Color("#c7bda5"))
 
 
 func dress(visual: Visual, outfit: Outfit, hat_override: int, coat: Color, vest: Color, trousers: Color) -> float:
@@ -34,18 +35,19 @@ func dress(visual: Visual, outfit: Outfit, hat_override: int, coat: Color, vest:
 	var coat_tint := coat if coat.a > 0.0 else Color(preset[3])
 	var accent_tint := vest if vest.a > 0.0 else Color(preset[4])
 	var trousers_tint := trousers if trousers.a > 0.0 else Color(preset[5])
-	_cloth = G.solid_material(coat_tint)
-	_accent = G.solid_material(accent_tint)
+	_cloth = Materials.get_material(coat_tint)
+	_accent = Materials.get_material(accent_tint)
 	var upper := visual.upper_body
 	var replacements := {
 		upper.get_node("CoatTorso").material_override: _cloth,
-		upper.get_node("LeftLapel").material_override: G.solid_material(coat_tint.lightened(0.095)),
+		upper.get_node("LeftLapel").material_override: Materials.get_material(coat_tint.lightened(0.095)),
 		upper.get_node("Waistcoat").material_override: _accent,
-		visual.legs[0].get_node("Thigh").material_override: G.solid_material(trousers_tint),
+		visual.legs[0].get_node("Thigh").material_override: Materials.get_material(trousers_tint),
 	}
-	for mesh: MeshInstance3D in visual.find_children("*", "MeshInstance3D"):
+	for mesh: MeshInstance3D in visual.find_children("*", "MeshInstance3D", true, false):
 		if mesh.material_override in replacements:
 			mesh.material_override = replacements[mesh.material_override]
+	_portrait(visual, outfit)
 	var style: Hat = preset[2] if hat_override < 0 else hat_override
 	_headwear(visual.head, style, outfit)
 
@@ -56,8 +58,52 @@ func dress(visual: Visual, outfit: Outfit, hat_override: int, coat: Color, vest:
 	else:
 		_civilian(visual, outfit)
 
-	visual.scale = Vector3.ONE * float(preset[1])
+	var build := Vector2.ONE
+	match outfit:
+		Outfit.MERCHANT, Outfit.OVERCOAT:
+			build = Vector2(1.13, 1.12)
+		Outfit.WORKER, Outfit.SENTRY:
+			build = Vector2(1.07, 1.04)
+		Outfit.CLERK, Outfit.ELDER:
+			build = Vector2(.92, .96)
+		Outfit.LADY_IN_DRESS, Outfit.TOWNSWOMAN:
+			build = Vector2(.95, 1.02)
+	visual.scale = Vector3(build.x, 1.0, build.y) * float(preset[1])
 	return preset[0]
+
+
+func _portrait(visual: Visual, outfit: Outfit) -> void:
+	var face := 0
+	var complexion := Color("#ad785e")
+	var hair := Color("#413026")
+	match outfit:
+		Outfit.MERCHANT, Outfit.OVERCOAT:
+			face = 1
+			complexion = Color("#b67d64")
+			hair = Color("#4c3429")
+		Outfit.FROCK_COAT, Outfit.CLERK:
+			face = 2
+			complexion = Color("#ba8972")
+			hair = Color("#534038")
+		Outfit.WORKER, Outfit.SENTRY, Outfit.PATROLMAN, Outfit.VENDOR:
+			face = 3
+			complexion = Color("#a66f56")
+			hair = Color("#3c2d27")
+		Outfit.LADY_IN_DRESS, Outfit.LADY_IN_CAPE, Outfit.TOWNSWOMAN:
+			face = 4
+			complexion = Color("#bc8c76")
+			hair = Color("#51382c") if outfit == Outfit.LADY_IN_CAPE else Color("#3d3029")
+		Outfit.ELDER:
+			face = 5
+			complexion = Color("#a77c6c")
+			hair = Color("#827b72")
+	visual.configure_portrait(face, complexion, hair)
+	var skin := Materials.get_material(complexion, Materials.Finish.SKIN)
+	for elbow in visual.elbows:
+		for name in ["Hand", "Thumb"]:
+			elbow.get_node(name).material_override = skin
+	if outfit in [Outfit.CLERK, Outfit.WORKER, Outfit.VENDOR]:
+		visual.head.get_node("Moustache").hide()
 
 
 func _headwear(head: Node3D, style: Hat, outfit: Outfit) -> void:
@@ -67,7 +113,7 @@ func _headwear(head: Node3D, style: Hat, outfit: Outfit) -> void:
 	match style:
 		Hat.TOP_HAT:
 			brim.scale = Vector3(0.27, 0.025, 0.29)
-			_cylinder(head, "SilkTopHat", Vector3(0, 0.345, 0.003), 0.202, 0.101, 0.091, _leather)
+			_cylinder(head, "SilkTopHat", Vector3(0, 0.345, 0.003), 0.202, 0.101, 0.091, Materials.get_material(Color("#2c2b2c")))
 			crown.hide()
 			band.scale = Vector3(0.197, 0.032, 0.204)
 		Hat.CAP, Hat.FORAGE_CAP:
@@ -107,8 +153,7 @@ func _dress(visual: Visual, outfit: Outfit) -> void:
 			"RightLapel", "LeftPocketWelt", "RightPocketWelt", "Cravat", "Waistcoat",
 			"WaistcoatButton0", "WaistcoatButton1", "WaistcoatButton2", "WaistcoatButton3"])
 	visual.head.get_node("Moustache").hide()
-	_cylinder(visual.head, "HairBun", Vector3(0, 0.164, 0.111), 0.096, 0.071, 0.053,
-			visual.head.get_node("Hair").material_override, 0.82)
+
 	upper.get_node("CoatTorso").scale.x = 0.365
 	upper.get_node("CoatShoulders").scale.x = 0.365
 	for arm in visual.arms:
@@ -119,9 +164,9 @@ func _dress(visual: Visual, outfit: Outfit) -> void:
 		# Only ankle footwear is rendered. The skirt rides on the hips, independent of torso lean.
 		for shoe: MeshInstance3D in leg.get_node("Knee/Ankle").get_children():
 			shoe.scale.x *= 0.90
-	var skirt_color: StandardMaterial3D = _cloth
+	var skirt_color: Material = _cloth
 	if outfit == Outfit.LADY_IN_CAPE:
-		skirt_color = G.solid_material(Color("#635567"))
+		skirt_color = Materials.get_material(Color("#635567"))
 	var skirt := _cylinder(visual.body, "LongSkirt", Vector3(0, -0.324, 0.006), 0.82, 0.160, 0.358, skirt_color, 0.95)
 	skirt.mesh.radial_segments = 14
 	var hem := _cylinder(visual.body, "SkirtHemBand", Vector3(0, -0.705, 0.006), 0.045, 0.357, 0.368, _accent, 0.95)
@@ -191,10 +236,7 @@ func _civilian(visual: Visual, outfit: Outfit) -> void:
 		Outfit.CLERK:
 			G.box(visual.elbows[0], "DocumentCase", Vector3(-0.075, -0.305, 0), Vector3(0.075, 0.227, 0.190), _leather)
 		Outfit.ELDER:
-			var grey := G.solid_material(Color("#a29a85"))
-			visual.head.get_node("Hair").material_override = grey
-			visual.head.get_node("Moustache").material_override = grey
-			_cylinder(upper, "WoolScarf", Vector3(0, 0.484, 0), 0.095, 0.088, 0.107, _accent)
+					_cylinder(upper, "WoolScarf", Vector3(0, 0.484, 0), 0.095, 0.088, 0.107, _accent)
 
 
 func _gloves(visual: Visual) -> void:
