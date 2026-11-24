@@ -52,9 +52,10 @@ func _paving(parent: Node3D, title: String, center: Vector2, dimensions: Vector2
 			Vector3(dimensions.x, 0.20, dimensions.y), material, true)
 
 
-func _gate(parent: Node3D, title: String, center: Vector3, yaw: float, height := 11.08) -> void:
+func _gate(parent: Node3D, title: String, center: Vector3, yaw: float, height := 11.08, pitched_cover := false, depth := FRONT * 2.0) -> void:
 	var gate := Geometry.group(parent, title, center)
 	gate.rotation_degrees.y = yaw
+	gate.scale.z = depth / (2.0 * FRONT)
 	for side in [-1, 1]:
 		Geometry.box(gate, "MasonryPier", Vector3(side * 2.49, height * 0.5, 0),
 				Vector3(1.4, height, FRONT * 2.0), plaster, true)
@@ -73,8 +74,14 @@ func _gate(parent: Node3D, title: String, center: Vector3, yaw: float, height :=
 
 	Geometry.box(gate, "Cornice", Vector3(0, height - 0.09, 0),
 			Vector3(6.6, 0.27, FRONT * 2.0 + 0.25), trim)
-	Geometry.box(gate, "RoofCap", Vector3(0, height + 0.04, 0),
-			Vector3(6.41, 0.18, FRONT * 2.0 + 0.18), roof)
+	if pitched_cover:
+		var cover := PrismMesh.new()
+		cover.size = Vector3(FRONT * 2.0 + 0.18, 1.3, 6.48)
+		var roof_node := Geometry.mesh_part(gate, "PitchedRoof", Vector3(0, height + 0.65, 0), cover, roof)
+		roof_node.rotation_degrees.y = 90
+	else:
+		Geometry.box(gate, "RoofCap", Vector3(0, height + 0.04, 0),
+				Vector3(6.41, 0.18, FRONT * 2.0 + 0.18), roof)
 	var ring_parts: Array[Transform3D] = []
 	for facing in [-1, 1]:
 		for i in 13:
@@ -91,6 +98,17 @@ func _gate(parent: Node3D, title: String, center: Vector3, yaw: float, height :=
 				window.rotation_degrees.y = 0 if facing > 0 else 180
 				gate.add_child(window, true)
 	Geometry.batch(gate, "StoneVoussoirs", BoxMesh.new(), trim, ring_parts)
+
+
+func build_service_gate(parent: Node3D, center: Vector2, paving: Material) -> void:
+	_paving(parent, "PrintworksPassagePaving", center, Vector2(3.6, 14.0), paving)
+	_gate(parent, "PrintworksPassage", Vector3(center.x, -0.05, center.y), 0.0, 8.43, true)
+
+
+func add_passage(parent: Node3D, title: String, center: Vector2, yaw: float,
+		floors: int, depth: float) -> void:
+	_gate(parent, title, Vector3(center.x, -0.05, center.y), yaw,
+			0.48 + floors * 2.65, true, depth)
 
 
 func _arch_mesh(height: float) -> ArrayMesh:

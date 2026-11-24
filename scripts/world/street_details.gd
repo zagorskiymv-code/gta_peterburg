@@ -20,7 +20,8 @@ var box := BoxMesh.new()
 func build(world: Node3D) -> void:
 	var street := G.group(world, "StreetDetails")
 	var buildings: Node3D = world.get_node("Buildings")
-	var shop := G.group(buildings.get_node("LaneShop"), "ShopDetails", Vector3(0, 0, 3.0))
+	var shop := G.group(world.get_node("Infill/UrbanBlocks/MainStreetWesternBlock/LaneShop"),
+			"ShopDetails", Vector3(0, 0, 3.25))
 	_shop(shop)
 	var house := G.group(buildings.get_node("SouthMerchantHouse"), "DoorDetails", Vector3(0, 0, 5.5))
 	_entrance(house)

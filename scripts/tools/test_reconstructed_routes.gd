@@ -20,8 +20,50 @@ func _run() -> void:
 	await _route(Vector3(22.4,0.06,-4), [Vector3(17,0,-4),Vector3(22.4,0,-4)], "Main Street service court")
 	await _route(Vector3(41,0.05,-154), [Vector3(72,0,-154),Vector3(72,0,-173),
 		Vector3(72,0,-186),Vector3(42,0,-186)], "Existing three well-courtyard arches")
+	await _route(Vector3(40.65,0.04,17), [Vector3(40.65,0,25.75)], "Canal and garden access beside new annex")
+	await _route(Vector3(-25.75,0.05,73), [Vector3(-25.75,0,84),Vector3(-25.75,0,73)], "Printworks service arch")
+	await _route(Vector3(-43,0.05,28), [Vector3(-43,0,11)], "Western perimeter courtyard arch")
+	await _route(Vector3(-28,0.05,9.5), [Vector3(-16.2,0,9.5),Vector3(-16.2,0,2)], "Baranov lane arch")
+	await _route(Vector3(24,0.05,-199), [Vector3(24,0,-175),Vector3(24,0,-165)], "Staff arch and rear gallery")
+	await _route(Vector3(-59,0.05,32.65), [Vector3(-69,0,32.65)], "Merchant corner garden approach")
+	_check_polygon_collisions()
+	await _check_campaign_contact()
 	print("RECONSTRUCTION ROUTES: %d failures" % failures)
 	quit(1 if failures else 0)
+
+func _check_polygon_collisions() -> void:
+	var space := player.get_world_3d().direct_space_state
+	for mesh: MeshInstance3D in current_scene.find_children("PolygonMasonry", "MeshInstance3D", true, false):
+		var building := mesh.get_parent() as Node3D
+		var outline: PackedVector2Array = building.get_meta(&"plan_polygon")
+		var center := Vector2.ZERO
+		for point in outline:
+			center += point
+		center /= outline.size()
+		var at := building.to_global(Vector3(center.x, 0, center.y))
+		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(at + Vector3.UP * 24, at, 1))
+		if hit.is_empty() or hit.collider.get_parent() != building:
+			push_error("Missing polygon building collision: %s" % building.get_path())
+			failures += 1
+
+
+func _check_campaign_contact() -> void:
+	change_scene_to_file("res://scenes/world/new_game.tscn")
+	await scene_changed
+	await physics_frame
+	var contact := current_scene.get_node("StoryContacts/Baranov") as CharacterBody3D
+	var mission_player := current_scene.get_node("PlayerSpawn/Player") as CharacterBody3D
+	var missions := current_scene.get_node("MissionManager")
+	mission_player.global_position = Vector3(-26.9, 0.04, 9.5)
+	var capsule := contact.get_node("CollisionShape3D") as CollisionShape3D
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = capsule.shape
+	query.transform = capsule.global_transform.translated(Vector3.UP * 0.10)
+	query.collision_mask = 1
+	if not contact.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty() or not missions._clear_interaction(contact):
+		push_error("Baranov or the mission interaction ray is obstructed")
+		failures += 1
+
 
 func _route(start: Vector3, points: Array, label: String) -> void:
 	player.global_position = start
