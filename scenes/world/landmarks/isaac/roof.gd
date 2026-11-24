@@ -1,64 +1,60 @@
 @tool
 extends MeshInstance3D
 
-const EAVE := Vector2(21.95, 19.45)
-const INNER := Vector2(9.0, 8.6)
-const EAVE_Y := 20.57
-const INNER_Y := 20.99
-const RIDGE_Y := 23.42
+const EAVE := Vector2(21.64, 19.14)
+const EAVE_HEIGHT := 20.57
+const STONE_TOE_RADIUS := 13.23
+const STONE_TOE_HEIGHT := 22.0
+const PANELS_PER_FACE := 32
+const STATIONS := [0.0, 0.33, 0.58, 0.81, 1.0]
+const RIDGE_HEIGHTS := [0.0, 1.42, 1.25, 0.39, 0.0]
+const VALLEY_DEPTHS := [0.0, -0.18, -0.26, -0.14, 0.0]
 
 @export var roof_material: Material
 @export var seam_material: Material
-@export var masonry_material: Material
+@export var show_seams := true
 
 
 func _ready() -> void:
+	rebuild()
+
+
+func rebuild() -> void:
 	var copper := _surface(roof_material)
 	var seams := _surface(seam_material)
-	var masonry := _surface(masonry_material)
 	for face in 4:
-		var basis := Basis(Vector3.UP, face * PI / 2.0)
-		var end := EAVE.y if face % 2 == 0 else EAVE.x
-		var width := EAVE.x if face % 2 == 0 else EAVE.y
-		var inner_end := INNER.y if face % 2 == 0 else INNER.x
-		var inner_width := INNER.x if face % 2 == 0 else INNER.y
-		var outer_left := Vector3(-width, EAVE_Y, end)
-		var outer_right := Vector3(width, EAVE_Y, end)
-		var inner_left := Vector3(-inner_width, INNER_Y, inner_end)
-		var inner_right := Vector3(inner_width, INNER_Y, inner_end)
-		_panel(copper, seams, basis, outer_left, outer_right, inner_right, inner_left, 28)
-		# Raised transverse volumes leave the lower hipped copper roof visible at the corners.
-		var arm := 8.85 if face % 2 == 0 else 7.55
-		var front := end - 1.46
-		var back := inner_end - 0.8
-		var near_ridge := Vector3(0, RIDGE_Y - 0.84, front)
-		var far_ridge := Vector3(0, RIDGE_Y, back)
-		var left_front := Vector3(-arm, 20.78, front)
-		var right_front := Vector3(arm, 20.78, front)
-		var left_back := Vector3(-arm + 0.68, 21.52, back)
-		var right_back := Vector3(arm - 0.68, 21.52, back)
-		_panel(copper, seams, basis, left_front, near_ridge, far_ridge, left_back, 12)
-		_panel(copper, seams, basis, near_ridge, right_front, right_back, far_ridge, 12)
-		_quad(seams, basis, near_ridge + Vector3(-0.09, 0.045, 0),
-				near_ridge + Vector3(0.09, 0.045, 0), far_ridge + Vector3(0.09, 0.045, 0),
-				far_ridge + Vector3(-0.09, 0.045, 0))
-		for edge: Vector3 in [left_front, right_front]:
-			var step := Vector3.RIGHT * 0.078
-			var lower := edge + Vector3.UP * 0.04
-			var upper := near_ridge + Vector3.UP * 0.04
-			_quad(seams, basis, lower - step, upper - step, upper + step, lower + step)
-		_triangle(masonry, basis, left_front, right_front, near_ridge)
-		_quad(masonry, basis, left_front - Vector3.UP * 0.50, right_front - Vector3.UP * 0.50, right_front, left_front)
-		_quad(masonry, basis, right_front - Vector3.UP, right_back - Vector3.UP, right_back, right_front)
-		_quad(masonry, basis, left_back - Vector3.UP, left_front - Vector3.UP, left_front, left_back)
+		for panel in PANELS_PER_FACE:
+			for row in range(STATIONS.size() - 1):
+				var left := float(panel) / PANELS_PER_FACE
+				var right := float(panel + 1) / PANELS_PER_FACE
+				var a := _point(face, left, row)
+				var b := _point(face, right, row)
+				var c := _point(face, right, row + 1)
+				var d := _point(face, left, row + 1)
+				_quad(copper, a, b, c, d)
+				if show_seams:
+					_seam(seams, a, b, c, d, panel == 0)
+	var result := copper.commit()
+	if show_seams:
+		seams.commit(result)
+	mesh = result
 
-	_quad(copper, Basis.IDENTITY, Vector3(-INNER.x, INNER_Y, INNER.y),
-			Vector3(INNER.x, INNER_Y, INNER.y), Vector3(INNER.x, INNER_Y, -INNER.y),
-			Vector3(-INNER.x, INNER_Y, -INNER.y))
-	mesh = ArrayMesh.new()
-	for surface: SurfaceTool in [copper, seams, masonry]:
-		surface.generate_normals()
-		surface.commit(mesh)
+
+func _point(face: int, span: float, row: int) -> Vector3:
+	var half_width := EAVE.x if face % 2 == 0 else EAVE.y
+	var depth := EAVE.y if face % 2 == 0 else EAVE.x
+	var across := (span * 2.0 - 1.0) * half_width
+	var edge := Vector2(across, depth).rotated(-face * PI / 2.0)
+	var foot := edge.normalized() * STONE_TOE_RADIUS
+	var t: float = STATIONS[row]
+	var plan := edge.lerp(foot, t)
+	# Each portico axis has a distinct raised line. The four shoulders fold
+	# down at the diagonal valleys, and all faces share the same circular toe.
+	var ridge := maxf(1.0 - absf(span * 2.0 - 1.0) * 2.3, 0.0)
+	var valley := smoothstep(0.52, 1.0, absf(span * 2.0 - 1.0))
+	var rise: float = ridge * RIDGE_HEIGHTS[row] + valley * VALLEY_DEPTHS[row]
+	var height := lerpf(EAVE_HEIGHT, STONE_TOE_HEIGHT, t) + rise
+	return Vector3(plan.x, height, plan.y)
 
 
 func _surface(material: Material) -> SurfaceTool:
@@ -68,28 +64,20 @@ func _surface(material: Material) -> SurfaceTool:
 	return surface
 
 
-func _panel(copper: SurfaceTool, seams: SurfaceTool, basis: Basis, a: Vector3,
-		b: Vector3, c: Vector3, d: Vector3, count: int) -> void:
-	_quad(copper, basis, a, b, c, d)
-	for index in range(1, count):
-		var t := float(index) / count
-		var front := a.lerp(b, t) + Vector3.UP * 0.028
-		var back := d.lerp(c, t) + Vector3.UP * 0.028
-		var width := Vector3.RIGHT * 0.037
-		_quad(seams, basis, front - width, front + width, back + width, back - width)
-	for index in range(1, 6):
-		var t := float(index) / 6.0
-		var left := a.lerp(d, t) + Vector3.UP * 0.025
-		var right := b.lerp(c, t) + Vector3.UP * 0.025
-		_quad(seams, basis, left + Vector3.BACK * 0.015, right + Vector3.BACK * 0.015,
-				right - Vector3.BACK * 0.015, left - Vector3.BACK * 0.015)
+func _seam(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3, valley: bool) -> void:
+	# Fold the seam up from the actual panel edge, leaving the roof surface intact.
+	var height := Vector3.UP * 0.027
+	var width := 0.10 if valley else 0.052
+	var a_offset := a.move_toward(b, width)
+	var d_offset := d.move_toward(c, width)
+	_quad(surface, a + height, a_offset + height, d_offset + height, d + height)
+	_quad(surface, a_offset + height, a_offset, d_offset, d_offset + height)
 
 
-func _quad(surface: SurfaceTool, basis: Basis, a: Vector3, b: Vector3, c: Vector3, d: Vector3) -> void:
-	_triangle(surface, basis, a, b, c)
-	_triangle(surface, basis, a, c, d)
-
-
-func _triangle(surface: SurfaceTool, basis: Basis, a: Vector3, b: Vector3, c: Vector3) -> void:
-	for point: Vector3 in [a, c, b]:
-		surface.add_vertex(basis * point)
+func _quad(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3) -> void:
+	# Share the area-weighted normal across each panel bay so its internal
+	# triangulation stays invisible while the height breaks retain their edges.
+	var normal := ((b - a).cross(c - a) + (c - a).cross(d - a)).normalized()
+	for vertex: Vector3 in [a, c, b, a, d, c]:
+		surface.set_normal(normal)
+		surface.add_vertex(vertex)

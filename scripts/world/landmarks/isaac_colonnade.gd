@@ -8,7 +8,7 @@ const OUTER_RADIUS := 11.57
 const SECTIONS := 64
 const ENTRY_RADIUS := 1.75
 
-var stone := G.solid_material(Color("#92918a"))
+var stone := G.solid_material(Color("#827f74"))
 var iron := G.solid_material(Color("#272d2c"))
 var ground_stop: Marker3D
 var upper_stop: Marker3D
