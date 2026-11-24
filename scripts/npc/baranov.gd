@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const Wardrobe = preload("res://scripts/npc/citizen_wardrobe.gd")
 const Geometry = preload("res://scripts/world/district_geometry.gd")
+const Materials = preload("res://scripts/player/character_materials.gd")
 const Visual = preload("res://scripts/player/historical_character_visual.gd")
 
 @onready var visual: Visual = $CharacterVisual
@@ -20,7 +21,7 @@ func _ready() -> void:
 	vest.scale.x *= 1.12
 	for arm in visual.arms:
 		arm.position.x *= 1.12
-	var hair := Geometry.solid_material(Color("#55443d"))
+	var hair := Materials.get_material(Color("#4c3429"), Materials.Finish.HAIR)
 	var moustache := visual.head.get_node("Moustache") as MeshInstance3D
 	moustache.scale *= Vector3(1.48, 1.16, 1.22)
 	moustache.material_override = hair

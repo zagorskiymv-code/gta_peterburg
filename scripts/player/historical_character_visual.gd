@@ -2,6 +2,8 @@ extends Node3D
 
 enum Pose { IDLE, WALK, RUN, JUMP, FALL, LAND }
 
+const Detail = preload("res://scripts/player/character_detail.gd")
+
 const HIP_HEIGHT := 0.934
 const THIGH := 0.425
 const SHIN := 0.420
@@ -33,6 +35,14 @@ var falling_blend := 0.0
 var landing_time := 0.0
 var air_time := 0.0
 var feet: Array[Vector2] = [Vector2.ZERO, Vector2.ZERO]
+
+
+func _ready() -> void:
+	Detail.apply(self)
+
+
+func configure_portrait(profile: int, skin: Color, hair: Color) -> void:
+	Detail.configure_face(head, profile, skin, hair)
 
 
 func animate(delta: float, displacement: Vector3, direction: Vector3, grounded: bool,
