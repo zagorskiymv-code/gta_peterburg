@@ -3,6 +3,7 @@ extends RefCounted
 
 const G = preload("res://scripts/world/district_geometry.gd")
 const F = preload("res://scripts/world/district_facades.gd")
+const Courtyards = preload("res://scripts/world/petersburg_courtyards.gd")
 const WATER := preload("res://materials/canal_water.gdshader")
 const DEATH = preload("res://scripts/world/water_death_zone.gd")
 const LAMP := preload("res://scenes/world/props/gas_lamp.tscn")
@@ -23,7 +24,6 @@ func south(root: Node3D, paving: Material) -> void:
 	for lot in [
 		["WestLaneCorner",-38.15,44,90,18,7.7,4,F.Kind.TENEMENT,"#c6b391"],
 		["PerimeterLink",-38.15,58.72,180,7.7,11.44,3,F.Kind.MERCHANT,"#cbb49c"],
-		["CourtyardBackWing",-24.0,21.65,0,7.8,5.3,3,F.Kind.TENEMENT,"#b7b5a1"],
 		["MerchantReturn",14.0,44.0,-90,3.0,11.0,3,F.Kind.MERCHANT,"#baac9d"],
 		["SouthTenementReturn",-11.45,57.0,90,14.5,7.9,5,F.Kind.TENEMENT,"#b8b399"],
 	]:
@@ -42,10 +42,7 @@ func _close_residual_lots(root: Node3D, facades: RefCounted, paving: Material) -
 	var blocks := G.group(root, "CompletedStreetBlocks")
 	# Close the street fronts at existing party walls and leave entrances to the rear courts.
 	for lot in [
-		["EastLaneTenement", -21.6, -12.5, -90, 15.0, 8.0, 4, F.Kind.TENEMENT, "#c5b497"],
-		["EastLaneCorner", -21.6, 1.0, -90, 12.0, 8.0, 3, F.Kind.MERCHANT, "#c3bba2"],
-		["LaneRearWing", -38.0, 6.5, 90, 13.0, 9.0, 3, F.Kind.TENEMENT, "#b8b19f"],
-		["WorkshopCourtWing", -38.2, 18.8, 0, 8.4, 11.6, 2, F.Kind.WAREHOUSE, "#aa8873"],
+		["GardenMerchantAnnex", 34.55, 22.75, 180, 8.3, 5.5, 3, F.Kind.MERCHANT, "#c5b294"],
 		["MainStreetNorthWing", 18.0, -12.5, 90, 9.0, 6.0, 3, F.Kind.TENEMENT, "#beb5a2"],
 		["MainStreetSouthWing", 18.0, 3.8, 90, 7.5, 6.0, 2, F.Kind.MERCHANT, "#c9b59f"],
 		["WesternCornerBackWing", -73.15, -10.0, -90, 10.0, 8.3, 3, F.Kind.TENEMENT, "#aea99b"],
@@ -55,9 +52,9 @@ func _close_residual_lots(root: Node3D, facades: RefCounted, paving: Material) -
 	]:
 		facades.add_building(blocks, lot[0], Vector2(lot[1], lot[2]), lot[3],
 				Vector2(lot[4], lot[5]), lot[6], lot[7], Color(lot[8]))
+	Courtyards.new().build_service_gate(blocks, Vector2(-25.75, 79), paving)
 	_slab(blocks, "WesternPassage", Vector2(-71.3,1.3), Vector2(22.6,3.15), paving, 0.024)
 	_slab(blocks, "MainStreetServicingCourt", Vector2(18.5,-4.0), Vector2(8.5,7.5), paving, 0.022)
-	_slab(blocks, "LaneServiceCourt", Vector2(-33.1,23.5), Vector2(1.8,3.0), paving, 0.022)
 
 
 func quays(root: Node3D) -> void:

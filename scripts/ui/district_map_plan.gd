@@ -23,7 +23,11 @@ func build(world: Node3D, font: Font) -> void:
 	for mesh: MeshInstance3D in world.find_children("*", "MeshInstance3D", true, false):
 		var layer := _ink(mesh)
 		if layer != -1:
-			_project(mesh.mesh, mesh.global_transform, layers, layer)
+			var footprint: PackedVector2Array = mesh.get_parent().get_meta(&"plan_polygon", PackedVector2Array())
+			if layer == Ink.BUILDING and not footprint.is_empty():
+				_project_footprint(footprint, mesh.global_transform, layers)
+			else:
+				_project(mesh.mesh, mesh.global_transform, layers, layer)
 	# The rows across the river and just beyond the district use instancing.
 	var near := world.get_node_or_null("BackgroundCity/Near")
 	if near:
@@ -67,12 +71,23 @@ func _ink(mesh: MeshInstance3D) -> int:
 		return Ink.LAND
 	if (material and material.shader == COBBLE) or label in ["MainSouth", "Sidewalk", "WestSidewalk",
 			"EastSidewalk", "NevskySidewalks", "BypassSidewalks", "BridgeFootways", "PalaceApproach",
-			"MillionnayaStreet", "NorthQuay", "SouthQuay", "WestPromenade", "CrossStreetContinuation",
+			"MillionnayaStreet", "WestBlockFootway", "LaneWestFootway", "LinkStreetFootway",
+			"LaneEastFootway", "NevskyWestFootway", "SouthBlockFootway", "MerchantFootway", "GardenApproach", "NorthQuay", "SouthQuay", "WestPromenade", "CrossStreetContinuation",
 			"NorthernLaneContinuation", "SouthernAxialStreet", "OuterQuayContinuation", "TimberDeck"]:
 		return Ink.STREET
-	if label in STRUCTURES or label.ends_with("Masonry"):
+	if label in STRUCTURES or label.ends_with("Masonry") or label == "MasonryPier":
 		return Ink.BUILDING
 	return -1
+
+
+func _project_footprint(outline: PackedVector2Array, pose: Transform3D,
+		layers: Array[PackedVector3Array]) -> void:
+	var output := layers[Ink.BUILDING]
+	for index in Geometry2D.triangulate_polygon(outline):
+		var point := outline[index]
+		var flat := project(pose * Vector3(point.x, 0, point.y))
+		output.append(Vector3(flat.x, flat.y, 0))
+	layers[Ink.BUILDING] = output
 
 
 func _project(mesh: Mesh, pose: Transform3D, layers: Array[PackedVector3Array], ink: int) -> void:

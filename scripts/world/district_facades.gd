@@ -225,3 +225,82 @@ func _trapezoid_roof(width: float, depth: float, rise: float, mansard: bool) -> 
 		surface.add_vertex(top[i])
 	surface.generate_normals()
 	return surface.commit()
+
+
+func add_polygon_building(parent: Node3D, label: String, outline: PackedVector2Array,
+		height: float, floors: int, color: Color, roof_color: Color, rise: float,
+		shop_edges: Array = [], base := -0.05) -> void:
+	# The convex outline follows the street and party walls in parent coordinates.
+	var building := Geometry.group(parent, label, Vector3.UP * base)
+	building.set_meta(&"plan_polygon", outline)
+	building.set_meta(&"facade_floors", floors)
+	var roof_center := Vector2.ZERO
+	for point in outline:
+		roof_center += point
+	roof_center /= outline.size()
+	var apex := Vector3(roof_center.x, height + rise, roof_center.y)
+	var wall := SurfaceTool.new()
+	var roof_surface := SurfaceTool.new()
+	for surface in [wall, roof_surface]:
+		surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+		surface.set_smooth_group(-1)
+	var points := PackedVector3Array([apex])
+	var moldings: Array[Transform3D] = []
+	var windows: Array[Transform3D] = []
+	for i in outline.size():
+		var a := Vector3(outline[i].x, 0, outline[i].y)
+		var next := outline[(i + 1) % outline.size()]
+		var b := Vector3(next.x, 0, next.y)
+		var top_a := a + Vector3.UP * height
+		var top_b := b + Vector3.UP * height
+		points.append(a)
+		points.append(top_a)
+		for vertex in [a, b, top_b, a, top_b, top_a]:
+			wall.add_vertex(vertex)
+		for vertex in [top_a, top_b, apex]:
+			roof_surface.add_vertex(vertex)
+		var delta := b - a
+		var side := Basis(Vector3.UP, atan2(-delta.z, delta.x) + PI)
+		var outward := side.z
+		var span := delta.length()
+		var mid := (a + b) / 2.0
+		for y in [0.3, height / floors, height - 0.14]:
+			moldings.append(Transform3D(side.scaled_local(Vector3(span, 0.17, 0.17)),
+					mid + Vector3.UP * y + outward * 0.035))
+		var bays := floori(span / 2.1)
+		for bay in bays:
+			var location := a.lerp(b, (bay + 0.5) / bays)
+			for floor_index in floors:
+				var storefront := floor_index == 0 and i in shop_edges
+				var elevation := (floor_index + 0.56) * height / floors
+				var scale := Vector3(1.35, 1.30, 1) if storefront else Vector3.ONE
+				windows.append(Transform3D(side.scaled_local(scale), location + Vector3.UP * elevation))
+			if i in shop_edges:
+				Geometry.box(building, "ShopLintel", location + Vector3.UP * 2.85 + outward * 0.11,
+						Vector3(1.4, 0.28, 0.22), wood).basis = side
+		if i in shop_edges and span > 3:
+			Geometry.box(building, "ShopDoor", mid + Vector3.UP * 1.21 + outward * 0.17,
+					Vector3(1.0, 2.42, 0.12), wood).basis = side
+	for index in range(1, outline.size() - 1):
+		for i in [0, index + 1, index]:
+			wall.add_vertex(Vector3(outline[i].x, 0, outline[i].y))
+	for surface in [wall, roof_surface]:
+		surface.generate_normals()
+	Geometry.mesh_part(building, "PolygonMasonry", Vector3.ZERO, wall.commit(), Geometry.solid_material(color))
+	Geometry.mesh_part(building, "HippedRoof", Vector3.ZERO, roof_surface.commit(), Geometry.solid_material(roof_color))
+	Geometry.batch(building, "StoneCourses", unit_box, trim, moldings)
+	for part in window_parts:
+		var transforms: Array[Transform3D] = []
+		for placement in windows:
+			transforms.append(placement * part.transform)
+		Geometry.batch(building, "Windows" + str(part.name), part.mesh, part.material_override, transforms)
+	Geometry.box(building, "Chimney", apex + Vector3.UP * 0.26, Vector3(0.54, 0.84, 0.60), brick_stack)
+	var body := StaticBody3D.new()
+	body.name = "PolygonMasonryCollision"
+	body.collision_mask = 0
+	var collider := CollisionShape3D.new()
+	var solid := ConvexPolygonShape3D.new()
+	solid.points = points
+	collider.shape = solid
+	body.add_child(collider)
+	building.add_child(body)

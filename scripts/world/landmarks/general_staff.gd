@@ -2,6 +2,7 @@
 extends RefCounted
 
 const G = preload("res://scripts/world/district_geometry.gd")
+const Facades = preload("res://scripts/world/district_facades.gd")
 const LAMP := preload("res://scenes/world/props/gas_lamp.tscn")
 const HALF_ARCH := 4.25
 const HEIGHT := 11.6
@@ -18,6 +19,7 @@ func build(parent: Node3D, paving: Material) -> void:
 	var frames: Array[Transform3D] = []
 	var panes: Array[Transform3D] = []
 	var courses: Array[Transform3D] = []
+	var slopes := _begin()
 	for side in [-1.0, 1.0]:
 		for i in 7:
 			var a: float = side * lerpf(HALF_ARCH + 0.95, 34.0, i / 7.0)
@@ -29,6 +31,17 @@ func build(parent: Node3D, paving: Material) -> void:
 			var outline: Array[Vector3] = [Vector3(x0, 0, z0), Vector3(x1, 0, z1),
 				Vector3(x1, 0, z1 + DEPTH), Vector3(x0, 0, z0 + DEPTH)]
 			_section(staff, outline)
+			var ridge_a := Vector3(x0, HEIGHT + 1.05, z0 + DEPTH / 2)
+			var ridge_b := Vector3(x1, HEIGHT + 1.05, z1 + DEPTH / 2)
+			_quad(slopes, outline[0] + Vector3.UP * HEIGHT, outline[1] + Vector3.UP * HEIGHT, ridge_b, ridge_a)
+			_quad(slopes, ridge_a, ridge_b, outline[2] + Vector3.UP * HEIGHT, outline[3] + Vector3.UP * HEIGHT)
+			if i == 6:
+				var end_a := outline[0] if side < 0 else outline[1]
+				var end_b := outline[3] if side < 0 else outline[2]
+				var crown := ridge_a if side < 0 else ridge_b
+				for vertex in ([end_a + Vector3.UP * HEIGHT, crown, end_b + Vector3.UP * HEIGHT] if side < 0
+						else [end_b + Vector3.UP * HEIGHT, crown, end_a + Vector3.UP * HEIGHT]):
+					slopes.add_vertex(vertex)
 			var basis := Basis(Vector3.UP, atan2(z0 - z1, x1 - x0))
 			var span := Vector2(x1 - x0, z1 - z0).length()
 			for y in [0.31, 3.63, 7.27, 11.40]:
@@ -41,6 +54,7 @@ func build(parent: Node3D, paving: Material) -> void:
 					frames.append(Transform3D(basis.scaled_local(Vector3(0.98, 0.054, 0.09)), Vector3(x, y+0.17, z - 0.24)))
 			courses.append(Transform3D(basis.scaled_local(Vector3(0.22, 10.40, 0.23)),
 					Vector3(x0 + 0.09, 5.7, z0 - 0.07)))
+	_finish(staff, "CurvedMetalRoof", slopes, roof, false)
 	G.batch(staff, "WindowFrames", box, stone, frames)
 	G.batch(staff, "RecessedGlass", box, glass, panes)
 	G.batch(staff, "Entablatures", box, stone, courses)
@@ -48,15 +62,69 @@ func build(parent: Node3D, paving: Material) -> void:
 	var court := G.group(staff, "InnerCourt", Vector3(0, 0, 15.0))
 	G.box(court, "CourtPaving", Vector3(0, -0.081, 0), Vector3(15.0, 0.22, 22), paving, true)
 	for side in [-1.0, 1.0]:
-		G.box(court, "CourtyardWing", Vector3(side * 8.8, 3.2, -1.06), Vector3(2.8, 6.4, 15.6), ochre, true)
 		var light: Node3D = LAMP.instantiate()
 		light.position = Vector3(side * 6.2, 0.03, 2.9)
 		court.add_child(light, true)
-		var windows: Array[Transform3D] = []
-		for z in [-6.0, -3.2, 0.0, 3.2, 6.0]:
-			for y in [2.0, 4.5]:
-				windows.append(G.box_transform(Vector3(side * 7.38, y, z), Vector3(0.11, 1.38, 1.05)))
-		G.batch(court, "CourtyardWindows", box, glass, windows)
+	_build_rear(staff, paving)
+
+
+func _build_rear(staff: Node3D, paving: Material) -> void:
+	var complex := G.group(staff, "RearComplex")
+	var facade := Facades.new()
+	# From outermost bay to the arch. The west line follows the Nevsky bend.
+	var west := [1.25, 1.25, 11.3, 15.6, 11.0, 11.0, 10.0, 10.0]
+	# At the east end the Northern Exit passage sets the building line.
+	var east := [0.5, 0.7, 0.9, 2.8, 5.0, 6.3, 10.0, 10.0]
+	for side in [-1.0, 1.0]:
+		var rear_line: Array = west if side < 0 else east
+		for i in 7:
+			if side > 0 and i in [1, 2, 3]:
+				continue # The east courtyard exit runs directly behind these bays.
+			var a: float = side * lerpf(34.0, HALF_ARCH + 0.95, i / 7.0)
+			var b: float = side * lerpf(34.0, HALF_ARCH + 0.95, (i + 1) / 7.0)
+			var left := minf(a, b)
+			var right := maxf(a, b)
+			var rear_left: float = rear_line[i if side < 0 else i + 1]
+			var rear_right: float = rear_line[i + 1 if side < 0 else i]
+			# The former back wall becomes the shared wall with each new trapezoidal bay.
+			_wing(facade, complex, "RearBay", [
+				Vector2(left, _curve(left) + DEPTH), Vector2(right, _curve(right) + DEPTH),
+				Vector2(right, rear_right), Vector2(left, rear_left),
+			])
+	# Outer returns enclose light wells alongside the main axial courtyard.
+	_wing(facade, complex, "WestCourtReturn", [
+		Vector2(-13.428571, 11), Vector2(-9.314286, 10),
+		Vector2(-9.314286, 17), Vector2(-13.428571, 17),
+	])
+	_wing(facade, complex, "WestCourtWall", [
+		Vector2(-9.314286, 10), Vector2(-5.2, 10), Vector2(-4.25, 17), Vector2(-9.314286, 17),
+	])
+	_wing(facade, complex, "WestRearRange", [
+		Vector2(-17.45, 17), Vector2(-4.25, 17), Vector2(-4.25, 22.5), Vector2(-17.45, 22.5),
+	])
+	_wing(facade, complex, "EastCourtWall", [
+		Vector2(5.2, 10), Vector2(9.314286, 10), Vector2(9.314286, 17), Vector2(4.25, 17),
+	])
+	_wing(facade, complex, "EastOuterReturn", [
+		Vector2(13.428571, 6.3), Vector2(13.8, 6.75), Vector2(13.8, 17),
+		Vector2(10.6, 17), Vector2(10.6, 8.84375),
+	])
+	_wing(facade, complex, "EastRearRange", [
+		Vector2(4.25, 17), Vector2(13.8, 17), Vector2(13.8, 22.5), Vector2(4.25, 22.5),
+	])
+	facade.add_polygon_building(complex, "RaisedGallery", PackedVector2Array([
+		Vector2(-4.25, 17), Vector2(4.25, 17), Vector2(4.25, 22.5), Vector2(-4.25, 22.5),
+	]), 5.6, 2, Color("#cdb27d"), Color("#6d6a5c"), 1.35, [], 5.25)
+	G.box(complex, "WestLightCourtPaving", Vector3(-16.3, -0.076, 14.3),
+			Vector3(5.8, 0.18, 5.4), paving, true)
+	G.box(complex, "EastLightCourtPaving", Vector3(9.9, -0.076, 13.6),
+			Vector3(1.5, 0.18, 6.6), paving, true)
+
+
+func _wing(facade: RefCounted, parent: Node3D, label: String, outline: Array) -> void:
+	facade.add_polygon_building(parent, label, PackedVector2Array(outline),
+			10.9, 3, Color("#cdb27d"), Color("#6d6a5c"), 1.35)
+
 
 func _curve(x: float) -> float:
 	# The terminal bays turn towards the square instead of forming an orthogonal block.

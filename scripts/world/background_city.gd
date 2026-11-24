@@ -18,6 +18,7 @@ var windows := G.solid_material(Color("#454f51"))
 var flue_brick := G.solid_material(Color("#825a4d"))
 var roofs: Array[StandardMaterial3D] = []
 var walls: Array[StandardMaterial3D] = []
+var row_batches: Dictionary = {}
 
 
 func build(district: Node3D) -> void:
@@ -35,6 +36,10 @@ func build(district: Node3D) -> void:
 	_south(near, middle, far)
 	_river(city, near, middle, far)
 	_skyline(far)
+	for entry: Dictionary in row_batches.values():
+		_batch(entry.parent, entry.title, entry.mesh, entry.material, entry.transforms,
+				entry.detail, Transform3D(Basis.IDENTITY, entry.anchor))
+	row_batches.clear()
 
 
 func _base(city: Node3D) -> void:
@@ -62,49 +67,91 @@ func _base(city: Node3D) -> void:
 
 
 func _east(near: Node3D, middle: Node3D, far: Node3D) -> void:
-	var east_blocks := [Vector2(84, 111), Vector2(31, 68), Vector2(-20, 16),
-			Vector2(-68,-34), Vector2(-114,-83), Vector2(-167,-128),
-			Vector2(-224,-182), Vector2(-279,-256), Vector2(-247,-239)]
-	for band: Vector2 in east_blocks:
-		_row(near, Vector2(98, band.y), Vector2(98, band.x), Detail.NEAR, int(band.y)+440)
-		_row(middle, Vector2(130, band.y+4), Vector2(130, band.x), Detail.MIDDLE, int(band.y)+488)
-		_row(middle, Vector2(165, band.y), Vector2(165, band.x-3), Detail.MIDDLE, int(band.y)+764)
+	var bands := [Vector2(78, 139), Vector2(23, 64), Vector2(-20, 16),
+			Vector2(-77, -34), Vector2(-115, -84), Vector2(-172, -128),
+			Vector2(-228, -194), Vector2(-286, -257), Vector2(-246, -235)]
+	for band: Vector2 in bands:
+		var start := Vector2(98, band.y)
+		var end := Vector2(98, band.x)
+		_perimeter(near, middle, start, end, 30, Detail.NEAR, int(band.y) + 440)
+		_perimeter(middle, middle, start + Vector2(43, 0), end + Vector2(43, 0),
+				33, Detail.MIDDLE, int(band.y) + 764)
 	for cross: Vector2 in [Vector2(-33,-21),Vector2(65,72),Vector2(-126,-117),Vector2(-191,-181),Vector2(-255.4,-247.4)]:
 		_surface(near, "CrossStreetContinuation", Vector4(90,cross.x,196,cross.y), road, -0.060)
+	for lane_x in [Vector2(90, 97), Vector2(129, 140), Vector2(175, 184)]:
+		_surface(near, "EastLongitudinalStreet", Vector4(lane_x.x, -289, lane_x.y, 149), road, -0.061)
 	for x in [215.0, 274.0, 360.0, 475.0]:
-		for z in [-340.0,-260.0,-180.0,-100.0,-20.0,60.0]:
-			_row(far, Vector2(x,z+52), Vector2(x,z), Detail.FAR, int(x)+int(z)+632)
+		for z in [-280.0,-200.0,-120.0,-40.0,40.0]:
+			# Leave the church parcel and its forecourt at X 251 / Z -206.
+			_perimeter(far, far, Vector2(x,z+52), Vector2(x,z), 36,
+					Detail.FAR, int(x)+int(z)+632)
 
 
 func _north(near: Node3D, middle: Node3D, far: Node3D) -> void:
-	for band: Vector2 in [Vector2(-82,-42),Vector2(-35,4),Vector2(15,57),Vector2(65,106)]:
-		_row(near, Vector2(band.y,-299), Vector2(band.x,-299), Detail.NEAR, int(band.y)+94)
-		_row(middle, Vector2(band.y+4,-330), Vector2(band.x,-330), Detail.MIDDLE, int(band.y)+954)
-	for line: Vector2 in [Vector2(-42,-35),Vector2(4,15),Vector2(57,65)]:
-		_surface(near, "NorthernLaneContinuation", Vector4(line.x,-369,line.y,-290), road,-0.06)
-	for z in [-375.0,-420.0,-495.0,-590.0]:
+	var bands := [Vector2(-82,-42),Vector2(-35,4),Vector2(15,57),Vector2(65,106),
+			Vector2(114,155),Vector2(165,207)]
+	for band: Vector2 in bands:
+		var start := Vector2(band.y,-299)
+		var end := Vector2(band.x,-299)
+		_perimeter(near, middle, start, end, 31, Detail.NEAR, int(band.y)+94)
+		_perimeter(middle, middle, start + Vector2(0,-42), end + Vector2(0,-42),
+				30, Detail.MIDDLE, int(band.y)+954)
+	for line: Vector2 in [Vector2(-42,-35),Vector2(4,15),Vector2(57,65),
+			Vector2(106,114),Vector2(155,165)]:
+		_surface(near, "NorthernLaneContinuation", Vector4(line.x,-371,line.y,-290), road,-0.06)
+	for lane_z in [Vector2(-339, -332), Vector2(-380, -373)]:
+		_surface(near, "NorthernCrossStreet", Vector4(-90, lane_z.x, 209, lane_z.y), road, -0.061)
+	for z in [-381.0,-433.0,-495.0,-590.0]:
 		for x in [-78.0,-10.0,58.0,126.0,194.0]:
-			_row(far, Vector2(x+53,z),Vector2(x,z),Detail.FAR, int(x)-int(z))
+			if z == -433.0 and x == -78.0:
+				continue # Skyline steeple at X -46 / Z -430.
+			_perimeter(far, far, Vector2(x+53,z),Vector2(x,z),36,Detail.FAR,int(x)-int(z))
 
 
 func _south(near: Node3D, middle: Node3D, far: Node3D) -> void:
-	for band: Vector2 in [Vector2(-88,-57),Vector2(-48,-8),Vector2(64,88)]:
-		_row(near, Vector2(band.x,101),Vector2(band.y,101),Detail.NEAR, int(band.y)+91)
-	for z in [153.0,189.0,225.0]:
-		for band: Vector2 in [Vector2(-83,-55),Vector2(-48,-12),Vector2(4,43),Vector2(65,99)]:
-			_row(middle,Vector2(band.x,z),Vector2(band.y,z),Detail.MIDDLE,int(z)+int(band.y))
-	for z in [284.0,347.0,428.0,526.0]:
-		for x in [-83.0,-19.0,45.0,109.0]:
-			_row(far,Vector2(x,z),Vector2(x+50,z),Detail.FAR, int(z)+int(x))
+	for band: Vector2 in [Vector2(-88,-57),Vector2(-48,-8),Vector2(75,88)]:
+		_perimeter(near, middle, Vector2(band.x,101),Vector2(band.y,101),
+				35,Detail.NEAR,int(band.y)+91)
+	for z in [151.0,192.0,233.0]:
+		for band: Vector2 in [Vector2(-88,-57),Vector2(-48,-10),Vector2(8,46),Vector2(64,99)]:
+			_perimeter(middle,middle,Vector2(band.x,z),Vector2(band.y,z),
+					30,Detail.MIDDLE,int(z)+int(band.y))
+	for z in [284.0,350.0,428.0,526.0]:
+		for band: Vector2 in [Vector2(-88,-40),Vector2(-31,-8),Vector2(8,56),Vector2(65,111),Vector2(120,170)]:
+			_perimeter(far,far,Vector2(band.x,z),Vector2(band.y,z),
+					37,Detail.FAR,int(z)+int(band.y))
+	for center_z in [188.0, 229.0]:
+		for bank in [Vector2(-92, 47), Vector2(63, 106)]:
+			_surface(middle, "SouthernCrossStreet", Vector4(bank.x, center_z - 3, bank.y, center_z + 3), road, -0.061)
 	_surface(near,"SouthernAxialStreet",Vector4(-4,90,4,272),road,-0.06)
 	_surface(near,"SouthWestLane",Vector4(-56,90,-49,198),road,-0.06)
 	_surface(near,"OuterQuayContinuation",Vector4(68,90,74,149),road,-0.06)
-	# Follow the water past the playable returns around New Holland.
 	for bank: Vector3 in [Vector3(4.88,119.5,59), Vector3(62.12,119.5,59)]:
 		G.box(near,"HollandDistantQuay",Vector3(bank.x,-1.46,bank.y),Vector3(0.26,2.82,bank.z),granite)
 	G.box(near,"HollandFarQuay",Vector3(26.5,-1.46,149),Vector3(43,2.82,0.26),granite)
 	for x in [47.85,62.15]:
 		G.box(middle,"CanalGraniteEdge",Vector3(x,-1.39,207),Vector3(0.32,2.47,122),granite)
+
+
+func _perimeter(front: Node3D, rear: Node3D, start: Vector2, end: Vector2,
+		block_depth: float, detail: Detail, seed_value: int) -> void:
+	var tangent := (end - start).normalized()
+	var inward := Vector2(-tangent.y, tangent.x)
+	var length := start.distance_to(end)
+	var house_depth := 11.35 if detail != Detail.FAR else 13.0
+	var return_depth := minf(9.0, (length - 4.0) * 0.5)
+	var rear_offset := inward * block_depth
+	var rear_detail := Detail.MIDDLE if detail == Detail.NEAR else detail
+	var front_row := _row(front, start, end, detail, seed_value, house_depth)
+	front_row.set_meta(&"block_depth", block_depth)
+	_row(rear, end + rear_offset, start + rear_offset, rear_detail, seed_value + 1, house_depth)
+	if return_depth < 5.0:
+		return
+	# The rows meet at party walls. An opening at the rear leads into the court.
+	_row(rear, start + inward * (block_depth - house_depth), start + inward * house_depth,
+			rear_detail, seed_value + 2, return_depth)
+	_row(rear, end + inward * house_depth, end + inward * (block_depth - house_depth - 3.5),
+			rear_detail, seed_value + 3, return_depth)
 
 
 func _river(city: Node3D, near: Node3D, middle: Node3D, far: Node3D) -> void:
@@ -129,15 +176,27 @@ func _river(city: Node3D, near: Node3D, middle: Node3D, far: Node3D) -> void:
 		var span := a.distance_to(b)
 		wall_tops.append(Transform3D(frame.scaled_local(Vector3(span+1.2,0.36,1.08)), Vector3(center.x,0.11,center.y)))
 		wall_faces.append(Transform3D(frame.scaled_local(Vector3(span+0.5,2.77,0.82)), Vector3(center.x,-1.40,center.y)))
-		if i < 2 or i > 11:
+		if i < 2 or i > 13:
 			continue
 		var inland := Vector2(-direction.y,direction.x)
-		# Both building lines sit on the inland side of the surveyed quay.
-		var corner_setback := Vector2(-16,0) if i in [5,6] else Vector2.ZERO
-		_row(near,a+direction*1.0+inland*9.5+corner_setback,
-				b-direction*1.0+inland*9.5+corner_setback,Detail.NEAR,183+i*81)
-		_row(middle,a+direction*1.0+inland*40,b-direction*1.0+inland*40,Detail.MIDDLE,957+i)
-		_row(far,a+direction*2.0+inland*73,b-direction*2.0+inland*73,Detail.FAR,1889+i)
+		if i == 5:
+			_row(near, a + direction * 3 + inland * 9.5 + Vector2(-12, 0),
+					b - direction * 9 + inland * 9.5 + Vector2(-12, 0), Detail.NEAR, 183+i*81, 8.0)
+			continue
+		if i == 6:
+			continue # The bridge approach opens into a forecourt at the tip.
+		# Subdivide the long bank reaches into blocks with cross lanes to the water.
+		var count := maxi(1, ceili(span / 63.0))
+		for j in count:
+			var inset := 5.0
+			if (j == 0 and i in [7, 8, 9, 10, 11, 12, 13]) or (j == count - 1 and i in [2, 3, 4]):
+				inset = 10.0
+			var frontage_start := a + direction * (span * j / count + inset) + inland * 9.5
+			var frontage_end := a + direction * (span * (j + 1) / count - inset) + inland * 9.5
+			if frontage_start.distance_to(frontage_end) >= 12.0:
+				_perimeter(near, middle, frontage_start, frontage_end, 35.0, Detail.NEAR, 183+i*81+j*4)
+		if i <= 11 and i != 7:
+			_row(far,a+direction*7.0+inland*67,b-direction*7.0+inland*67,Detail.FAR,1889+i)
 	mesh.generate_normals()
 	var bank := G.mesh_part(city,"WestBankGround",Vector3.ZERO,mesh.commit(),pavement)
 	bank.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -145,16 +204,19 @@ func _river(city: Node3D, near: Node3D, middle: Node3D, far: Node3D) -> void:
 	_batch(city,"ContinuousQuayCoping",unit,walk,wall_tops,Detail.MIDDLE)
 
 
-func _row(parent: Node3D, start: Vector2, end: Vector2, detail: Detail, seed_value: int) -> void:
+func _row(parent: Node3D, start: Vector2, end: Vector2, detail: Detail, seed_value: int,
+		fixed_depth := 0.0) -> Node3D:
 	var distance := start.distance_to(end)
-	if distance < 5:
-		return
+	if distance < 3.75:
+		return null
 	var tangent := (end-start).normalized()
 	var frame := _frame(tangent)
 	var section := G.group(parent,"StreetFront",Vector3(start.x,0,start.y))
 	section.basis = frame
 	section.set_meta(&"frontage_length", distance)
-	section.set_meta(&"frontage_depth", 18.0 if detail == Detail.FAR else 12.5)
+	var max_depth := 18.0 if detail == Detail.FAR else 12.5
+	section.set_meta(&"frontage_depth", fixed_depth if fixed_depth > 0.0 else max_depth)
+	var footprints: Array[Dictionary] = []
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	var wall_groups: Array[Array] = []
@@ -175,11 +237,17 @@ func _row(parent: Node3D, start: Vector2, end: Vector2, detail: Detail, seed_val
 		var floors := rng.randi_range(3,5)
 		var h := floors*2.62+0.20
 		var depth := rng.randf_range(9.25,12.5) if detail != Detail.FAR else rng.randf_range(12.0,18.0)
+		if fixed_depth > 0.0:
+			depth = fixed_depth
+		# Reach the ground even on the lower west bank.
+		var base_y := -0.12
 		var x := offset+width*0.5
+		footprints.append({"center": Vector2(x, depth * 0.5),
+				"size": Vector2(width - 0.025, depth), "floors": floors})
 		var color_index := rng.randi_range(0,walls.size()-1)
 		var roof_index := rng.randi_range(0,roofs.size()-1)
 		var roof_rise := rng.randf_range(0.95,2.25)
-		wall_groups[color_index].append(G.box_transform(Vector3(x,h*0.5,depth*0.5),Vector3(width-0.025,h,depth)))
+		wall_groups[color_index].append(G.box_transform(Vector3(x,(h+base_y)*0.5,depth*0.5),Vector3(width-0.025,h-base_y,depth)))
 		roof_groups[roof_index].append(Transform3D(Basis(Vector3.UP,PI*0.5).scaled_local(Vector3(depth+0.07,roof_rise,width+0.04)),
 				Vector3(x,h+roof_rise*0.5,depth*0.5)))
 		if detail != Detail.FAR:
@@ -194,13 +262,33 @@ func _row(parent: Node3D, start: Vector2, end: Vector2, detail: Detail, seed_val
 			for level in range(1,floors):
 				borders.append(G.box_transform(Vector3(x,level*2.62,-0.037),Vector3(width-0.30,0.12,0.12)))
 		offset += width
+	section.set_meta(&"building_footprints", footprints)
 	for group in wall_groups.size():
-		_batch(section,"Stucco",unit,walls[group],_transforms(wall_groups[group]),detail)
+		_queue_row_batch(section,"Stucco",unit,walls[group],_transforms(wall_groups[group]),detail)
 	for group in roof_groups.size():
-		_batch(section,"PitchedRoof",gabled,roofs[group],_transforms(roof_groups[group]),detail)
-	_batch(section,"StoneBands",unit,trim,borders,detail)
-	_batch(section,"Glazing",unit,windows,panes,detail)
-	_batch(section,"Chimneys",unit,flue_brick,flues,detail)
+		_queue_row_batch(section,"PitchedRoof",gabled,roofs[group],_transforms(roof_groups[group]),detail)
+	_queue_row_batch(section,"StoneBands",unit,trim,borders,detail)
+	_queue_row_batch(section,"Glazing",unit,windows,panes,detail)
+	_queue_row_batch(section,"Chimneys",unit,flue_brick,flues,detail)
+	return section
+
+
+func _queue_row_batch(section: Node3D, title: String, mesh: Mesh, material: Material,
+		placements: Array[Transform3D], detail: Detail) -> void:
+	if placements.is_empty():
+		return
+	# Merge only nearby rows at the same detail level so the renderer can cull by neighborhood.
+	var tile := (section.position / 96.0).floor()
+	var anchor := Vector3(tile.x, 0, tile.z) * 96.0
+	var key := [section.get_parent().get_instance_id(), tile, title, material.get_instance_id(), detail]
+	if not row_batches.has(key):
+		var transforms: Array[Transform3D] = []
+		row_batches[key] = {"parent": section.get_parent(), "title": title, "mesh": mesh,
+				"material": material, "transforms": transforms, "detail": detail, "anchor": anchor}
+	var relative := section.transform
+	relative.origin -= anchor
+	for placement in placements:
+		row_batches[key].transforms.append(relative * placement)
 
 
 func _windows(panes: Array[Transform3D], edges: Array[Transform3D], x: float, width: float, floors: int) -> void:
@@ -265,10 +353,11 @@ func _transforms(items: Array) -> Array[Transform3D]:
 
 
 func _batch(parent: Node3D, title: String, shape: Mesh, material: Material,
-		transforms: Array[Transform3D], detail: Detail) -> void:
+		transforms: Array[Transform3D], detail: Detail, at := Transform3D.IDENTITY) -> void:
 	if transforms.is_empty():
 		return
 	G.batch(parent,title,shape,material,transforms)
 	var instances := parent.get_child(parent.get_child_count()-1) as MultiMeshInstance3D
-	if detail != Detail.NEAR or title == "Glazing" or parent.global_position.x < -150:
+	instances.transform = at
+	if detail != Detail.NEAR or title == "Glazing" or instances.global_position.x < -150:
 		instances.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF

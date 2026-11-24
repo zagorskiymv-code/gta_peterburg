@@ -199,8 +199,6 @@ func _build_frontages() -> void:
 	facades.add_building(buildings, "SquareCivicHall", Vector2(23.5, -63.5), 0, Vector2(23, 13), 3, Facades.Kind.CIVIC, Color("#d9caa6"))
 	facades.add_building(buildings, "WestCrossStreetShops", Vector2(-30.8, -38.5), 0, Vector2(17, 9), 2, Facades.Kind.SHOP, Color("#e3c790"))
 	facades.add_building(buildings, "WestCrossStreetTenement", Vector2(-52, -38.5), 0, Vector2(20, 10), 4, Facades.Kind.TENEMENT, Color("#c7cbb8"))
-	facades.add_building(buildings, "LaneHouse", Vector2(-38, -8), 90, Vector2(16, 9), 3, Facades.Kind.TENEMENT, Color("#d0b2ac"))
-	facades.add_building(buildings, "LaneShop", Vector2(-21.5, 13), -90, Vector2(10, 6), 2, Facades.Kind.SHOP, Color("#d7c9a4"))
 	facades.add_building(buildings, "SouthMerchantHouse", Vector2(14, 34), -90, Vector2(17, 11), 3, Facades.Kind.MERCHANT, Color("#c1cbbb"))
 	facades.add_building(buildings, "SouthTenement", Vector2(-13, 41), 90, Vector2(17, 10), 4, Facades.Kind.TENEMENT, Color("#dbc098"))
 	facades.add_building(buildings, "SouthCornerHouse", Vector2(14, 54), -90, Vector2(16, 11), 4, Facades.Kind.TENEMENT, Color("#d5b4a7"))
@@ -315,7 +313,7 @@ func _place_district_props() -> void:
 		Vector3(9, 0.02, -54), Vector3(37, 0.02, -54), Vector3(9, 0.02, -35), Vector3(37, 0.02, -35),
 		Vector3(46, 0.02, -34), Vector3(46, 0.02, -20), Vector3(64, 0.02, -34), Vector3(64, 0.02, -20),
 		Vector3(6, 0.065, 38), Vector3(-6, 0.065, 62),
-		Vector3(-34, 0, -20), Vector3(-33, 0, 15)
+		Vector3(-33.1, 0.052, -20.85), Vector3(-33, 0.044, 15)
 	]:
 		_place_prop(props, LAMP, point, 0)
 	for point: Vector3 in [

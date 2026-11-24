@@ -49,8 +49,6 @@ func _build_houses(parent: Node3D) -> void:
 	var lots := [
 		["WesternCorner", -65, -9, 90, 17, 8, 4, Facades.Kind.TENEMENT, "#b9bbb0"],
 		["Grocer", -65, 11, 90, 15, 8, 2, Facades.Kind.SHOP, "#d8b580"],
-		["WestRental", -48, 4, -90, 18, 8, 5, Facades.Kind.TENEMENT, "#cbb298"],
-		["WestMerchant", -47, 19, -90, 9, 9, 3, Facades.Kind.MERCHANT, "#c1c3a1"],
 		["SouthwestCourt", -47, 49, -90, 23, 10, 4, Facades.Kind.TENEMENT, "#c8aa9d"],
 		["SouthernRow", -25, 56, 0, 18, 10, 3, Facades.Kind.MERCHANT, "#d3c3a5"],
 		["SouthernPrintworks", -41, 79, 180, 24, 10, 3, Facades.Kind.WAREHOUSE, "#a98370"],

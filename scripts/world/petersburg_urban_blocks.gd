@@ -32,6 +32,60 @@ func build(parent: Node3D, paving: Material, stone: Material) -> void:
 	_garden(Geometry.group(blocks, "PalaceSidePromenade", Vector3(-49, 0, -272)), Vector2(24, 15), stone)
 	_garden(Geometry.group(blocks, "OuterQuayGarden", Vector3(80, 0, 79)), Vector2(15, 14), stone)
 	_frontages(blocks)
+	_rebuild_west_blocks(blocks, paving, stone)
+	_southwest_corner(blocks, stone)
+
+
+func _rebuild_west_blocks(parent: Node3D, paving: Material, stone: Material) -> void:
+	var facades := Facades.new()
+	var arches := Courtyards.new()
+	var west := Geometry.group(parent, "WesternResidentialBlock")
+	# Rectangles use west/north/east/south bounds. Shared edges are party walls.
+	_lot(facades, west, "CrossStreetHouse", Vector4(-52.6, -20, -33.4, -12), 180, 4, "#c8b89d")
+	_lot(facades, west, "WestStreetTenement", Vector4(-52.6, -12, -45.35, 2), -90, 5, "#bdad98")
+	_lot(facades, west, "WestStreetMerchant", Vector4(-52.6, 2, -45.35, 17), -90, 3, "#c9ad91", true)
+	_lot(facades, west, "LaneTenement", Vector4(-40.65, -12, -33.4, 5), 90, 4, "#c8aea1")
+	_lot(facades, west, "LaneLodgings", Vector4(-40.65, 5, -33.4, 17), 90, 3, "#b3b69e")
+	_lot(facades, west, "SouthWestReturn", Vector4(-52.6, 17, -46.19, 24), 0, 4, "#b9b49b")
+	_lot(facades, west, "SouthEastReturn", Vector4(-39.81, 17, -33.4, 24), 0, 4, "#c5b29b")
+	arches.add_passage(west, "LinkStreetArch", Vector2(-43, 20.5), 0, 4, 7)
+	_slab(west, "WestCourt", Vector2(-43, 6.5), Vector2(4.7, 35), 0.024, paving)
+	_slab(west, "WestBlockFootway", Vector2(-53.3, 2.5), Vector2(1.4, 45), 0.044, stone)
+	_slab(west, "LaneWestFootway", Vector2(-32.7, 2.5), Vector2(1.4, 45), 0.044, stone)
+	_slab(west, "LinkStreetFootway", Vector2(-43, 24.5), Vector2(19.2, 1), 0.040, stone)
+
+	var main := Geometry.group(parent, "MainStreetWesternBlock")
+	_lot(facades, main, "CrossingCorner", Vector4(-24.9, -20, -7, -12), 180, 4, "#cdbda2", true)
+	_lot(facades, main, "NevskyDraper", Vector4(-14, -12, -7, 4), 90, 5, "#bfad9c", true)
+	_lot(facades, main, "NevskyHaberdasher", Vector4(-14, 4, -7, 18), 90, 4, "#c7aa99", true)
+	_lot(facades, main, "LaneShop", Vector4(-24.9, -12, -18.4, 6.31), -90, 4, "#d0bc9b", true)
+	arches.add_passage(main, "BaranovCourtArch", Vector2(-21.65, 9.5), -90, 4, 6.5)
+	_lot(facades, main, "LaneReturn", Vector4(-24.9, 12.69, -18.4, 18), -90, 4, "#b5baa5")
+	_lot(facades, main, "SouthCourtFront", Vector4(-24.9, 18, -7, 23.5), 0, 4, "#cfb69d")
+	_slab(main, "NevskyWellCourt", Vector2(-16.2, 3), Vector2(4.4, 30), 0.024, paving)
+	_slab(main, "LaneEastFootway", Vector2(-25.45, 2.5), Vector2(1.1, 45), 0.044, stone)
+	_slab(main, "NevskyWestFootway", Vector2(-5.5, 22.5), Vector2(3, 5), 0.065, stone)
+	_slab(main, "SouthBlockFootway", Vector2(-15.95, 24.25), Vector2(17.9, 1.5), 0.044, stone)
+
+
+func _lot(facades: RefCounted, parent: Node3D, title: String, bounds: Vector4,
+		yaw: float, floors: int, tint: String, retail := false) -> void:
+	var dimensions := Vector2(bounds.z - bounds.x, bounds.w - bounds.y)
+	if absf(yaw) == 90.0:
+		dimensions = Vector2(dimensions.y, dimensions.x)
+	var kind := Facades.Kind.SHOP if retail else Facades.Kind.TENEMENT
+	facades.add_building(parent, title, Vector2((bounds.x + bounds.z) / 2, (bounds.y + bounds.w) / 2),
+			yaw, dimensions, floors, kind, Color(tint))
+
+
+func _southwest_corner(parent: Node3D, stone: Material) -> void:
+	var corner := Geometry.group(parent, "SouthwesternCornerGap")
+	Facades.new().add_polygon_building(corner, "ChamferedMerchantHouse", PackedVector2Array([
+		Vector2(-77, 18.5), Vector2(-61.3, 18.5), Vector2(-61.3, 29.1),
+		Vector2(-64, 31.8), Vector2(-77, 31.8),
+	]), 10.9, 3, Color("#c9ac91"), Color("#555c57"), 2.2, [1, 2, 3])
+	_slab(corner, "MerchantFootway", Vector2(-60.65, 24.15), Vector2(1.3, 11.3), 0.045, stone)
+	_slab(corner, "GardenApproach", Vector2(-70, 32.65), Vector2(14, 1.7), 0.045, stone)
 
 
 func _streets(parent: Node3D, paving: Material, stone: Material) -> void:
