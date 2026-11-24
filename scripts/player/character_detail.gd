@@ -4,7 +4,6 @@ const Materials = preload("res://scripts/player/character_materials.gd")
 
 const Head = preload("res://scripts/player/character_head.gd")
 
-static var _oval: SphereMesh
 static var _meshes: Dictionary = {}
 static var _faces: Dictionary = {}
 
@@ -379,11 +378,28 @@ static func _shoe(ankle: Node3D, leather: Material) -> void:
 		Vector4(-.108,.042,.040,.023), Vector4(-.104,.049,.044,.023),
 		Vector4(-.093,.050,.047,.023)]), sole.material_override)
 	heel.visibility_range_end = 18.0
-	var vamp := _part(ankle, "VampCreases", _cached_batch("boot creases", [
-		[Vector3(0,-.030,-.102),Vector3(.056,.0035,.006),Vector3(-.34,0,.05)],
-		[Vector3(0,-.039,-.122),Vector3(.065,.0030,.006),Vector3(-.34,0,-.04)]]),
+	if not _meshes.has("laces"):
+		_meshes["laces"] = _laces()
+	var vamp := _part(ankle, "VampCreases", _meshes["laces"],
 		Materials.get_material(Color("#423328"), Materials.Finish.LEATHER))
 	vamp.visibility_range_end = 12.0
+
+
+static func _laces() -> ArrayMesh:
+	var lace := SurfaceTool.new()
+	lace.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for row in 3:
+		var z := -.075-row*.0115
+		for section in 8:
+			var u := section/4.0-1.0
+			var v := (section+1)/4.0-1.0
+			var a := Vector3(.030*u,-.019-row*.006-.011*u*u,z)
+			var b := Vector3(.030*v,-.019-row*.006-.011*v*v,z)
+			var thickness := Vector3(0,.001,.0028)
+			_cloth_quad(lace,a,b,b+thickness,a+thickness,false)
+	lace.generate_normals()
+	lace.index()
+	return lace.commit()
 
 
 static func _part(parent: Node3D, name: String, mesh: Mesh, material: Material) -> MeshInstance3D:
@@ -394,38 +410,6 @@ static func _part(parent: Node3D, name: String, mesh: Mesh, material: Material) 
 	part.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(part)
 	return part
-
-
-static func _sphere() -> SphereMesh:
-	if _oval == null:
-		_oval = SphereMesh.new()
-		_oval.radius = .5
-		_oval.height = 1.0
-		_oval.radial_segments = 10
-		_oval.rings = 5
-	return _oval
-
-
-static func _cached_batch(key: String, shapes: Array) -> ArrayMesh:
-	if not _meshes.has(key):
-		_meshes[key] = _batch(shapes)
-	return _meshes[key]
-
-
-static func _batch(shapes: Array) -> ArrayMesh:
-	var mesh := ArrayMesh.new()
-	_append_batch(mesh, shapes, null)
-	return mesh
-
-
-static func _append_batch(mesh: ArrayMesh, shapes: Array, material: Material) -> void:
-	var surface := SurfaceTool.new()
-	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-	surface.set_material(material)
-	for shape: Array in shapes:
-		var basis := Basis.from_euler(shape[2]).scaled_local(shape[1])
-		surface.append_from(_sphere(), 0, Transform3D(basis, shape[0]))
-	surface.commit(mesh)
 
 
 static func _coat_tails() -> ArrayMesh:

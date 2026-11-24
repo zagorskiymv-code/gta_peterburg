@@ -171,21 +171,35 @@ static func eyes(profile: int, eye_material: Material, lid_material: Material, b
 	for side: float in [-1.0,1.0]:
 		var center := Vector2(side*(.037 + SHAPES[profile].w*.0012),.176+side*.00065)
 		for step in 16:
-			var u := -0.999 + 1.998*step/16.0
-			var v := -0.999 + 1.998*(step+1)/16.0
-			for band in 4:
-				_eye_quad(eye, center, u, v, -1.0 + band*.5, -.5 + band*.5, profile, false, blink)
+			var u := -0.982 + 1.964*step/16.0
+			var v := -0.982 + 1.964*(step+1)/16.0
+			if blink < 1.0:
+				for band in 4:
+					_eye_quad(eye, center, u, v, -1.0 + band*.5, -.5 + band*.5, profile, false, blink)
 			_eye_quad(lids, center, u, v, 1.0, 2.0, profile, true, blink)
 			_eye_quad(lids, center, u, v, -2.0, -1.0, profile, true, blink)
-	eye.set_material(eye_material)
-	eye.generate_normals()
-	eye.index()
-	eye.commit(mesh)
-	lids.set_material(lid_material)
-	lids.generate_normals()
-	lids.index()
-	lids.commit(mesh)
+	if blink < 1.0:
+		_commit_eye_surface(mesh,eye,eye_material)
+	_commit_eye_surface(mesh,lids,lid_material)
 	return mesh
+
+
+static func _commit_eye_surface(mesh: ArrayMesh, tool: SurfaceTool, material: Material) -> void:
+	tool.generate_normals()
+	tool.index()
+	var arrays := tool.commit_to_arrays()
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var source: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	var indices := PackedInt32Array()
+	for i in range(0,source.size(),3):
+		var a := source[i]
+		var b := source[i+1]
+		var c := source[i+2]
+		if (vertices[b]-vertices[a]).cross(vertices[c]-vertices[a]).length_squared() > 1e-20:
+			indices.append_array(PackedInt32Array([a,b,c]))
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+	mesh.surface_set_material(mesh.get_surface_count()-1,material)
 
 
 static func _eye_quad(surface: SurfaceTool, center: Vector2, u: float, v: float,
@@ -208,7 +222,6 @@ static func _eye_quad(surface: SurfaceTool, center: Vector2, u: float, v: float,
 		surface.set_uv(Vector2(.5+x/.024,.5+y/.024))
 		if not outer:
 			at.y = lerpf(at.y, center.y - .0014 + signf(center.x)*x*.05, blink * .995)
-		surface.set_uv2(Vector2.ZERO)
 		surface.add_vertex(at)
 
 
