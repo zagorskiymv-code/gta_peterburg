@@ -27,7 +27,7 @@ var _cloth: Material
 var _accent: Material
 var _leather := Materials.get_material(Color("#322821"), Materials.Finish.LEATHER)
 var _brass := Materials.get_material(Color("#af8750"), Materials.Finish.METAL)
-var _linen := Materials.get_material(Color("#c7bda5"))
+var _linen := Materials.get_material(Color("#c7bda5"), Materials.Finish.COTTON)
 
 
 func dress(visual: Visual, outfit: Outfit, hat_override: int, coat: Color, vest: Color, trousers: Color) -> float:
@@ -40,7 +40,7 @@ func dress(visual: Visual, outfit: Outfit, hat_override: int, coat: Color, vest:
 	var upper := visual.upper_body
 	var replacements := {
 		upper.get_node("CoatTorso").material_override: _cloth,
-		upper.get_node("LeftLapel").material_override: Materials.get_material(coat_tint.lightened(0.095)),
+		upper.get_node("LeftLapel").material_override: Materials.get_material(coat_tint.lightened(0.035)),
 		upper.get_node("Waistcoat").material_override: _accent,
 		visual.legs[0].get_node("Thigh").material_override: Materials.get_material(trousers_tint),
 	}
@@ -110,12 +110,15 @@ func _headwear(head: Node3D, style: Hat, outfit: Outfit) -> void:
 	var brim: MeshInstance3D = head.get_node("BowlerBrim")
 	var crown: MeshInstance3D = head.get_node("BowlerCrown")
 	var band: MeshInstance3D = head.get_node("BowlerBand")
+	if style in [Hat.CAP, Hat.FORAGE_CAP, Hat.LADIES_HAT, Hat.BONNET]:
+		brim.mesh = brim.get_meta(&"solid_brim")
 	match style:
 		Hat.TOP_HAT:
 			brim.scale = Vector3(0.27, 0.025, 0.29)
 			_cylinder(head, "SilkTopHat", Vector3(0, 0.345, 0.003), 0.202, 0.101, 0.091, Materials.get_material(Color("#2c2b2c")))
 			crown.hide()
-			band.scale = Vector3(0.197, 0.032, 0.204)
+			band.scale = Vector3(0.184, 0.030, 0.184)
+			band.position = Vector3(0, 0.260, 0.003)
 		Hat.CAP, Hat.FORAGE_CAP:
 			var service := style == Hat.FORAGE_CAP
 			crown.hide()
@@ -154,7 +157,10 @@ func _dress(visual: Visual, outfit: Outfit) -> void:
 			"WaistcoatButton0", "WaistcoatButton1", "WaistcoatButton2", "WaistcoatButton3"])
 	visual.head.get_node("Moustache").hide()
 
-	upper.get_node("CoatTorso").scale.x = 0.365
+	var bodice: MeshInstance3D = upper.get_node("CoatTorso")
+	bodice.mesh = bodice.get_meta(&"closed_cut")
+	bodice.scale.x = 0.365
+	upper.get_node("CoatShoulders").hide()
 	upper.get_node("CoatShoulders").scale.x = 0.365
 	for arm in visual.arms:
 		arm.position.x *= 0.92
@@ -183,6 +189,9 @@ func _dress(visual: Visual, outfit: Outfit) -> void:
 
 func _uniform(visual: Visual, sentry: bool) -> void:
 	var upper := visual.upper_body
+	var tunic: MeshInstance3D = upper.get_node("CoatTorso")
+	tunic.mesh = tunic.get_meta(&"closed_cut")
+	upper.get_node("CoatShoulders").hide()
 	_hide_parts(upper, ["LeftLapel", "RightLapel", "LeftCollar", "RightCollar", "Cravat", "Waistcoat",
 			"ShirtFront", "WaistcoatButton0", "WaistcoatButton1", "WaistcoatButton2", "WaistcoatButton3"])
 	_cylinder(upper, "StandCollar", Vector3(0, 0.505, 0), 0.091, 0.069, 0.081, _accent, 0.9)
@@ -194,6 +203,7 @@ func _uniform(visual: Visual, sentry: bool) -> void:
 		G.box(upper, "StrapButton", Vector3(sign_x * 0.116, 0.556, -0.01), Vector3(0.017, 0.011, 0.018), _brass)
 	for leg in visual.legs:
 		var boot: MeshInstance3D = leg.get_node("Knee/BootShaft")
+		boot.show()
 		boot.position.y = -0.25
 		boot.scale = Vector3(0.157, 0.347, 0.153)
 		var trouser_leg: MeshInstance3D = leg.get_node("Knee/TrouserLeg")
