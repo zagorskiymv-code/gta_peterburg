@@ -3,9 +3,9 @@ extends MeshInstance3D
 
 const EAVE := Vector2(21.95, 19.45)
 const INNER := Vector2(9.0, 8.6)
-const EAVE_Y := 20.51
-const INNER_Y := 21.32
-const RIDGE_Y := 23.04
+const EAVE_Y := 20.57
+const INNER_Y := 20.99
+const RIDGE_Y := 23.42
 
 @export var roof_material: Material
 @export var seam_material: Material
@@ -28,22 +28,27 @@ func _ready() -> void:
 		var inner_right := Vector3(inner_width, INNER_Y, inner_end)
 		_panel(copper, seams, basis, outer_left, outer_right, inner_right, inner_left, 28)
 		# Raised transverse volumes leave the lower hipped copper roof visible at the corners.
-		var arm := 10.25 if face % 2 == 0 else 8.4
-		var front := end - 1.27
-		var back := inner_end - 1.7
-		var near_ridge := Vector3(0, RIDGE_Y - 0.66, front)
+		var arm := 8.85 if face % 2 == 0 else 7.55
+		var front := end - 1.46
+		var back := inner_end - 0.8
+		var near_ridge := Vector3(0, RIDGE_Y - 0.84, front)
 		var far_ridge := Vector3(0, RIDGE_Y, back)
-		var left_front := Vector3(-arm, 21.31, front)
-		var right_front := Vector3(arm, 21.31, front)
-		var left_back := Vector3(-arm + 0.68, 21.97, back)
-		var right_back := Vector3(arm - 0.68, 21.97, back)
+		var left_front := Vector3(-arm, 20.78, front)
+		var right_front := Vector3(arm, 20.78, front)
+		var left_back := Vector3(-arm + 0.68, 21.52, back)
+		var right_back := Vector3(arm - 0.68, 21.52, back)
 		_panel(copper, seams, basis, left_front, near_ridge, far_ridge, left_back, 12)
 		_panel(copper, seams, basis, near_ridge, right_front, right_back, far_ridge, 12)
 		_quad(seams, basis, near_ridge + Vector3(-0.09, 0.045, 0),
 				near_ridge + Vector3(0.09, 0.045, 0), far_ridge + Vector3(0.09, 0.045, 0),
 				far_ridge + Vector3(-0.09, 0.045, 0))
+		for edge: Vector3 in [left_front, right_front]:
+			var step := Vector3.RIGHT * 0.078
+			var lower := edge + Vector3.UP * 0.04
+			var upper := near_ridge + Vector3.UP * 0.04
+			_quad(seams, basis, lower - step, upper - step, upper + step, lower + step)
 		_triangle(masonry, basis, left_front, right_front, near_ridge)
-		_quad(masonry, basis, left_front - Vector3.UP, right_front - Vector3.UP, right_front, left_front)
+		_quad(masonry, basis, left_front - Vector3.UP * 0.50, right_front - Vector3.UP * 0.50, right_front, left_front)
 		_quad(masonry, basis, right_front - Vector3.UP, right_back - Vector3.UP, right_back, right_front)
 		_quad(masonry, basis, left_back - Vector3.UP, left_front - Vector3.UP, left_front, left_back)
 

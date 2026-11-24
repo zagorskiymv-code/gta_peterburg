@@ -22,7 +22,7 @@ void fragment() {
 	vec2 faces = smoothstep(vec2(0.0), width + vec2(0.004, 0.008), edge);
 	float seam = (1.0 - faces.x * faces.y) * (1.0 - smoothstep(0.033, 0.14, max(width.x, width.y)));
 	float variation = block_tone(floor(layout)) - 0.5;
-	vec3 stone_tone = vec3(0.445, 0.375, 0.294);
-	ALBEDO = stone_tone * (1.0 + variation * 0.085 - seam * 0.11);
+	vec3 stone_tone = vec3(0.351, 0.335, 0.309);
+	ALBEDO = stone_tone * (1.0 + variation * 0.061 - seam * 0.075);
 	ROUGHNESS = 0.86;
 }

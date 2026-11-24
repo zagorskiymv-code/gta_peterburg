@@ -9,8 +9,8 @@ size = Vector3(29.8, 0.76, 6.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 resource_name = "step"
-albedo_color = Color(0.65882, 0.56471, 0.50588, 1)
-roughness = 0.83
+albedo_color = Color(0.59608, 0.54118, 0.52941, 1)
+roughness = 0.88
 metallic = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3"]
@@ -39,8 +39,8 @@ size = Vector3(29.5, 0.46, 6.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11"]
 resource_name = "trim"
-albedo_color = Color(0.77255, 0.70588, 0.59608, 1)
-roughness = 0.81
+albedo_color = Color(0.70196, 0.67843, 0.63137, 1)
+roughness = 0.85
 metallic = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_12"]
@@ -48,8 +48,8 @@ size = Vector3(29.75, 0.57, 6.74)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13"]
 resource_name = "frieze"
-albedo_color = Color(0.57255, 0.4902, 0.42353, 1)
-roughness = 0.83
+albedo_color = Color(0.55686, 0.51373, 0.47843, 1)
+roughness = 0.86
 metallic = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_14"]
@@ -72,8 +72,8 @@ size = Vector3(15.97249, 0.2, 7.15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_19"]
 resource_name = "copper"
-albedo_color = Color(0.33725, 0.44706, 0.37647, 1)
-roughness = 0.73
+albedo_color = Color(0.30588, 0.40784, 0.33333, 1)
+roughness = 0.76
 metallic = 0.21
 
 [sub_resource type="BoxMesh" id="BoxMesh_20"]

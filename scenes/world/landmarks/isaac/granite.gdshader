@@ -16,8 +16,8 @@ void fragment() {
 	vec3 grain_cell = stone_position * 47.0;
 	float detail = 1.0 - smoothstep(0.38, 1.12, length(fwidth(grain_cell)));
 	float speckle = (grain(floor(grain_cell)) - 0.5) * detail;
-	vec3 granite_tone = vec3(0.254, 0.105, 0.072);
+	vec3 granite_tone = vec3(0.203, 0.116, 0.095);
 	ALBEDO = granite_tone * (1.0 + 0.15 * speckle);
-	ROUGHNESS = 0.49 + 0.12 * speckle;
-	SPECULAR = 0.32;
+	ROUGHNESS = 0.44 + 0.12 * speckle;
+	SPECULAR = 0.35;
 }
