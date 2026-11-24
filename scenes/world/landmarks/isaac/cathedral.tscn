@@ -1,0 +1,3377 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/column.tscn" id="column"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/portico.tscn" id="portico"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/landmarks/isaac/belfry.tscn" id="belfry"]
+
+[ext_resource type="Script" path="res://scenes/world/landmarks/isaac/dome.gd" id="dome"]
+
+[ext_resource type="Script" path="res://scenes/world/landmarks/isaac/roof.gd" id="roof"]
+
+[ext_resource type="Script" path="res://scripts/world/landmarks/isaac_colonnade.gd" id="lookout"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(43.8, 0.84, 38.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+resource_name = "step"
+albedo_color = Color(0.65882, 0.56471, 0.50588, 1)
+roughness = 0.83
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(43, 18.72, 38)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+resource_name = "stone"
+albedo_color = Color(0.69412, 0.64314, 0.57647, 1)
+roughness = 0.86
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5"]
+size = Vector3(43.52, 0.38, 38.52)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+resource_name = "trim"
+albedo_color = Color(0.80784, 0.75686, 0.66667, 1)
+roughness = 0.81
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_7"]
+size = Vector3(43.26, 0.2, 38.26)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8"]
+size = Vector3(43.41, 0.22, 38.41)
+
+[sub_resource type="BoxMesh" id="BoxMesh_9"]
+size = Vector3(43.44, 0.98, 38.44)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10"]
+resource_name = "frieze"
+albedo_color = Color(0.57255, 0.4902, 0.42353, 1)
+roughness = 0.83
+metallic = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_11"]
+size = Vector3(44.05, 0.4, 39.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_12"]
+size = Vector3(44.16, 0.98, 39.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_13"]
+size = Vector3(44.52, 0.27, 39.52)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_14"]
+size = Vector3(43.8, 19.2, 38.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_15"]
+size = Vector3(0.38, 0.23, 0.22)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16"]
+size = Vector3(2.12, 0.85, 0.19)
+
+[sub_resource type="BoxMesh" id="BoxMesh_17"]
+size = Vector3(1.55, 0.85, 0.19)
+
+[sub_resource type="BoxMesh" id="BoxMesh_18"]
+size = Vector3(1.69, 4.64, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_19"]
+resource_name = "shadow"
+albedo_color = Color(0.1451, 0.15686, 0.14902, 1)
+roughness = 0.9
+metallic = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_20"]
+top_radius = 0.84
+bottom_radius = 0.84
+height = 0.07
+radial_segments = 20
+rings = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_21"]
+size = Vector3(0.23, 4.65, 0.34)
+
+[sub_resource type="BoxMesh" id="BoxMesh_22"]
+size = Vector3(2.24, 0.28, 0.51)
+
+[sub_resource type="BoxMesh" id="BoxMesh_23"]
+size = Vector3(2.23, 0.32, 0.49)
+
+[sub_resource type="BoxMesh" id="BoxMesh_24"]
+size = Vector3(0.34, 0.32, 0.28)
+
+[sub_resource type="BoxMesh" id="BoxMesh_25"]
+size = Vector3(0.068, 4.4, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26"]
+resource_name = "door"
+albedo_color = Color(0.26667, 0.24314, 0.19216, 1)
+roughness = 0.73
+metallic = 0.13
+
+[sub_resource type="BoxMesh" id="BoxMesh_27"]
+size = Vector3(4.25, 7.44, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_28"]
+size = Vector3(1.72, 6.86, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_29"]
+size = Vector3(1.26, 1.58, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30"]
+resource_name = "bronze"
+albedo_color = Color(0.25098, 0.35294, 0.31373, 1)
+roughness = 0.53
+metallic = 0.33
+
+[sub_resource type="BoxMesh" id="BoxMesh_31"]
+size = Vector3(0.35, 7.46, 0.58)
+
+[sub_resource type="BoxMesh" id="BoxMesh_32"]
+size = Vector3(4.86, 0.45, 0.68)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33"]
+resource_name = "copper"
+albedo_color = Color(0.34118, 0.51765, 0.46667, 1)
+roughness = 0.63
+metallic = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34"]
+resource_name = "seam"
+albedo_color = Color(0.24314, 0.38431, 0.34902, 1)
+roughness = 0.66
+metallic = 0.24
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_35"]
+top_radius = 12.57
+bottom_radius = 12.57
+height = 0.5
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_36"]
+top_radius = 11.95
+bottom_radius = 12.52
+height = 1.51
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_37"]
+top_radius = 12.6
+bottom_radius = 12.6
+height = 0.23
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_38"]
+top_radius = 9.32
+bottom_radius = 9.67
+height = 1.03
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_39"]
+top_radius = 6.74
+bottom_radius = 6.74
+height = 8.1
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_40"]
+top_radius = 9.21
+bottom_radius = 9.19
+height = 0.58
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_41"]
+top_radius = 9.17
+bottom_radius = 9.17
+height = 0.34
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_42"]
+top_radius = 9.47
+bottom_radius = 9.47
+height = 0.39
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_43"]
+top_radius = 8.47
+bottom_radius = 8.47
+height = 2.12
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_44"]
+top_radius = 8.69
+bottom_radius = 8.69
+height = 0.38
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_45"]
+top_radius = 8.56
+bottom_radius = 8.63
+height = 0.21
+radial_segments = 96
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46"]
+resource_name = "gold"
+albedo_color = Color(0.85098, 0.65098, 0.25882, 1)
+roughness = 0.4
+metallic = 0.65
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_47"]
+top_radius = 1.38
+bottom_radius = 1.38
+height = 0.35
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_48"]
+top_radius = 0.73
+bottom_radius = 0.73
+height = 1.58
+radial_segments = 96
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_49"]
+top_radius = 1.18
+bottom_radius = 1.18
+height = 0.28
+radial_segments = 96
+rings = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_50"]
+size = Vector3(0.91, 4.9, 0.14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_51"]
+size = Vector3(0.77, 1.32, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_52"]
+size = Vector3(0.27, 1.82, 0.16)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_53"]
+top_radius = 0.106
+bottom_radius = 0.118
+height = 1.49
+radial_segments = 12
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54"]
+resource_name = "rib"
+albedo_color = Color(0.94118, 0.74902, 0.37647, 1)
+roughness = 0.39
+metallic = 0.67
+
+[sub_resource type="SphereMesh" id="SphereMesh_55"]
+radius = 1.11
+height = 1.03
+radial_segments = 64
+rings = 24
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_56"]
+top_radius = 0.2325
+bottom_radius = 0.2325
+height = 0.14
+radial_segments = 12
+rings = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_57"]
+size = Vector3(0.1395, 1.55, 0.1395)
+
+[sub_resource type="BoxMesh" id="BoxMesh_58"]
+size = Vector3(0.992, 0.1395, 0.1395)
+
+[node name="SaintIsaacsCathedral" type="Node3D"]
+
+[node name="GranitePlinth" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.42, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+position = Vector3(0, 10.19, 0)
+mesh = SubResource("BoxMesh_3")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="BaseMoulding" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.25, 0)
+mesh = SubResource("BoxMesh_5")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LowerStringcourse" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.18, 0)
+mesh = SubResource("BoxMesh_7")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="UpperStringcourse" type="MeshInstance3D" parent="."]
+position = Vector3(0, 16.97, 0)
+mesh = SubResource("BoxMesh_8")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="AtticFrieze" type="MeshInstance3D" parent="."]
+position = Vector3(0, 18.72, 0)
+mesh = SubResource("BoxMesh_9")
+material_override = SubResource("StandardMaterial3D_10")
+
+[node name="MainCornice" type="MeshInstance3D" parent="."]
+position = Vector3(0, 19.38, 0)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="AtticParapet" type="MeshInstance3D" parent="."]
+position = Vector3(0, 20.08, 0)
+mesh = SubResource("BoxMesh_12")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="ParapetCap" type="MeshInstance3D" parent="."]
+position = Vector3(0, 20.65, 0)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="MasonryCollision" type="StaticBody3D" parent="."]
+position = Vector3(0, 9.6, 0)
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape3D" parent="MasonryCollision"]
+shape = SubResource("BoxShape3D_14")
+
+[node name="Facade0" type="Node3D" parent="."]
+rotation = Vector3(0, 0, 0)
+
+[node name="Portico" parent="Facade0" instance=ExtResource("portico")]
+position = Vector3(0, 0, 18.8)
+scale = Vector3(1, 1, 1)
+
+[node name="CorniceDentil0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-20.27143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.04286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.81429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil3" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-16.58571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil4" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-15.35714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil5" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-14.12857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil6" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-12.9, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil7" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-11.67143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil8" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-10.44286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil9" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-9.21429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil10" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-7.98571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil11" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-6.75714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil12" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-5.52857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil13" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-4.3, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil14" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-3.07143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil15" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-1.84286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil16" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-0.61429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil17" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0.61429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil18" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(1.84286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil19" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(3.07143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil20" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(4.3, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil21" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(5.52857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil22" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(6.75714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil23" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(7.98571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil24" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(9.21429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil25" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(10.44286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil26" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(11.67143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil27" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(12.9, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil28" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(14.12857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil29" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(15.35714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil30" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(16.58571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil31" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.81429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil32" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.04286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil33" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(20.27143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 2, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 2, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 2.96, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 2.96, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 3.92, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 3.92, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_3" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 4.88, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_3" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 4.88, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_4" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 5.84, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_4" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 5.84, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_5" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 6.8, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_5" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 6.8, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_6" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 7.76, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_6" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 7.76, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_7" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 8.72, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_7" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 8.72, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_8" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 9.68, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_8" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 9.68, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_9" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 10.64, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_9" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 10.64, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_10" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 11.6, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_10" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 11.6, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_11" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 12.56, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_11" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 12.56, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_12" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 13.52, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_12" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 13.52, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_13" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 14.48, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_13" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 14.48, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_14" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 15.44, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_14" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 15.44, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_15" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 16.4, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_15" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 16.4, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_16" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-19.1, 17.36, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_16" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(19.1, 17.36, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowRecess0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.4, 7.85, 19.01)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.4, 10.17, 19.05)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb0_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-18.36, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb0_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-16.44, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.4, 5.4, 19.2)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.4, 11.23, 19.2)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-16.44966, 10.31757, 19.15)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-16.56429, 10.6325, 19.15)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-16.77971, 10.88923, 19.15)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_3" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.06995, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_4" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.4, 11.115, 19.15)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_5" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.73005, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_6" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-18.02029, 10.88923, 19.15)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_7" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-18.23571, 10.6325, 19.15)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_8" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-18.35034, 10.31757, 19.15)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-17.4, 7.94, 19.075)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="WindowRecess1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.4, 7.85, 19.01)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.4, 10.17, 19.05)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb1_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(16.44, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb1_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(18.36, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.4, 5.4, 19.2)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.4, 11.23, 19.2)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(18.35034, 10.31757, 19.15)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(18.23571, 10.6325, 19.15)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(18.02029, 10.88923, 19.15)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_3" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.73005, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_4" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.4, 11.115, 19.15)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_5" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.06995, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_6" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(16.77971, 10.88923, 19.15)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_7" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(16.56429, 10.6325, 19.15)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_8" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(16.44966, 10.31757, 19.15)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(17.4, 7.94, 19.075)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="Portal" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0, 4.48, 19.04)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="DoorLeaf0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-0.91, 4.27, 19.12)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel0_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-0.91, 2.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-0.91, 4.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-0.91, 6.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(-2.19, 4.48, 19.23)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLeaf1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0.91, 4.27, 19.12)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel1_0" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0.91, 2.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0.91, 4.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_2" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0.91, 6.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb1" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(2.19, 4.48, 19.23)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Facade0"]
+position = Vector3(0, 8.37, 19.26)
+mesh = SubResource("BoxMesh_32")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Facade1" type="Node3D" parent="."]
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="Portico" parent="Facade1" instance=ExtResource("portico")]
+position = Vector3(0, 0, 21.3)
+scale = Vector3(0.81, 1, 1)
+
+[node name="CorniceDentil0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-17.91429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.82857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.74286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil3" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-14.65714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil4" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-13.57143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil5" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-12.48571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil6" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-11.4, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil7" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-10.31429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil8" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-9.22857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil9" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-8.14286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil10" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-7.05714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil11" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-5.97143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil12" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-4.88571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil13" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-3.8, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil14" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-2.71429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil15" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-1.62857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil16" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-0.54286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil17" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0.54286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil18" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(1.62857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil19" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(2.71429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil20" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(3.8, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil21" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(4.88571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil22" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(5.97143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil23" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(7.05714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil24" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(8.14286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil25" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(9.22857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil26" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(10.31429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil27" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(11.4, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil28" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(12.48571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil29" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(13.57143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil30" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(14.65714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil31" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.74286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil32" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.82857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil33" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(17.91429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 2, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 2, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 2.96, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 2.96, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 3.92, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 3.92, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_3" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 4.88, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_3" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 4.88, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_4" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 5.84, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_4" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 5.84, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_5" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 6.8, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_5" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 6.8, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_6" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 7.76, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_6" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 7.76, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_7" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 8.72, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_7" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 8.72, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_8" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 9.68, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_8" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 9.68, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_9" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 10.64, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_9" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 10.64, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_10" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 11.6, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_10" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 11.6, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_11" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 12.56, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_11" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 12.56, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_12" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 13.52, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_12" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 13.52, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_13" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 14.48, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_13" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 14.48, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_14" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 15.44, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_14" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 15.44, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_15" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 16.4, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_15" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 16.4, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_16" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.6, 17.36, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_16" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.6, 17.36, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowRecess0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.2, 7.85, 21.51)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.2, 10.17, 21.55)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb0_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.16, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb0_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-14.24, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.2, 5.4, 21.7)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.2, 11.23, 21.7)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-14.24966, 10.31757, 21.65)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-14.36429, 10.6325, 21.65)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-14.57971, 10.88923, 21.65)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_3" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-14.86995, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_4" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.2, 11.115, 21.65)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_5" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.53005, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_6" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.82029, 10.88923, 21.65)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_7" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.03571, 10.6325, 21.65)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_8" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-16.15034, 10.31757, 21.65)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-15.2, 7.94, 21.575)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="WindowRecess1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.2, 7.85, 21.51)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.2, 10.17, 21.55)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb1_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(14.24, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb1_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.16, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.2, 5.4, 21.7)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.2, 11.23, 21.7)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.15034, 10.31757, 21.65)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(16.03571, 10.6325, 21.65)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.82029, 10.88923, 21.65)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_3" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.53005, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_4" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.2, 11.115, 21.65)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_5" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(14.86995, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_6" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(14.57971, 10.88923, 21.65)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_7" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(14.36429, 10.6325, 21.65)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_8" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(14.24966, 10.31757, 21.65)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(15.2, 7.94, 21.575)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="Portal" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0, 4.48, 21.54)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="DoorLeaf0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-0.91, 4.27, 21.62)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel0_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-0.91, 2.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-0.91, 4.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-0.91, 6.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(-2.19, 4.48, 21.73)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLeaf1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0.91, 4.27, 21.62)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel1_0" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0.91, 2.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0.91, 4.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_2" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0.91, 6.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb1" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(2.19, 4.48, 21.73)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Facade1"]
+position = Vector3(0, 8.37, 21.76)
+mesh = SubResource("BoxMesh_32")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Facade2" type="Node3D" parent="."]
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Portico" parent="Facade2" instance=ExtResource("portico")]
+position = Vector3(0, 0, 18.8)
+scale = Vector3(1, 1, 1)
+
+[node name="CorniceDentil0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-20.27143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.04286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.81429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil3" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-16.58571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil4" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-15.35714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil5" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-14.12857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil6" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-12.9, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil7" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-11.67143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil8" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-10.44286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil9" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-9.21429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil10" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-7.98571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil11" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-6.75714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil12" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-5.52857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil13" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-4.3, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil14" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-3.07143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil15" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-1.84286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil16" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-0.61429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil17" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0.61429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil18" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(1.84286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil19" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(3.07143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil20" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(4.3, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil21" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(5.52857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil22" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(6.75714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil23" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(7.98571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil24" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(9.21429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil25" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(10.44286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil26" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(11.67143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil27" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(12.9, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil28" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(14.12857, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil29" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(15.35714, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil30" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(16.58571, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil31" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.81429, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil32" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.04286, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil33" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(20.27143, 19.09, 19.245)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 2, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 2, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 2.96, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 2.96, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 3.92, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 3.92, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_3" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 4.88, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_3" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 4.88, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_4" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 5.84, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_4" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 5.84, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_5" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 6.8, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_5" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 6.8, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_6" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 7.76, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_6" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 7.76, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_7" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 8.72, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_7" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 8.72, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_8" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 9.68, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_8" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 9.68, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_9" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 10.64, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_9" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 10.64, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_10" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 11.6, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_10" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 11.6, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_11" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 12.56, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_11" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 12.56, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_12" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 13.52, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_12" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 13.52, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_13" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 14.48, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_13" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 14.48, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_14" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 15.44, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_14" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 15.44, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_15" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 16.4, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_15" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 16.4, 19.045)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_16" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-19.1, 17.36, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_16" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(19.1, 17.36, 19.045)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowRecess0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.4, 7.85, 19.01)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.4, 10.17, 19.05)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb0_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-18.36, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb0_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-16.44, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.4, 5.4, 19.2)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.4, 11.23, 19.2)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-16.44966, 10.31757, 19.15)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-16.56429, 10.6325, 19.15)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-16.77971, 10.88923, 19.15)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_3" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.06995, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_4" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.4, 11.115, 19.15)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_5" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.73005, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_6" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-18.02029, 10.88923, 19.15)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_7" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-18.23571, 10.6325, 19.15)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_8" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-18.35034, 10.31757, 19.15)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-17.4, 7.94, 19.075)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="WindowRecess1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.4, 7.85, 19.01)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.4, 10.17, 19.05)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb1_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(16.44, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb1_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(18.36, 7.86, 19.14)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.4, 5.4, 19.2)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.4, 11.23, 19.2)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(18.35034, 10.31757, 19.15)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(18.23571, 10.6325, 19.15)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(18.02029, 10.88923, 19.15)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_3" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.73005, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_4" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.4, 11.115, 19.15)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_5" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.06995, 11.0568, 19.15)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_6" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(16.77971, 10.88923, 19.15)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_7" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(16.56429, 10.6325, 19.15)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_8" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(16.44966, 10.31757, 19.15)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(17.4, 7.94, 19.075)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="Portal" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0, 4.48, 19.04)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="DoorLeaf0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-0.91, 4.27, 19.12)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel0_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-0.91, 2.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-0.91, 4.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-0.91, 6.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(-2.19, 4.48, 19.23)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLeaf1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0.91, 4.27, 19.12)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel1_0" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0.91, 2.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0.91, 4.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_2" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0.91, 6.1, 19.22)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb1" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(2.19, 4.48, 19.23)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Facade2"]
+position = Vector3(0, 8.37, 19.26)
+mesh = SubResource("BoxMesh_32")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Facade3" type="Node3D" parent="."]
+rotation = Vector3(0, 4.71239, 0)
+
+[node name="Portico" parent="Facade3" instance=ExtResource("portico")]
+position = Vector3(0, 0, 21.3)
+scale = Vector3(0.81, 1, 1)
+
+[node name="CorniceDentil0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-17.91429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.82857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.74286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil3" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-14.65714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil4" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-13.57143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil5" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-12.48571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil6" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-11.4, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil7" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-10.31429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil8" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-9.22857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil9" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-8.14286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil10" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-7.05714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil11" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-5.97143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil12" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-4.88571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil13" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-3.8, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil14" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-2.71429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil15" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-1.62857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil16" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-0.54286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil17" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0.54286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil18" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(1.62857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil19" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(2.71429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil20" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(3.8, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil21" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(4.88571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil22" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(5.97143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil23" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(7.05714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil24" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(8.14286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil25" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(9.22857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil26" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(10.31429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil27" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(11.4, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil28" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(12.48571, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil29" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(13.57143, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil30" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(14.65714, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil31" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.74286, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil32" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.82857, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CorniceDentil33" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(17.91429, 19.09, 21.745)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 2, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 2, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 2.96, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 2.96, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 3.92, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 3.92, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_3" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 4.88, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_3" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 4.88, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_4" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 5.84, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_4" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 5.84, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_5" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 6.8, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_5" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 6.8, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_6" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 7.76, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_6" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 7.76, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_7" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 8.72, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_7" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 8.72, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_8" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 9.68, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_8" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 9.68, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_9" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 10.64, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_9" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 10.64, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_10" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 11.6, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_10" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 11.6, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_11" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 12.56, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_11" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 12.56, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_12" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 13.52, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_12" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 13.52, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_13" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 14.48, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_13" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 14.48, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_14" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 15.44, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_14" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 15.44, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_15" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 16.4, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_15" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 16.4, 21.545)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin0_16" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.6, 17.36, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Quoin1_16" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.6, 17.36, 21.545)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowRecess0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.2, 7.85, 21.51)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.2, 10.17, 21.55)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb0_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.16, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb0_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-14.24, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.2, 5.4, 21.7)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.2, 11.23, 21.7)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-14.24966, 10.31757, 21.65)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-14.36429, 10.6325, 21.65)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-14.57971, 10.88923, 21.65)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_3" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-14.86995, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_4" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.2, 11.115, 21.65)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_5" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.53005, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_6" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.82029, 10.88923, 21.65)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_7" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.03571, 10.6325, 21.65)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir0_8" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-16.15034, 10.31757, 21.65)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-15.2, 7.94, 21.575)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="WindowRecess1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.2, 7.85, 21.51)
+mesh = SubResource("BoxMesh_18")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowArch1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.2, 10.17, 21.55)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CylinderMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="WindowJamb1_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(14.24, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowJamb1_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.16, 7.86, 21.64)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowSill1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.2, 5.4, 21.7)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowHood1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.2, 11.23, 21.7)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.15034, 10.31757, 21.65)
+rotation = Vector3(0, 0, 0.17453)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(16.03571, 10.6325, 21.65)
+rotation = Vector3(0, 0, 0.5236)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.82029, 10.88923, 21.65)
+rotation = Vector3(0, 0, 0.87266)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_3" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.53005, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.22173)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_4" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.2, 11.115, 21.65)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_5" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(14.86995, 11.0568, 21.65)
+rotation = Vector3(0, 0, 1.91986)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_6" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(14.57971, 10.88923, 21.65)
+rotation = Vector3(0, 0, 2.26893)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_7" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(14.36429, 10.6325, 21.65)
+rotation = Vector3(0, 0, 2.61799)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowVoussoir1_8" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(14.24966, 10.31757, 21.65)
+rotation = Vector3(0, 0, 2.96706)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="WindowMullion1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(15.2, 7.94, 21.575)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="Portal" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0, 4.48, 21.54)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="DoorLeaf0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-0.91, 4.27, 21.62)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel0_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-0.91, 2.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-0.91, 4.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel0_2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-0.91, 6.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(-2.19, 4.48, 21.73)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLeaf1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0.91, 4.27, 21.62)
+mesh = SubResource("BoxMesh_28")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="DoorPanel1_0" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0.91, 2.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0.91, 4.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorPanel1_2" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0.91, 6.1, 21.72)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="DoorJamb1" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(2.19, 4.48, 21.73)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DoorLintel" type="MeshInstance3D" parent="Facade3"]
+position = Vector3(0, 8.37, 21.76)
+mesh = SubResource("BoxMesh_32")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="CopperRoof" type="MeshInstance3D" parent="."]
+script = ExtResource("roof")
+roof_material = SubResource("StandardMaterial3D_33")
+seam_material = SubResource("StandardMaterial3D_34")
+
+[node name="Belfry0" parent="." instance=ExtResource("belfry")]
+position = Vector3(-17.1, 20.36, -14.8)
+
+[node name="Belfry1" parent="." instance=ExtResource("belfry")]
+position = Vector3(-17.1, 20.36, 14.8)
+
+[node name="Belfry2" parent="." instance=ExtResource("belfry")]
+position = Vector3(17.1, 20.36, -14.8)
+
+[node name="Belfry3" parent="." instance=ExtResource("belfry")]
+position = Vector3(17.1, 20.36, 14.8)
+
+[node name="PodiumFoot" type="MeshInstance3D" parent="."]
+position = Vector3(0, 22.14, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Podium" type="MeshInstance3D" parent="."]
+position = Vector3(0, 23, 0)
+mesh = SubResource("CylinderMesh_36")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="WalkwayCornice" type="MeshInstance3D" parent="."]
+position = Vector3(0, 23.94, 0)
+mesh = SubResource("CylinderMesh_37")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="ColonnadePlinth" type="MeshInstance3D" parent="."]
+position = Vector3(0, 24.55, 0)
+mesh = SubResource("CylinderMesh_38")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="RecessedDrum" type="MeshInstance3D" parent="."]
+position = Vector3(0, 28.65, 0)
+mesh = SubResource("CylinderMesh_39")
+material_override = SubResource("StandardMaterial3D_10")
+
+[node name="RingArchitrave" type="MeshInstance3D" parent="."]
+position = Vector3(0, 32.82, 0)
+mesh = SubResource("CylinderMesh_40")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="RingFrieze" type="MeshInstance3D" parent="."]
+position = Vector3(0, 33.23, 0)
+mesh = SubResource("CylinderMesh_41")
+material_override = SubResource("StandardMaterial3D_10")
+
+[node name="RingCornice" type="MeshInstance3D" parent="."]
+position = Vector3(0, 33.59, 0)
+mesh = SubResource("CylinderMesh_42")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="UpperDrum" type="MeshInstance3D" parent="."]
+position = Vector3(0, 34.82, 0)
+mesh = SubResource("CylinderMesh_43")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="DomeBed" type="MeshInstance3D" parent="."]
+position = Vector3(0, 35.98, 0)
+mesh = SubResource("CylinderMesh_44")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="GiltEaves" type="MeshInstance3D" parent="."]
+position = Vector3(0, 36.23, 0)
+mesh = SubResource("CylinderMesh_45")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="LanternFoot" type="MeshInstance3D" parent="."]
+position = Vector3(0, 43.53, 0)
+mesh = SubResource("CylinderMesh_47")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternCore" type="MeshInstance3D" parent="."]
+position = Vector3(0, 44.42, 0)
+mesh = SubResource("CylinderMesh_48")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="LanternCornice" type="MeshInstance3D" parent="."]
+position = Vector3(0, 45.28, 0)
+mesh = SubResource("CylinderMesh_49")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn0" parent="." instance=ExtResource("column")]
+position = Vector3(0, 24.98, 8.36)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess0" type="MeshInstance3D" parent="."]
+position = Vector3(0.87844, 28.7, 6.67242)
+rotation = Vector3(0, 0.1309, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow0" type="MeshInstance3D" parent="."]
+position = Vector3(1.1049, 34.82, 8.39258)
+rotation = Vector3(0, 0.1309, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier0" type="MeshInstance3D" parent="."]
+position = Vector3(0, 34.82, 8.47)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn1" parent="." instance=ExtResource("column")]
+position = Vector3(2.16373, 24.98, 8.07514)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess1" type="MeshInstance3D" parent="."]
+position = Vector3(2.57546, 28.7, 6.21771)
+rotation = Vector3(0, 0.3927, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow1" type="MeshInstance3D" parent="."]
+position = Vector3(3.23942, 34.82, 7.82064)
+rotation = Vector3(0, 0.3927, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier1" type="MeshInstance3D" parent="."]
+position = Vector3(2.1922, 34.82, 8.18139)
+rotation = Vector3(0, 0.2618, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn2" parent="." instance=ExtResource("column")]
+position = Vector3(4.18, 24.98, 7.23997)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess2" type="MeshInstance3D" parent="."]
+position = Vector3(4.09696, 28.7, 5.33927)
+rotation = Vector3(0, 0.6545, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow2" type="MeshInstance3D" parent="."]
+position = Vector3(5.15317, 34.82, 6.71574)
+rotation = Vector3(0, 0.6545, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier2" type="MeshInstance3D" parent="."]
+position = Vector3(4.235, 34.82, 7.33524)
+rotation = Vector3(0, 0.5236, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn3" parent="." instance=ExtResource("column")]
+position = Vector3(5.91141, 24.98, 5.91141)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess3" type="MeshInstance3D" parent="."]
+position = Vector3(5.33927, 28.7, 4.09696)
+rotation = Vector3(0, 0.9163, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow3" type="MeshInstance3D" parent="."]
+position = Vector3(6.71574, 34.82, 5.15317)
+rotation = Vector3(0, 0.9163, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier3" type="MeshInstance3D" parent="."]
+position = Vector3(5.98919, 34.82, 5.98919)
+rotation = Vector3(0, 0.7854, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn4" parent="." instance=ExtResource("column")]
+position = Vector3(7.23997, 24.98, 4.18)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess4" type="MeshInstance3D" parent="."]
+position = Vector3(6.21771, 28.7, 2.57546)
+rotation = Vector3(0, 1.1781, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow4" type="MeshInstance3D" parent="."]
+position = Vector3(7.82064, 34.82, 3.23942)
+rotation = Vector3(0, 1.1781, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier4" type="MeshInstance3D" parent="."]
+position = Vector3(7.33524, 34.82, 4.235)
+rotation = Vector3(0, 1.0472, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn5" parent="." instance=ExtResource("column")]
+position = Vector3(8.07514, 24.98, 2.16373)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess5" type="MeshInstance3D" parent="."]
+position = Vector3(6.67242, 28.7, 0.87844)
+rotation = Vector3(0, 1.4399, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow5" type="MeshInstance3D" parent="."]
+position = Vector3(8.39258, 34.82, 1.1049)
+rotation = Vector3(0, 1.4399, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier5" type="MeshInstance3D" parent="."]
+position = Vector3(8.18139, 34.82, 2.1922)
+rotation = Vector3(0, 1.309, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn6" parent="." instance=ExtResource("column")]
+position = Vector3(8.36, 24.98, 0)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess6" type="MeshInstance3D" parent="."]
+position = Vector3(6.67242, 28.7, -0.87844)
+rotation = Vector3(0, 1.7017, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow6" type="MeshInstance3D" parent="."]
+position = Vector3(8.39258, 34.82, -1.1049)
+rotation = Vector3(0, 1.7017, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier6" type="MeshInstance3D" parent="."]
+position = Vector3(8.47, 34.82, 0)
+rotation = Vector3(0, 1.5708, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn7" parent="." instance=ExtResource("column")]
+position = Vector3(8.07514, 24.98, -2.16373)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess7" type="MeshInstance3D" parent="."]
+position = Vector3(6.21771, 28.7, -2.57546)
+rotation = Vector3(0, 1.9635, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow7" type="MeshInstance3D" parent="."]
+position = Vector3(7.82064, 34.82, -3.23942)
+rotation = Vector3(0, 1.9635, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier7" type="MeshInstance3D" parent="."]
+position = Vector3(8.18139, 34.82, -2.1922)
+rotation = Vector3(0, 1.8326, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn8" parent="." instance=ExtResource("column")]
+position = Vector3(7.23997, 24.98, -4.18)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess8" type="MeshInstance3D" parent="."]
+position = Vector3(5.33927, 28.7, -4.09696)
+rotation = Vector3(0, 2.22529, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow8" type="MeshInstance3D" parent="."]
+position = Vector3(6.71574, 34.82, -5.15317)
+rotation = Vector3(0, 2.22529, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier8" type="MeshInstance3D" parent="."]
+position = Vector3(7.33524, 34.82, -4.235)
+rotation = Vector3(0, 2.0944, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn9" parent="." instance=ExtResource("column")]
+position = Vector3(5.91141, 24.98, -5.91141)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess9" type="MeshInstance3D" parent="."]
+position = Vector3(4.09696, 28.7, -5.33927)
+rotation = Vector3(0, 2.48709, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow9" type="MeshInstance3D" parent="."]
+position = Vector3(5.15317, 34.82, -6.71574)
+rotation = Vector3(0, 2.48709, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier9" type="MeshInstance3D" parent="."]
+position = Vector3(5.98919, 34.82, -5.98919)
+rotation = Vector3(0, 2.35619, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn10" parent="." instance=ExtResource("column")]
+position = Vector3(4.18, 24.98, -7.23997)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess10" type="MeshInstance3D" parent="."]
+position = Vector3(2.57546, 28.7, -6.21771)
+rotation = Vector3(0, 2.74889, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow10" type="MeshInstance3D" parent="."]
+position = Vector3(3.23942, 34.82, -7.82064)
+rotation = Vector3(0, 2.74889, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier10" type="MeshInstance3D" parent="."]
+position = Vector3(4.235, 34.82, -7.33524)
+rotation = Vector3(0, 2.61799, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn11" parent="." instance=ExtResource("column")]
+position = Vector3(2.16373, 24.98, -8.07514)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess11" type="MeshInstance3D" parent="."]
+position = Vector3(0.87844, 28.7, -6.67242)
+rotation = Vector3(0, 3.01069, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow11" type="MeshInstance3D" parent="."]
+position = Vector3(1.1049, 34.82, -8.39258)
+rotation = Vector3(0, 3.01069, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier11" type="MeshInstance3D" parent="."]
+position = Vector3(2.1922, 34.82, -8.18139)
+rotation = Vector3(0, 2.87979, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn12" parent="." instance=ExtResource("column")]
+position = Vector3(0, 24.98, -8.36)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess12" type="MeshInstance3D" parent="."]
+position = Vector3(-0.87844, 28.7, -6.67242)
+rotation = Vector3(0, 3.27249, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow12" type="MeshInstance3D" parent="."]
+position = Vector3(-1.1049, 34.82, -8.39258)
+rotation = Vector3(0, 3.27249, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier12" type="MeshInstance3D" parent="."]
+position = Vector3(0, 34.82, -8.47)
+rotation = Vector3(0, 3.14159, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn13" parent="." instance=ExtResource("column")]
+position = Vector3(-2.16373, 24.98, -8.07514)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess13" type="MeshInstance3D" parent="."]
+position = Vector3(-2.57546, 28.7, -6.21771)
+rotation = Vector3(0, 3.53429, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow13" type="MeshInstance3D" parent="."]
+position = Vector3(-3.23942, 34.82, -7.82064)
+rotation = Vector3(0, 3.53429, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier13" type="MeshInstance3D" parent="."]
+position = Vector3(-2.1922, 34.82, -8.18139)
+rotation = Vector3(0, 3.40339, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn14" parent="." instance=ExtResource("column")]
+position = Vector3(-4.18, 24.98, -7.23997)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess14" type="MeshInstance3D" parent="."]
+position = Vector3(-4.09696, 28.7, -5.33927)
+rotation = Vector3(0, 3.79609, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow14" type="MeshInstance3D" parent="."]
+position = Vector3(-5.15317, 34.82, -6.71574)
+rotation = Vector3(0, 3.79609, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier14" type="MeshInstance3D" parent="."]
+position = Vector3(-4.235, 34.82, -7.33524)
+rotation = Vector3(0, 3.66519, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn15" parent="." instance=ExtResource("column")]
+position = Vector3(-5.91141, 24.98, -5.91141)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess15" type="MeshInstance3D" parent="."]
+position = Vector3(-5.33927, 28.7, -4.09696)
+rotation = Vector3(0, 4.05789, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow15" type="MeshInstance3D" parent="."]
+position = Vector3(-6.71574, 34.82, -5.15317)
+rotation = Vector3(0, 4.05789, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier15" type="MeshInstance3D" parent="."]
+position = Vector3(-5.98919, 34.82, -5.98919)
+rotation = Vector3(0, 3.92699, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn16" parent="." instance=ExtResource("column")]
+position = Vector3(-7.23997, 24.98, -4.18)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess16" type="MeshInstance3D" parent="."]
+position = Vector3(-6.21771, 28.7, -2.57546)
+rotation = Vector3(0, 4.31969, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow16" type="MeshInstance3D" parent="."]
+position = Vector3(-7.82064, 34.82, -3.23942)
+rotation = Vector3(0, 4.31969, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier16" type="MeshInstance3D" parent="."]
+position = Vector3(-7.33524, 34.82, -4.235)
+rotation = Vector3(0, 4.18879, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn17" parent="." instance=ExtResource("column")]
+position = Vector3(-8.07514, 24.98, -2.16373)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess17" type="MeshInstance3D" parent="."]
+position = Vector3(-6.67242, 28.7, -0.87844)
+rotation = Vector3(0, 4.58149, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow17" type="MeshInstance3D" parent="."]
+position = Vector3(-8.39258, 34.82, -1.1049)
+rotation = Vector3(0, 4.58149, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier17" type="MeshInstance3D" parent="."]
+position = Vector3(-8.18139, 34.82, -2.1922)
+rotation = Vector3(0, 4.45059, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn18" parent="." instance=ExtResource("column")]
+position = Vector3(-8.36, 24.98, -0)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess18" type="MeshInstance3D" parent="."]
+position = Vector3(-6.67242, 28.7, 0.87844)
+rotation = Vector3(0, 4.84329, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow18" type="MeshInstance3D" parent="."]
+position = Vector3(-8.39258, 34.82, 1.1049)
+rotation = Vector3(0, 4.84329, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier18" type="MeshInstance3D" parent="."]
+position = Vector3(-8.47, 34.82, -0)
+rotation = Vector3(0, 4.71239, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn19" parent="." instance=ExtResource("column")]
+position = Vector3(-8.07514, 24.98, 2.16373)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess19" type="MeshInstance3D" parent="."]
+position = Vector3(-6.21771, 28.7, 2.57546)
+rotation = Vector3(0, 5.10509, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow19" type="MeshInstance3D" parent="."]
+position = Vector3(-7.82064, 34.82, 3.23942)
+rotation = Vector3(0, 5.10509, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier19" type="MeshInstance3D" parent="."]
+position = Vector3(-8.18139, 34.82, 2.1922)
+rotation = Vector3(0, 4.97419, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn20" parent="." instance=ExtResource("column")]
+position = Vector3(-7.23997, 24.98, 4.18)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess20" type="MeshInstance3D" parent="."]
+position = Vector3(-5.33927, 28.7, 4.09696)
+rotation = Vector3(0, 5.36689, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow20" type="MeshInstance3D" parent="."]
+position = Vector3(-6.71574, 34.82, 5.15317)
+rotation = Vector3(0, 5.36689, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier20" type="MeshInstance3D" parent="."]
+position = Vector3(-7.33524, 34.82, 4.235)
+rotation = Vector3(0, 5.23599, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn21" parent="." instance=ExtResource("column")]
+position = Vector3(-5.91141, 24.98, 5.91141)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess21" type="MeshInstance3D" parent="."]
+position = Vector3(-4.09696, 28.7, 5.33927)
+rotation = Vector3(0, 5.62869, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow21" type="MeshInstance3D" parent="."]
+position = Vector3(-5.15317, 34.82, 6.71574)
+rotation = Vector3(0, 5.62869, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier21" type="MeshInstance3D" parent="."]
+position = Vector3(-5.98919, 34.82, 5.98919)
+rotation = Vector3(0, 5.49779, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn22" parent="." instance=ExtResource("column")]
+position = Vector3(-4.18, 24.98, 7.23997)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess22" type="MeshInstance3D" parent="."]
+position = Vector3(-2.57546, 28.7, 6.21771)
+rotation = Vector3(0, 5.89049, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow22" type="MeshInstance3D" parent="."]
+position = Vector3(-3.23942, 34.82, 7.82064)
+rotation = Vector3(0, 5.89049, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier22" type="MeshInstance3D" parent="."]
+position = Vector3(-4.235, 34.82, 7.33524)
+rotation = Vector3(0, 5.75959, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DrumColumn23" parent="." instance=ExtResource("column")]
+position = Vector3(-2.16373, 24.98, 8.07514)
+scale = Vector3(0.82, 0.72, 0.82)
+
+[node name="DrumRecess23" type="MeshInstance3D" parent="."]
+position = Vector3(-0.87844, 28.7, 6.67242)
+rotation = Vector3(0, 6.15229, 0)
+mesh = SubResource("BoxMesh_50")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticWindow23" type="MeshInstance3D" parent="."]
+position = Vector3(-1.1049, 34.82, 8.39258)
+rotation = Vector3(0, 6.15229, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="AtticPier23" type="MeshInstance3D" parent="."]
+position = Vector3(-2.1922, 34.82, 8.18139)
+rotation = Vector3(0, 6.02139, 0)
+mesh = SubResource("BoxMesh_52")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn0" type="MeshInstance3D" parent="."]
+position = Vector3(0, 44.43, 0.98)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn1" type="MeshInstance3D" parent="."]
+position = Vector3(0.69296, 44.43, 0.69296)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn2" type="MeshInstance3D" parent="."]
+position = Vector3(0.98, 44.43, 0)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn3" type="MeshInstance3D" parent="."]
+position = Vector3(0.69296, 44.43, -0.69296)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn4" type="MeshInstance3D" parent="."]
+position = Vector3(0, 44.43, -0.98)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn5" type="MeshInstance3D" parent="."]
+position = Vector3(-0.69296, 44.43, -0.69296)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn6" type="MeshInstance3D" parent="."]
+position = Vector3(-0.98, 44.43, -0)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="LanternColumn7" type="MeshInstance3D" parent="."]
+position = Vector3(-0.69296, 44.43, 0.69296)
+mesh = SubResource("CylinderMesh_53")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="GildedDome" type="MeshInstance3D" parent="."]
+position = Vector3(0, 36.31, 0)
+script = ExtResource("dome")
+shell_material = SubResource("StandardMaterial3D_46")
+rib_material = SubResource("StandardMaterial3D_54")
+
+[node name="LanternCupola" type="MeshInstance3D" parent="."]
+position = Vector3(0, 45.42, 0)
+mesh = SubResource("SphereMesh_55")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="MainCrossFinial" type="MeshInstance3D" parent="."]
+position = Vector3(0, 46.34, 0)
+mesh = SubResource("CylinderMesh_56")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="MainCrossStem" type="MeshInstance3D" parent="."]
+position = Vector3(0, 47.185, 0)
+mesh = SubResource("BoxMesh_57")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="MainCrossArms" type="MeshInstance3D" parent="."]
+position = Vector3(0, 47.433, 0)
+mesh = SubResource("BoxMesh_58")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="ColonnadeAccess" type="Node3D" parent="."]
+script = ExtResource("lookout")

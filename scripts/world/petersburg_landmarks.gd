@@ -3,7 +3,7 @@ extends RefCounted
 
 const Geometry = preload("res://scripts/world/district_geometry.gd")
 const Headquarters = preload("res://scripts/world/landmarks/general_staff.gd")
-const Colonnade = preload("res://scripts/world/landmarks/isaac_colonnade.gd")
+const CATHEDRAL := preload("res://scenes/world/landmarks/isaac/cathedral.tscn")
 const Sculpture = preload("res://scripts/world/landmark_sculpture.gd")
 const Facades = preload("res://scripts/world/district_facades.gd")
 const LAMP := preload("res://scenes/world/props/gas_lamp.tscn")
@@ -12,7 +12,6 @@ const BENCH := preload("res://scenes/world/props/wooden_bench.tscn")
 var marble := Geometry.solid_material(Color("#a4a197"))
 var carved_stone := Geometry.solid_material(Color("#bdb6a4"))
 var granite := Geometry.solid_material(Color("#68423c"))
-var gold := Geometry.solid_material(Color("#cba149"))
 var bronze := Geometry.solid_material(Color("#4b5946"))
 var shadow := Geometry.solid_material(Color("#302924"))
 var grass := Geometry.solid_material(Color("#686f48"))
@@ -26,11 +25,9 @@ func build(parent: Node3D, paving: Material, flagstone: Material, ground: Materi
 	_tile(parent, "PalaceApproach", Vector2(19, -186), Vector2(55, 5.5), paving, 0.01)
 
 	_isaac_garden(Geometry.group(parent, "SaintIsaacGarden", Vector3(-49, 0, -93)), flagstone)
-	var cathedral := Geometry.group(parent, "SaintIsaacsCathedral", Vector3(-49, 0, -136))
-	_cathedral(cathedral)
-	var lookout := Colonnade.new()
-	lookout.name = "ColonnadeAccess"
-	cathedral.add_child(lookout)
+	var cathedral := CATHEDRAL.instantiate() as Node3D
+	cathedral.position = Vector3(-49, 0, -136)
+	parent.add_child(cathedral)
 	_tile(parent, "IsaacStoneParvis", Vector2(-49.5, -136), Vector2(79, 71), flagstone, 0.018)
 	_tile(parent, "IsaacNorthWalk", Vector2(-49, -174.5), Vector2(15, 7), flagstone, 0.017)
 	_tile(parent, "AdmiraltyForecourt", Vector2(-49, -184.5), Vector2(25, 13), flagstone, 0.017)
@@ -75,89 +72,6 @@ func _isaac_garden(garden: Node3D, stone: Material) -> void:
 	for side in [-1, 1]:
 		Geometry.box(monument, "BronzeRelief", Vector3(side * 1.14, 1.26, 0),
 				Vector3(0.13, 0.65, 0.96), bronze)
-
-
-func _cathedral(church: Node3D) -> void:
-	Geometry.box(church, "GranitePlinth", Vector3(0, 0.52, 0), Vector3(46, 1.05, 43), granite, true)
-	Geometry.box(church, "MarbleBody", Vector3(0, 10.2, 0), Vector3(43, 19.2, 38), marble, true)
-	Geometry.box(church, "AtticCornice", Vector3(0, 20.0, 0), Vector3(44.5, 1.28, 39.5), marble)
-	Geometry.box(church, "CentralAttic", Vector3(0, 21.5, 0), Vector3(28, 3.0, 26), marble)
-	for yaw in [0, 90, 180, 270]:
-		_portico(church, yaw)
-
-	_cylinder(church, "DrumBase", Vector3(0, 23.2, 0), 9.5, 10, 1.6, marble, 32)
-	_cylinder(church, "MainDrum", Vector3(0, 28.1, 0), 6.8, 6.8, 9.5, marble, 32)
-	_cylinder(church, "DrumCornice", Vector3(0, 32.55, 0), 9.1, 8.85, 1.0, marble, 32)
-	var colonnade: Array[Transform3D] = []
-	for index in 24:
-		var angle := TAU * index / 24.0
-		colonnade.append(Transform3D(Basis.IDENTITY, Vector3(cos(angle) * 8.0, 28.0, sin(angle) * 8.0)))
-	_batch_columns(church, colonnade, 7.75, 0.48, granite)
-	_dome(church, "GildedDome", Vector3(0, 32.9, 0), 7.2, 10.8, 32)
-	_cylinder(church, "Lantern", Vector3(0, 43.95, 0), 1.48, 1.7, 2.0, marble, 12)
-	_dome(church, "LanternCupola", Vector3(0, 44.95, 0), 1.5, 1.55, 16)
-	_cross(church, Vector3(0, 48.0, 0), 2.8, gold)
-
-	for x in [-16.5, 16.5]:
-		for z in [-13.9, 13.9]:
-			var base := Vector3(x, 0, z)
-			Geometry.box(church, "Belfry", base + Vector3.UP * 23, Vector3(6.8, 6.0, 6.8), marble)
-			for side in [-1, 1]:
-				Geometry.box(church, "BelfryOpening", base + Vector3(0, 23.5, side * 3.42), Vector3(2.13, 3.36, 0.12), shadow)
-				Geometry.box(church, "BelfryOpening", base + Vector3(side * 3.42, 23.5, 0), Vector3(0.12, 3.36, 2.13), shadow)
-			_cylinder(church, "BelfryCornice", base + Vector3.UP * 26.3, 3.35, 3.55, 0.65, marble, 16)
-			_dome(church, "BelfryCupola", base + Vector3.UP * 26.62, 2.78, 3.25, 16)
-			_cross(church, base + Vector3.UP * 30.65, 1.48, gold)
-
-
-func _portico(church: Node3D, yaw: int) -> void:
-	var front := Geometry.group(church, "Portico")
-	front.rotation_degrees.y = yaw
-	var at := 19.0 if yaw % 180 == 0 else 21.5
-	var width := 29.0 if yaw % 180 == 0 else 23.0
-	_tile(front, "Stylobate", Vector2(0, at + 3.1), Vector2(width + 2, 7.9), granite, 0.63)
-	for step in 3:
-		Geometry.box(front, "GraniteStep", Vector3(0, 0.10 + step * 0.10, at + 8.0 - step * 0.37),
-				Vector3(width * 0.79, 0.2 + step * 0.2, 0.46), marble)
-	Geometry.box(front, "Entablature", Vector3(0, 11.8, at + 3.2), Vector3(width + 1, 1.55, 7.7), marble)
-	var pediment := PrismMesh.new()
-	pediment.size = Vector3(width + 1, 3.35, 7.8)
-	Geometry.mesh_part(front, "TriangularPediment", Vector3(0, 14.25, at + 3.2), pediment, marble)
-	# Project the raking cornices just beyond the plane of the pediment.
-	var half_width := (width + 1.0) * 0.5
-	var cornice_length := Vector2(half_width, 3.35).length()
-	for side in [-1, 1]:
-		var trim := Geometry.box(front, "RakingCornice", Vector3(side * half_width * 0.5, 14.25, at + 7.16),
-				Vector3(cornice_length, 0.29, 0.50), carved_stone)
-		trim.rotation.z = atan2(-side * 3.35, half_width)
-	Geometry.box(front, "PedimentBase", Vector3(0, 12.64, at + 7.15),
-			Vector3(width + 1.4, 0.33, 0.52), carved_stone)
-	for side in [-1, 1]:
-		var x: float = side * (width * 0.5 + 2.0)
-		Geometry.box(front, "TallWindowSurround", Vector3(x, 9.3, at + 0.12),
-				Vector3(2.1, 4.3, 0.25), carved_stone)
-		Geometry.box(front, "TallWindowGlazing", Vector3(x, 9.35, at + 0.27),
-				Vector3(1.55, 3.7, 0.09), shadow)
-	Geometry.box(front, "BronzePortal", Vector3(0, 4.2, at + 0.10), Vector3(4.4, 7.2, 0.18), shadow)
-	var columns: Array[Transform3D] = []
-	for i in 8:
-		var x := lerpf(-width * 0.45, width * 0.45, i / 7.0)
-		columns.append(Transform3D(Basis.IDENTITY, Vector3(x, 6.1, at + 5.9)))
-		if yaw % 180 == 0:
-			columns.append(Transform3D(Basis.IDENTITY, Vector3(x, 6.1, at + 2.5)))
-	_batch_columns(front, columns, 10.35, 0.67, granite)
-	var portico_body := StaticBody3D.new()
-	portico_body.name = "PorticoColumnCollisions"
-	portico_body.collision_mask = 0
-	var shaft := CylinderShape3D.new()
-	shaft.height = 10.35
-	shaft.radius = 0.67
-	for placement in columns:
-		var collision := CollisionShape3D.new()
-		collision.shape = shaft
-		collision.position = placement.origin
-		portico_body.add_child(collision, true)
-	front.add_child(portico_body)
 
 
 func _palace_square(square: Node3D, paving: Material, stone: Material) -> void:
@@ -292,33 +206,6 @@ func _cylinder(parent: Node3D, title: String, center: Vector3, top: float, botto
 	cylinder.height = height
 	cylinder.radial_segments = segments
 	Geometry.mesh_part(parent, title, center, cylinder, material)
-
-
-func _dome(parent: Node3D, title: String, base: Vector3, radius: float, height: float, segments: int) -> void:
-	var surface := SurfaceTool.new()
-	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var rings := 8
-	for ring in rings:
-		for i in segments:
-			var bottom_left := _dome_vertex(ring, i, rings, segments, radius, height)
-			var bottom_right := _dome_vertex(ring, i + 1, rings, segments, radius, height)
-			var top_right := _dome_vertex(ring + 1, i + 1, rings, segments, radius, height)
-			var top_left := _dome_vertex(ring + 1, i, rings, segments, radius, height)
-			for vertex: Vector3 in [bottom_left, bottom_right, top_right]:
-				surface.add_vertex(vertex)
-			if ring < rings - 1:
-				for vertex: Vector3 in [bottom_left, top_right, top_left]:
-					surface.add_vertex(vertex)
-	surface.index()
-	surface.generate_normals()
-	Geometry.mesh_part(parent, title, base, surface.commit(), gold)
-
-
-func _dome_vertex(ring: int, segment: int, rings: int, segments: int, radius: float, height: float) -> Vector3:
-	var latitude := PI * 0.5 * ring / rings
-	var longitude := TAU * (segment % segments) / segments
-	var profile := cos(latitude) * radius * (1.0 + 0.055 * (segment % 2))
-	return Vector3(cos(longitude) * profile, sin(latitude) * height, sin(longitude) * profile)
 
 
 func _new_hermitage(museum: Node3D) -> void:
