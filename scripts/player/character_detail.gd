@@ -53,6 +53,10 @@ static func apply(visual: Node3D) -> void:
 		head.get_node(name).hide()
 	var neck: MeshInstance3D = head.get_node("Neck")
 	neck.scale = Vector3(.098, .143, .085)
+	neck.mesh = _cached_profile("neck", [
+		Vector4(-.50,.49,.48,.03), Vector4(-.28,.47,.46,.02),
+		Vector4(.05,.45,.45,.025), Vector4(.25,.46,.46,.022),
+		Vector4(.46,.49,.49,.003), Vector4(.50,.46,.45,0)])
 	for name in ["BowlerCrown", "BowlerBrim"]:
 		head.get_node(name).material_override = felt
 	var crown: MeshInstance3D = head.get_node("BowlerCrown")
@@ -64,18 +68,20 @@ static func apply(visual: Node3D) -> void:
 			Vector4(.49,.102,.105,.025), Vector4(.50,.006,.006,.025)], 32)
 		_meshes["bowler brim"] = _bowler_brim()
 	crown.mesh = _meshes["bowler crown"]
-	crown.position.y = .298
+	crown.position.y = .295
+	crown.scale.y = .120
 	var brim: MeshInstance3D = head.get_node("BowlerBrim")
 	brim.set_meta(&"solid_brim", brim.mesh)
 	brim.mesh = _meshes["bowler brim"]
 	head.get_node("BowlerBrim").scale.y = .014
 	var bowler_band: MeshInstance3D = head.get_node("BowlerBand")
-	bowler_band.position.y = .244
-	bowler_band.scale = Vector3(.201, .018, .216)
+	bowler_band.position.y = .246
+	bowler_band.scale = Vector3(.196, .019, .211)
 	bowler_band.mesh = _cached_profile("bowler ribbon", [
 		Vector4(-.50,.495,.495,0), Vector4(-.40,.500,.50,0),
 		Vector4(.40,.498,.50,.004), Vector4(.50,.490,.494,.004)])
 	var collar_band: MeshInstance3D = head.get_node("ShirtCollar")
+	collar_band.scale.y *= .78
 	collar_band.mesh = _cached_profile("stand shirt collar", [
 		Vector4(-.50,.53,.55,0), Vector4(-.35,.52,.54,0),
 		Vector4(.35,.49,.51,0), Vector4(.50,.48,.49,0)])
@@ -83,26 +89,25 @@ static func apply(visual: Node3D) -> void:
 	var knot: MeshInstance3D = upper.get_node("Cravat")
 	if not _meshes.has("folded cravat"):
 		_meshes["folded cravat"] = _front_panel([
-			Vector4(-.54,.14,-.14,.08), Vector4(-.31,.19,-.15,.10),
-			Vector4(-.08,.25,-.25,.14), Vector4(.12,.43,-.47,.19),
-			Vector4(.32,.41,-.36,.17), Vector4(.50,.20,-.04,.11)])
+			Vector4(.376,.003,-.157,.003), Vector4(.390,.024,-.164,.007),
+			Vector4(.451,.019,-.160,.005), Vector4(.484,.012,-.144,.004),
+			Vector4(.492,.011,-.140,.004), Vector4(.500,.017,-.143,.010),
+			Vector4(.519,.020,-.126,.010), Vector4(.532,.017,-.105,.009)])
 	knot.mesh = _meshes["folded cravat"]
-	knot.position = Vector3(0,.480,-.135)
-	knot.rotation.x = .43
-	knot.scale = Vector3(.070,.088,.031)
+	knot.transform = Transform3D.IDENTITY
 	knot.material_override = Materials.get_material(Color("#49392f"), Materials.Finish.WOOL)
 	var torso: MeshInstance3D = upper.get_node("CoatTorso")
 	if not _meshes.has("cut jacket"):
 		_meshes["cut jacket"] = _coat_shell()
 		_meshes["waistcoat front"] = _front_panel([
-			Vector4(-.50,.46,-.014,.18), Vector4(-.29,.52,-.18,.33),
+			Vector4(-.59,.41,-.095,.18), Vector4(-.29,.52,-.18,.33),
 			Vector4(.07,.51,-.23,.34), Vector4(.28,.49,-.18,.32),
 			Vector4(.40,.37,-.12,.26), Vector4(.48,.21,-.066,.19)])
 		_meshes["shirt front"] = _front_panel([
-			Vector4(-.50,.12,-.14,.08), Vector4(-.32,.28,-.19,.18),
-			Vector4(.06,.42,-.23,.25), Vector4(.32,.41,.09,.24),
-			Vector4(.56,.38,.44,.30), Vector4(.77,.32,1.50,.30),
-			Vector4(.90,.23,2.0,.34)])
+			Vector4(-.20,.025,-.12,.10), Vector4(-.02,.12,-.18,.20),
+			Vector4(.23,.19,-.11,.25), Vector4(.48,.25,.27,.32),
+			Vector4(.66,.36,.62,.34), Vector4(.81,.35,1.14,.34),
+			Vector4(.94,.28,1.57,.30)])
 	torso.mesh = _meshes["cut jacket"]
 	torso.set_meta(&"closed_cut", _cached_profile("closed uniform", COAT_RINGS))
 	var jacket_lining: MeshInstance3D = upper.get_node("CoatShoulders")
@@ -143,6 +148,13 @@ static func apply(visual: Node3D) -> void:
 			_meshes[collar_key] = _collar_fold(mirror)
 		collar.mesh = _meshes[collar_key]
 		collar.transform = Transform3D.IDENTITY
+		var welt: MeshInstance3D = upper.get_node(side + "PocketWelt")
+		welt.mesh = _cached_profile("welt pocket", [
+			Vector4(-.48,.39,.39,0), Vector4(-.30,.49,.48,0),
+			Vector4(.30,.49,.48,0), Vector4(.48,.40,.34,0)])
+		welt.position = Vector3(mirror*.124,.083,-.109)
+		welt.scale = Vector3(.087,.011,.015)
+		welt.rotation_degrees = Vector3(0,mirror*29,mirror*4)
 
 		var arm: Node3D = upper.get_node(side + "ArmPivot")
 		var elbow: Node3D = arm.get_node("Elbow")
@@ -155,15 +167,17 @@ static func apply(visual: Node3D) -> void:
 
 		var leg: Node3D = visual.get_node("Body/" + side + "LegPivot")
 		var thigh: MeshInstance3D = leg.get_node("Thigh")
+		thigh.scale.x *= 1.06
 		thigh.mesh = _cached_profile("pressed thigh", [
-			Vector4(-.55,.41,.43,-.010),Vector4(-.47,.425,.445,.008),
+			Vector4(-.59,.367,.39,-.012),Vector4(-.53,.399,.421,-.009),Vector4(-.46,.426,.448,.002),
 			Vector4(-.31,.444,.455,-.006),Vector4(.12,.48,.47,0),
 			Vector4(.40,.48,.46,.021),Vector4(.50,.44,.43,.020)])
 		var knee: Node3D = visual.get_node("Body/" + side + "LegPivot/Knee")
 		var trouser: MeshInstance3D = knee.get_node("TrouserLeg")
+		trouser.scale.x *= 1.12
 		trouser.mesh = _cached_profile("trousers", [
-			Vector4(-.5,.39,.39,0),Vector4(-.33,.43,.39,.008),Vector4(.12,.45,.46,.018),
-			Vector4(.31,.45,.45,-.055),Vector4(.39,.49,.49,-.07),Vector4(.50,.47,.46,.025)])
+			Vector4(-.5,.39,.39,0),Vector4(-.33,.43,.39,.008),Vector4(.12,.46,.46,-.005),
+			Vector4(.31,.48,.47,-.025),Vector4(.43,.49,.48,-.035),Vector4(.51,.49,.47,-.012)])
 		knee.get_node("BootShaft").hide()
 		_shoe(knee.get_node("Ankle"), leather)
 
@@ -247,7 +261,7 @@ static func configure_face(head: Node3D, character: int, skin: Color, hair_color
 		_faces[character] = {
 			"Skull": Head.make_skull(character), "Hair": Head.hair(character),
 			"LeftEar": Head.ear(character, -1.0), "RightEar": Head.ear(character, 1.0),
-			"Moustache": Head.moustache(character), "Eyes": {},
+			"Moustache": Head.moustache(character), "Eyebrows": Head.eyebrows(character), "Eyes": {},
 		}
 	var face: Dictionary = _faces[character]
 	var skin_material := Materials.get_material(skin, Materials.Finish.SKIN)
@@ -261,6 +275,15 @@ static func configure_face(head: Node3D, character: int, skin: Color, hair_color
 		part.material_override = hair_material if part_name in ["Hair", "Moustache"] else skin_material
 		if part_name == "Skull":
 			part.material_override = face_material
+	var eyebrows := head.get_node_or_null("Eyebrows") as MeshInstance3D
+	var brow_material := Materials.get_material(hair_color.lightened(.025), Materials.Finish.HAIR)
+	if eyebrows == null:
+		eyebrows = _part(head, "Eyebrows", face["Eyebrows"], brow_material)
+		eyebrows.visibility_range_end = 12.0
+		eyebrows.visibility_range_end_margin = 2.0
+	else:
+		eyebrows.mesh = face["Eyebrows"]
+		eyebrows.material_override = brow_material
 	head.get_node("Neck").material_override = skin_material
 	var eye_key := skin.to_html(false)
 	var eye_frames: Dictionary = face["Eyes"]
@@ -293,7 +316,7 @@ static func _hands(elbow: Node3D, side: float, skin: Color) -> void:
 		Vector4(-.50,.17,.19,-.15), Vector4(-.39,.40,.39,-.10),
 		Vector4(-.14,.43,.41,-.045), Vector4(.18,.49,.49,0),
 		Vector4(.39,.44,.42,.08), Vector4(.50,.31,.29,.08)])
-	thumb.position.x = -side*.025
+	thumb.position.x = -side*.022
 	thumb.rotation.z = -side*.31
 	thumb.scale = Vector3(.022,.048,.025)
 	for part: MeshInstance3D in [hand, thumb]:
@@ -304,7 +327,8 @@ static func _palm() -> ArrayMesh:
 	var tool := SurfaceTool.new()
 	tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var roots: Array[PackedVector3Array] = []
-	var lengths := [.026,.033,.030,.023]
+	var lengths := [.027,.033,.031,.024]
+	var knuckles := [.000,-.002,-.001,.002]
 	for digit in 4:
 		var center := (digit-1.5)*.014
 		var previous := PackedVector3Array()
@@ -313,10 +337,10 @@ static func _palm() -> ArrayMesh:
 			var ring := PackedVector3Array()
 			for j in 6:
 				var angle := TAU*j/6.0
-				var taper := lerpf(1.0,.72,progress) if i < 3 else .20
-				ring.append(Vector3(center+cos(angle)*.007*taper,
-					-.013-lengths[digit]*progress,
-					sin(angle)*.010*taper-.010*progress*progress))
+				var taper: float = [1.0,.90,.73,.27][i]
+				ring.append(Vector3(center+cos(angle)*.007*taper+center*.14*progress,
+					-.013+knuckles[digit]-lengths[digit]*progress,
+					sin(angle)*.010*taper-.012*progress*progress))
 			if i == 0:
 				roots.append(ring)
 			else:
@@ -359,8 +383,8 @@ static func _shoe(ankle: Node3D, leather: Material) -> void:
 	var upper: MeshInstance3D = ankle.get_node("BootUpper")
 	upper.mesh = _cached_profile("boot upper", [
 		Vector4(-.084,.064,.116,-.060),Vector4(-.074,.068,.119,-.059),
-		Vector4(-.057,.063,.117,-.060),Vector4(-.034,.057,.103,-.050),
-		Vector4(-.015,.054,.077,-.035),Vector4(.015,.053,.059,-.010),
+		Vector4(-.057,.063,.117,-.060),Vector4(-.034,.058,.100,-.049),
+		Vector4(-.015,.055,.074,-.033),Vector4(.015,.053,.059,-.010),
 		Vector4(.041,.052,.054,.001),Vector4(.073,.050,.054,.001),
 		Vector4(.100,.051,.051,.002),Vector4(.116,.046,.047,.002)])
 	upper.position = Vector3.ZERO
@@ -422,14 +446,12 @@ static func _coat_tails() -> ArrayMesh:
 	]
 	for side in 2:
 		# Each side is a separate panel, with an open front and a back vent.
-		var start := -1.41 + PI * side
-		var sweep := 2.81
 		for level in range(rings.size() - 1):
 			for j in 10:
-				var a := _tail_vertex(rings[level], start+sweep*j/10.0)
-				var b := _tail_vertex(rings[level], start+sweep*(j+1)/10.0)
-				var c := _tail_vertex(rings[level+1], start+sweep*(j+1)/10.0)
-				var d := _tail_vertex(rings[level+1], start+sweep*j/10.0)
+				var a := _skirt_edge(rings[level],side,j/10.0)
+				var b := _skirt_edge(rings[level],side,(j+1)/10.0)
+				var c := _skirt_edge(rings[level+1],side,(j+1)/10.0)
+				var d := _skirt_edge(rings[level+1],side,j/10.0)
 				for point: Vector3 in [a,b,c,a,c,d]:
 					surface.add_vertex(point)
 	# Cloth panels are small enough to keep a second winding for the visible lining.
@@ -440,6 +462,14 @@ static func _coat_tails() -> ArrayMesh:
 			surface.add_vertex(Vector3(point.x*.959, point.y, point.z*.959))
 	surface.generate_normals()
 	return surface.commit()
+
+
+static func _skirt_edge(ring: Vector4, side: int, across: float) -> Vector3:
+	var front_opening := lerpf(.24,.025,smoothstep(-.5,.40,ring.x))
+	var back_vent := lerpf(.10,.0,smoothstep(-.5,.22,ring.x))
+	var start := (-PI/2.0 + front_opening) if side == 0 else (PI/2.0 + back_vent)
+	var end := (PI/2.0 - back_vent) if side == 0 else (3.0*PI/2.0 - front_opening)
+	return _tail_vertex(ring,lerpf(start,end,across))
 
 
 static func _tail_vertex(ring: Vector4, angle: float) -> Vector3:
@@ -469,8 +499,8 @@ static func _ring(level: Vector4, side: int, sides: int) -> Vector3:
 
 const COAT_RINGS := [
 	Vector4(-.50,.442,.500,.005), Vector4(-.36,.431,.489,.012),
-	Vector4(-.12,.446,.515,.006), Vector4(.12,.471,.545,-.006),
-	Vector4(.30,.505,.504,-.004), Vector4(.43,.475,.432,.011),
+	Vector4(-.12,.444,.512,.006), Vector4(.12,.469,.541,-.006),
+	Vector4(.30,.503,.507,-.004), Vector4(.43,.475,.438,.011),
 	Vector4(.52,.412,.371,.022), Vector4(.58,.229,.275,.029),
 ]
 const COAT_OPENING := [.095,.098,.14,.25,.42,.50,.52,.58]
@@ -489,7 +519,12 @@ static func _coat_shell() -> ArrayMesh:
 static func _coat_point(row: int, fraction: float) -> Vector3:
 	var section: Vector4 = COAT_RINGS[row]
 	var slit: float = COAT_OPENING[row]
-	return _tail_vertex(section, -PI/2.0 + slit + (TAU-2.0*slit)*fraction)
+	var angle := -PI/2.0 + slit + (TAU-2.0*slit)*fraction
+	var point := _tail_vertex(section,angle)
+	# A shallow pressed seam follows the back beneath the shoulder blades.
+	var back_seam := 1.0-smoothstep(0.0,.041,absf(fraction-.5))
+	point.z -= .007*back_seam*(1.0-smoothstep(.27,.58,section.x))
+	return point
 
 
 static func _coat_edge(row: int, side: float, inset: float) -> Vector3:
@@ -502,10 +537,11 @@ static func _lapel_panel(side: float) -> ArrayMesh:
 	fold.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var roots: Array[Vector3] = []
 	var hems: Array[Vector3] = []
-	var widths := [.0,.008,.014,.024,.034,.025]
+	var widths := [.001,.009,.019,.036,.043,.024]
 	for row in range(2,8):
-		var root := _coat_edge(row,side,.022) + Vector3.FORWARD*.0015
-		var hem := _coat_edge(row,side,0.0) + Vector3(-side*widths[row-2],0,-.003)
+		var root := _coat_edge(row,side,.022) + Vector3.FORWARD*.003
+		var hem := _coat_edge(row,side,0.0) + Vector3(-side*widths[row-2],
+			.003*smoothstep(3.0,6.0,row),-.005)
 		roots.append(root)
 		hems.append(hem)
 	for i in range(5):
@@ -521,8 +557,8 @@ static func _collar_fold(side: float) -> ArrayMesh:
 	var cloth := SurfaceTool.new()
 	cloth.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var notch := _coat_edge(6,side,.017) + Vector3.FORWARD*.004
-	var neck := Vector3(side*.050,.555,-.032)
-	var back := Vector3(side*.060,.539,.035)
+	var neck := Vector3(side*.052,.552,-.031)
+	var back := Vector3(side*.061,.545,.035)
 	var shoulder := _coat_edge(6,side,.048) + Vector3.FORWARD*.003
 	_cloth_quad(cloth, shoulder, notch, neck, back, side > 0.0)
 	_cloth_quad(cloth, shoulder, shoulder+Vector3.DOWN*.003,
@@ -538,14 +574,18 @@ static func _front_panel(sections: Array) -> ArrayMesh:
 	for i in range(sections.size()-1):
 		var a: Vector4 = sections[i]
 		var b: Vector4 = sections[i+1]
-		for side: float in [-1,1]:
-			var fold := Vector3(0,a.x,a.z)
-			var next_fold := Vector3(0,b.x,b.z)
-			_cloth_quad(panel, fold, Vector3(side*a.y,a.x,a.z+a.w),
-				Vector3(side*b.y,b.x,b.z+b.w), next_fold, side < 0.0)
+		for step in range(-2,2):
+			var left := step/2.0
+			var right := (step+1)/2.0
+			_cloth_quad(panel, _panel_point(a,left), _panel_point(a,right),
+				_panel_point(b,right), _panel_point(b,left), false)
 	panel.generate_normals()
 	panel.index()
 	return panel.commit()
+
+
+static func _panel_point(section: Vector4, across: float) -> Vector3:
+	return Vector3(section.y*across,section.x,section.z+section.w*across*across)
 
 
 static func _cloth_quad(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3,
@@ -575,5 +615,6 @@ static func _bowler_brim() -> ArrayMesh:
 
 
 static func _brim_point(angle: float, radius: float) -> Vector3:
-	return Vector3(cos(angle)*radius, cos(angle)*cos(angle)*(radius-.32)*2.0,
-		sin(angle)*radius)
+	var sweep := smoothstep(.32,.50,radius)
+	var curl := .29*pow(absf(cos(angle)),2.8) - .075*pow(absf(sin(angle)),2.0)
+	return Vector3(cos(angle)*radius,sweep*curl,sin(angle)*radius)

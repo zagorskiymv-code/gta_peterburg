@@ -3,8 +3,8 @@ extends RefCounted
 # y, half-width, front depth and rear depth. Landmark rows describe the jaw,
 # the zygomatic arch and the frontal bone independently of the eye openings.
 const CRANIUM := [
-	Vector4(.063,.035,.064,.037),Vector4(.073,.050,.082,.041),
-	Vector4(.088,.061,.091,.051),Vector4(.105,.066,.093,.062),
+	Vector4(.063,.031,.063,.040),Vector4(.073,.048,.079,.046),
+	Vector4(.088,.058,.088,.055),Vector4(.105,.065,.093,.066),
 	Vector4(.125,.073,.092,.078),Vector4(.147,.080,.091,.091),
 	Vector4(.172,.081,.089,.101),Vector4(.191,.079,.095,.103),
 	Vector4(.218,.077,.089,.096),Vector4(.239,.065,.077,.075),
@@ -13,8 +13,8 @@ const CRANIUM := [
 # y, bridge/tip projection, bridge width and extra projection of the alae.
 const NOSE := [
 	Vector4(.129,0,.010,0),Vector4(.136,.010,.016,.009),
-	Vector4(.143,.032,.015,.009),Vector4(.149,.035,.012,.003),
-	Vector4(.157,.029,.010,0),Vector4(.169,.019,.009,0),
+	Vector4(.143,.024,.016,.007),Vector4(.149,.029,.015,.005),
+	Vector4(.157,.026,.013,.001),Vector4(.169,.017,.011,0),
 	Vector4(.181,.011,.009,0),Vector4(.196,0,.012,0),
 ]
 const ROWS := [
@@ -77,57 +77,87 @@ static func face_at(x: float, y: float, profile: int) -> Vector3:
 
 static func _facial_section(x: float, y: float, front: float, variant: Vector4) -> float:
 	var nose := _section(NOSE,y)
-	var offset_x := x - .0016 * (1.0-smoothstep(.144,.19,y))
-	var bridge := nose.y * (1.0-smoothstep(.002,nose.z+.008,absf(offset_x)))
-	var ala := nose.w * (1.0-smoothstep(.001,.008,absf(absf(offset_x)-.010)))
+	var offset_x := x - .0008 * (1.0-smoothstep(.144,.19,y))
+	var bridge := nose.y * exp(-pow(offset_x / (nose.z + .002), 2.0))
+	var ala := nose.w * exp(-pow((absf(offset_x)-.010)/.007,2.0))
 	var orbital_x := 1.0-smoothstep(.006,.027,absf(absf(x)-(.037+variant.w*.0012)))
 	var orbital_y := smoothstep(.150,.174,y)*(1.0-smoothstep(.181,.198,y))
-	var socket := .011*orbital_x*orbital_y
+	var socket := .0065*orbital_x*orbital_y
 	var muzzle := .0045*(1.0-smoothstep(.010,.029,absf(x))) * smoothstep(.093,.111,y)*(1.0-smoothstep(.120,.134,y))
-	return smoothstep(.31,.78,front) * (socket-(bridge+ala)*variant.z-muzzle)
+	var lip_span := 1.0-smoothstep(.009,.026,absf(x))
+	var lips := .0024 * lip_span * exp(-pow((y-.112)/.006,2.0))
+	var cheek := .0030 * exp(-pow((absf(x)-.054)/.017,2.0) -pow((y-.152)/.021,2.0))
+	return smoothstep(.27,.77,front) * (socket-(bridge+ala)*variant.z-muzzle-lips-cheek)
 
 
 static func ear(profile: int, side: float) -> ArrayMesh:
-	var shell: Array[PackedVector3Array] = []
-	var root: Vector3 = head_point(.156, side*PI*.51, profile)
-	for radius: float in [.08,.41,.76,1.0]:
+	var rows: Array[PackedVector3Array] = []
+	var root := head_point(.154, side*PI*.52, profile)
+	# The first section is buried in the skull. Beyond the helix, the
+	# sections return toward the concha to form a shallow outer bowl.
+	for section: Vector2 in [Vector2(1.0,-.011),Vector2(1.0,.001),
+			Vector2(.94,.009),Vector2(.72,.012),Vector2(.52,.0095),Vector2(.32,.007),Vector2(.08,.006)]:
 		var ring := PackedVector3Array()
-		for i in 14:
-			var a := TAU*i/14.0
-			var rim := sin(a)
-			var y := .154 + radius*.027*rim
-			var z := root.z + radius*(cos(a)*.015 + rim*.005)
-			var x := root.x + side * (lerpf(.006,.013,smoothstep(.28,.81,radius)) + radius*rim*.004)
-			if side < 0:
-				z = root.z - (z-root.z)
+		for i in 16:
+			var angle := side*TAU*i/16.0
+			var vertical := sin(angle)
+			var y := .154 + section.x*.024*vertical
+			var z := root.z + section.x*(cos(angle)*.012 + vertical*.006)
+			var fold := .0022 * sin(angle*2.0+.5) * smoothstep(.25,.8,section.x)
+			var x := root.x + side*(section.y + section.x*vertical*.003 + fold)
 			ring.append(Vector3(x,y,z))
-		shell.append(ring)
-	return mesh_rings(shell)
+		rows.append(ring)
+	return mesh_rings(rows,false,true)
 
 
 static func hair(profile: int) -> ArrayMesh:
 	var rows: Array[PackedVector3Array] = []
-	for level in 9:
+	for level in 11:
 		var row := PackedVector3Array()
-		for column in 32:
-			# The side part pushes the front hairline slightly to the right;
-			# a shallow lobe ahead of each ear continues into the sideburn.
-			var angle := -PI + TAU*column/32.0
+		var height := maxf(0.0,(level-1)/9.0)
+		for column in 48:
+			var angle := wrapf(_angle(column),-PI,PI)
 			var front := cos(angle)
-			var line := lerpf(.154,.224,smoothstep(-.50,.74,front))
-			line -= .021 * (1.0-smoothstep(.04,.31,absf(absf(angle)-1.13)))
+			var line := lerpf(.158,.222,smoothstep(-.60,.76,front))
+			line += .005*cos(3.0*angle)*smoothstep(.25,1.0,front)
+			line -= .005*smoothstep(.45,1.0,-front)
+			line -= .024 * (1.0-smoothstep(.025,.24,absf(absf(angle)-1.10)))
 			line += .005*sin(angle)*smoothstep(-.1,1.0,front)
 			if profile == 5:
 				line += .012*smoothstep(.3,1.0,front)
 			if profile == 4:
 				line -= .010*(1.0-smoothstep(-.8,.1,front))
-			var y := lerpf(line,.266,level/8.0)
-			var point := head_point(y, angle, profile)
-			var bulk := (.0020+.0010*sin(angle*5.0+level*.51)) * (1.0-level/10.0)
-			point += Vector3(sin(angle)*bulk, .002, -front*bulk)
+			var y := lerpf(line,.270,height)
+			var point := head_point(y - (.0012 if level == 0 else 0.0), angle, profile)
+			var part_angle := -.46 + .34*height
+			var part := exp(-pow((angle-part_angle)/.11,2.0))*smoothstep(.05,.5,front)
+			var wave := .0012*cos(11.0*angle + 5.0*height)
+			var crown := (.0045 + .0025*sin(angle+.5))*smoothstep(.0,.42,height)
+			var bulk := -.003 if level == 0 else lerpf(.0017,.0028,smoothstep(.0,.15,height))
+			bulk += (crown + wave - part*.003)*sin(height*PI*.89)
+			point += Vector3(sin(angle)*bulk, .008*smoothstep(.06,.92,height), -front*bulk)
 			row.append(point)
 		rows.append(row)
-	return mesh_rings(rows, true, true)
+	return mesh_rings(rows,true,true)
+
+
+static func eyebrows(profile: int) -> ArrayMesh:
+	var surface := SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for side: float in [-1.0,1.0]:
+		for i in 12:
+			for uv: Vector2 in [Vector2(0,-1),Vector2(1,-1),Vector2(1,1),
+					Vector2(0,-1),Vector2(1,1),Vector2(0,1)]:
+				var t := (i + (uv.x if side > 0.0 else 1.0-uv.x))/12.0
+				var x: float = side*(.022 + .030*t + SHAPES[profile].w*.0012)
+				var y := .189 + .004*sin(PI*t) - .003*t
+				y += uv.y*(.0002 + .0015*pow(sin(PI*t),.65))
+				var point := face_at(x,y,profile)
+				point.z -= .0011
+				surface.add_vertex(point)
+	surface.generate_normals()
+	surface.index()
+	return surface.commit()
 
 
 static func moustache(profile: int) -> ArrayMesh:
@@ -139,11 +169,11 @@ static func moustache(profile: int) -> ArrayMesh:
 		for i in 17:
 			var t := i/16.0
 			var a := Vector2(0,.121)
-			var b := Vector2(.010,.123)
-			var c := Vector2(.025,.114)
+			var b := Vector2(.010,.122)
+			var c := Vector2(.025,.116)
 			var d := Vector2(.032,.120)
 			var center := a.lerp(b,t).lerp(b.lerp(c,t),t).lerp(b.lerp(c,t).lerp(c.lerp(d,t),t),t)
-			var width := .00065 + .0032*sin(PI * pow(t,.58))
+			var width := .00035 + .00265*sin(PI * pow(t,.72))
 			for edge: float in [-1.0,0.0,1.0]:
 				var point := face_at(center.x*side,center.y+width*edge,profile)
 				point.z -= .0015 + (.0012 if edge == 0.0 else 0.0)
@@ -171,8 +201,8 @@ static func eyes(profile: int, eye_material: Material, lid_material: Material, b
 	for side: float in [-1.0,1.0]:
 		var center := Vector2(side*(.037 + SHAPES[profile].w*.0012),.176+side*.00065)
 		for step in 16:
-			var u := -0.982 + 1.964*step/16.0
-			var v := -0.982 + 1.964*(step+1)/16.0
+			var u := -1.0 + 2.0*step/16.0
+			var v := -1.0 + 2.0*(step+1)/16.0
 			if blink < 1.0:
 				for band in 4:
 					_eye_quad(eye, center, u, v, -1.0 + band*.5, -.5 + band*.5, profile, false, blink)
@@ -209,17 +239,17 @@ static func _eye_quad(surface: SurfaceTool, center: Vector2, u: float, v: float,
 		var x := coordinate.x * .0119
 		var r := sqrt(maxf(1.0-coordinate.x*coordinate.x,0))
 		var side_y := (coordinate.y if not lid else clampf(coordinate.y,-1.0,1.0))
-		var y := side_y * r * (.0040 if side_y > 0.0 else .0028)
+		var y := side_y * r * (.0037 if side_y > 0.0 else .0025)
 		var outer := absf(coordinate.y) > 1.0
 		if outer:
-			y += signf(y)*(.0023 + .0012*r)
+			y += signf(coordinate.y)*.0032*r
 		var at := face_at(center.x+x,center.y+y+signf(center.x)*x*.05,profile)
 		if not outer:
-			var dome := sqrt(maxf(.012*.012 - (x*.77)*(x*.77) - y*y,0))
-			at.z = minf(at.z-.0003, face_at(center.x,center.y,profile).z + .0086-dome)
+			var dome := sqrt(maxf(.012*.012 - (x*.85)*(x*.85) - y*y,0))
+			at.z = minf(at.z-.0003, face_at(center.x,center.y,profile).z + .0099-dome)
 			if lid:
-				at.z -= .0008
-		surface.set_uv(Vector2(.5+x/.024,.5+y/.024))
+				at.z -= .00045
+		surface.set_uv(Vector2(.5+(x-.00035)/.024,.5+(y-.00025)/.024))
 		if not outer:
 			at.y = lerpf(at.y, center.y - .0014 + signf(center.x)*x*.05, blink * .995)
 		surface.add_vertex(at)

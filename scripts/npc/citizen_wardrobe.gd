@@ -117,7 +117,8 @@ func _headwear(head: Node3D, style: Hat, outfit: Outfit) -> void:
 			brim.scale = Vector3(0.27, 0.025, 0.29)
 			_cylinder(head, "SilkTopHat", Vector3(0, 0.345, 0.003), 0.202, 0.101, 0.091, Materials.get_material(Color("#2c2b2c")))
 			crown.hide()
-			band.scale = Vector3(0.197, 0.032, 0.204)
+			band.scale = Vector3(0.184, 0.030, 0.184)
+			band.position = Vector3(0, 0.260, 0.003)
 		Hat.CAP, Hat.FORAGE_CAP:
 			var service := style == Hat.FORAGE_CAP
 			crown.hide()

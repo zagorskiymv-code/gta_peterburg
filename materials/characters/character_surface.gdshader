@@ -52,17 +52,27 @@ void fragment() {
 		albedo += vec3(.034, -.006, -.008) * (cheek + nose * .62);
 		rough += cheek * .03 - nose * .035;
 		float lip = spot(face, vec2(.0, .110), vec2(.023, .007)) * front;
-		float mouth = spot(face, vec2(.0, .111), vec2(.021, .0012)) * front;
+		float mouth_height = .111 + .0011 * smoothstep(.009, .022, face.x);
+		float mouth = spot(face, vec2(.0, mouth_height), vec2(.020, .0010)) * front;
+		float corner = spot(face, vec2(.020, .112), vec2(.0032, .0023)) * front;
 		float nostril = spot(face, vec2(.011, .139), vec2(.0043, .0027)) * front;
-		float brow = spot(face, vec2(.038, .188), vec2(.014, .0027)) * front;
 		float orbit = spot(face, vec2(.037, .176), vec2(.011, .0025)) * front;
-		albedo *= 1.0 - mouth * .27 - nostril * .46 - brow * .40 - orbit * .23;
+		albedo *= 1.0 - mouth * .30 - nostril * .24 - corner * .12 - orbit * .16;
 		albedo = mix(albedo, albedo * vec3(1.04, .84, .86), lip * .78);
-	} else if (finish != 1 && finish != 2) {
+	} else if (finish == 2) {
+		float sweep = anatomy.x + .49 * anatomy.z + .26 * anatomy.y;
+		float flow = sweep * 1260.0 + 3.4 * sin(anatomy.y * 36.0 + anatomy.z * 19.0);
+		float strands = cos(flow) * (1.0 - smoothstep(.35, 2.7, fwidth(flow)));
+		float tone = .015 * sin(sweep * 94.0);
+		albedo *= 1.0 + strands * .019 + tone;
+		rough += strands * .014;
+	} else if (finish != 1) {
 		vec3 p = object_metres;
-		float grain = cloth_grain(vec2(p.x + p.z * .71, p.y + p.z * .55) * 260.0);
-		albedo *= 1.0 + grain * .025;
-		rough += grain * .045;
+		vec2 grain_uv = vec2(p.x + p.z * .71, p.y + p.z * .55);
+		float scale = finish == 5 ? 320.0 : (finish == 3 ? 170.0 : 235.0);
+		float grain = cloth_grain(grain_uv * scale);
+		albedo *= 1.0 + grain * (finish == 0 ? .034 : .017);
+		rough += grain * (finish == 3 ? .055 : .035);
 	}
 	ALBEDO = albedo;
 	ROUGHNESS = clamp(rough, 0.15, 1.0);
